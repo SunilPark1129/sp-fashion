@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-interface MyData {
+export interface MyData {
   id: string;
   name: string;
   sale: number;
