@@ -1,0 +1,49 @@
+header {
+  background-color: rgb(235, 235, 235);
+  border-bottom: 1px solid rgb(212, 206, 206);
+  position: relative;
+}
+
+nav {
+  display: flex;
+  padding: 1.5em 2em;
+  justify-content: space-between;
+}
+
+.nav__content {
+  display: flex;
+
+  ul {
+    display: flex;
+    gap: 2em;
+  }
+}
+
+.nav__cloth {
+  display: flex;
+}
+
+.nav__lists {
+  position: absolute;
+  left: 0;
+  top: calc(1px + 100%);
+  width: 100%;
+  background-color: rgb(235, 235, 235);
+  border-bottom: 1px solid rgb(212, 206, 206);
+  display: none;
+
+  &--active {
+    display: block;
+  }
+  .wrapper {
+    padding: 1em 2em;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+  }
+}

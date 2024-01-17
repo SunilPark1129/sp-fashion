@@ -1,71 +1,136 @@
-import React from "react";
-import Home from "../../pages/home/Home";
-import Shop from "../../pages/shop/Shop";
-import Purchase from "../../pages/purchase/Purchase";
-import Contact from "../../pages/contact/Contact";
+import React, { useEffect, useState } from "react";
+
+import "./navbar.css";
 
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  /* category lists modal */
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+
+  /* check if user has pressed the modal */
+  function focusOnTarget(e: any) {
+    if (
+      !e.target?.className.includes("nav__cloth__btn--clothes") &&
+      !e.target?.offsetParent?.className.includes("nav__lists--active")
+    ) {
+      setIsModalOpen(false);
+    }
+  }
+
+  function modalOpenHandler() {
+    setIsModalOpen((prev) => !prev);
+  }
+
+  /* add and remove click event handler */
+  useEffect(() => {
+    if (IsModalOpen) {
+      document.addEventListener("click", focusOnTarget);
+    }
+    if (!IsModalOpen) {
+      document.removeEventListener("click", focusOnTarget);
+    }
+    return () => document.removeEventListener("click", focusOnTarget);
+  }, [IsModalOpen]);
+
   return (
     <header>
-      <nav>
-        {/* flex 1 */}
-        <div>
-          <ul>
-            {/* home */}
-            <li>
-              <div>
-                <Link to={"/"}>HOME</Link>
-              </div>
-            </li>
-            {/* shop */}
-            <li>
-              <div>
-                <div>CLOTHES</div>
+      <div className="wrapper">
+        <nav>
+          {/* flex 1 */}
+          <div className="nav__content">
+            <ul>
+              {/* home */}
+              <li>
                 <div>
-                  <div>COAT</div>
-                  <Link to={"/shop/coat-men"}>COAT - MEN</Link>
-                  <Link to={"/shop/coat-women"}>COAT - WOMEN</Link>
+                  <Link to={"/"}>HOME</Link>
                 </div>
+              </li>
+              {/* shop */}
+              <li>
+                <div className="nav__cloth">
+                  <button
+                    className="nav__cloth__btn--clothes"
+                    onClick={modalOpenHandler}
+                    tabIndex={0}
+                  >
+                    CLOTHES
+                  </button>
+                </div>
+              </li>
+              {/* career */}
+              <li>
                 <div>
-                  <div>SHIRT</div>
-                  <Link to={"/shop/shirt-men"}>SHIRT - MEN</Link>
-                  <Link to={"/shop/shirt-women"}>COAT - WOMEN</Link>
+                  <Link to={"/"}>CAREER</Link>
                 </div>
+              </li>
+              {/* contact */}
+              <li>
                 <div>
-                  <div>HOODIE</div>
-                  <Link to={"/shop/hoodie-men"}>HOODIE - MEN</Link>
-                  <Link to={"/shop/hoodie-women"}>HOODIE - WOMEN</Link>
+                  <Link to={"/contact"}>CONTACT</Link>
                 </div>
-                <div>
-                  <div>SWEATER</div>
-                  <Link to={"/shop/sweater-men"}>SWEATER - MEN</Link>
-                  <Link to={"/shop/sweater-women"}>SWEATER - WOMEN</Link>
-                </div>
-              </div>
-            </li>
-            {/* contact */}
-            <li>
-              <div>
-                <Link to={"/contact"}>CONTACT</Link>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
+          {/* flex 2 */}
+          <div className="nav__content">
+            <ul>
+              <li>
+                <Link to={"/favorite"}>Fav</Link>
+              </li>
+              <li>
+                <Link to={"/purchase"}>PURCHASE</Link>
+              </li>
+              <li>
+                <Link to={"/login"}>LOGIN</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div
+        className={`nav__lists ${IsModalOpen && "nav__lists--active"}`}
+        tabIndex={0}
+      >
+        <div className="wrapper">
+          <div>
+            <div>COAT</div>
+            <Link onClick={modalOpenHandler} to={"/shop/coat-men"}>
+              COAT - MEN
+            </Link>
+            <Link onClick={modalOpenHandler} to={"/shop/coat-women"}>
+              COAT - WOMEN
+            </Link>
+          </div>
+          <div>
+            <div>SHIRT</div>
+            <Link onClick={modalOpenHandler} to={"/shop/shirt-men"}>
+              SHIRT - MEN
+            </Link>
+            <Link onClick={modalOpenHandler} to={"/shop/shirt-women"}>
+              COAT - WOMEN
+            </Link>
+          </div>
+          <div>
+            <div>HOODIE</div>
+            <Link onClick={modalOpenHandler} to={"/shop/hoodie-men"}>
+              HOODIE - MEN
+            </Link>
+            <Link onClick={modalOpenHandler} to={"/shop/hoodie-women"}>
+              HOODIE - WOMEN
+            </Link>
+          </div>
+          <div>
+            <div>SWEATER</div>
+            <Link onClick={modalOpenHandler} to={"/shop/sweater-men"}>
+              SWEATER - MEN
+            </Link>
+            <Link onClick={modalOpenHandler} to={"/shop/sweater-women"}>
+              SWEATER - WOMEN
+            </Link>
+          </div>
         </div>
-        {/* flex 2 */}
-        <div>
-          <div>
-            <Link to={"/favorite"}>Fav</Link>
-          </div>
-          <div>
-            <Link to={"/purchase"}>PURCHASE</Link>
-          </div>
-          <div>
-            <Link to={"/login"}>LOGIN</Link>
-          </div>
-        </div>
-      </nav>
+      </div>
     </header>
   );
 }
