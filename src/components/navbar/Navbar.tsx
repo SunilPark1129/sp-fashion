@@ -10,10 +10,12 @@ function Navbar() {
   /* check if user has pressed the modal */
   function focusOnTarget(e: any) {
     if (
-      !e.target?.className.includes("nav__cloth__btn--clothes") &&
-      !e.target?.offsetParent?.className.includes("nav__lists--active")
+      !e?.target?.className.includes("nav__cloth__btn--clothes") &&
+      !e?.target?.offsetParent?.className.includes("nav__lists--active")
     ) {
+      console.log(e);
       setIsModalOpen(false);
+    } else {
     }
   }
 
@@ -79,13 +81,63 @@ function Navbar() {
             {/* flex line 2 */}
             <ul className="nav__content">
               <li>
-                <Link to={"/favorite"}>Fav</Link>
+                <Link to={"/favorite"} className="svg-heart">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                  </svg>
+                </Link>
               </li>
               <li>
-                <Link to={"/purchase"}>PURCHASE</Link>
+                <Link to={"/purchase"} className="svg-purchase">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 17h-11v-14h-2" />
+                    <path d="M6 5l14 1l-1 7h-13" />
+                  </svg>
+                </Link>
               </li>
               <li>
-                <Link to={"/login"}>LOGIN</Link>
+                <Link to={"/login"} className="svg-login">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                    <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                    <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                  </svg>
+                </Link>
               </li>
             </ul>
           </div>
