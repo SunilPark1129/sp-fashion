@@ -13,7 +13,6 @@ function Navbar() {
       !e?.target?.className.includes("nav__cloth__btn--clothes") &&
       !e?.target?.offsetParent?.className.includes("nav__lists--active")
     ) {
-      console.log(e);
       setIsModalOpen(false);
     } else {
     }
