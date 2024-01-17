@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { BasketProp, FilteredProp, CategoryProp } from "../../model/stateProps";
-
-// export interface BasketState {
-//   basket: BasketProp[];
-// }
+import { FilteredProp, CategoryProp } from "../../model/stateProps";
 
 const initialState: CategoryProp = {
   coat: [],
@@ -12,10 +8,6 @@ const initialState: CategoryProp = {
   shirt: [],
   sweater: [],
 };
-
-// const initialState: BasketState = {
-//   basket: [],
-// };
 
 export const basketSlice = createSlice({
   name: "basket",

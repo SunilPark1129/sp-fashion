@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import { FilteredProp } from "../../model/stateProps";

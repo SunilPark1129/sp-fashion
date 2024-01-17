@@ -14,6 +14,9 @@ import { getFilter } from "../../utilities/getFilter";
 
 type ParamProp = { id: string | undefined };
 
+const validCategory = ["coat", "shirt", "hoodie", "sweater"];
+const validGender = ["men", "women"];
+
 function Shop() {
   /* param states */
   const { id }: any = useParams<ParamProp>();
@@ -26,8 +29,6 @@ function Shop() {
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
   const [filteredData, setFilteredData] = useState<FilteredProp[] | null>(null);
 
-  const dispatch = useDispatch<AppDispatch>();
-
   /* request and receive the data from server */
   const { data, loading, error } = useSelector(
     (state: RootState) => state.getPost
@@ -39,11 +40,11 @@ function Shop() {
   );
   const basket: CategoryProp = useSelector((state: RootState) => state.basket);
 
+  const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    const validCategory = ["coat", "shirt", "hoodie", "sweater"];
-    const validGender = ["men", "women"];
     if (paramCategory) {
-      // used a validated param
+      // check if current id params are validated
       if (
         !validCategory.includes(paramCategory) ||
         !validGender.includes(paramGender)
@@ -68,11 +69,6 @@ function Shop() {
   }, [selectedCategory]);
 
   useEffect(() => {
-    console.log("like:", likeState);
-    console.log("brakest:", basket);
-  }, [likeState, basket]);
-
-  useEffect(() => {
     // filtering the received data
     if (selectedCategory && data.length !== 0) {
       console.log("filtering notification...");
@@ -88,7 +84,7 @@ function Shop() {
     }
   }, [selectedGender, data, likeState, basket]);
 
-  // a component to display current pending stage
+  // components to display current pending stage
   function PendingData() {
     if (wrongParam) return <WrongParamComponent />;
     if (error) return <ErrorComponent err={error} />;
@@ -106,14 +102,17 @@ function Shop() {
   );
 }
 
+/* When id param is not validated */
 function WrongParamComponent() {
   return <div>Wrong Param...</div>;
 }
 
+/* When received an error from fetching */
 function ErrorComponent({ err }: any) {
   return <div>{err}</div>;
 }
 
+/* When currently pending */
 function LoadingComponent() {
   return <div>Loading ...</div>;
 }
