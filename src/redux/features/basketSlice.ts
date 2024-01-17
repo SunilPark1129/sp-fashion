@@ -1,32 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
+import { BasketProp } from "../../model/stateProps";
 
 export interface BasketState {
-  items: PayloadProp[];
-}
-
-export interface PayloadProp {
-  id: string;
-  image: string;
-  name: string;
-  color: string;
+  basket: BasketProp[];
 }
 
 const initialState: BasketState = {
-  items: [],
+  basket: [],
 };
 
 export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addBasket: (state, action: PayloadAction<PayloadProp>) => {
-      state.items = [...state.items, action.payload];
+    addBasket: (state, action: PayloadAction<BasketProp>) => {
+      state.basket = [...state.basket, action.payload];
     },
     deleteBasket: (state, action: PayloadAction<string>) => {
-      state.items = state.items.filter(
-        (item: PayloadProp) => item.id !== action.payload
+      state.basket = state.basket.filter(
+        (item: BasketProp) => item.id !== action.payload
       );
     },
     clearBasket: (state) => {

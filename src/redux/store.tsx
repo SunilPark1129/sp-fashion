@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import basketReducer from "./features/basketSlice";
 import getReducer from "./features/getSlice";
+import likeReducer from "./features/LikeSlice";
 
 export const store = configureStore({
   reducer: {
     basket: basketReducer,
     getPost: getReducer,
+    likeState: likeReducer,
   },
 });
 

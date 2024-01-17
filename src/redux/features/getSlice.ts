@@ -1,16 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-export interface MyData {
-  id: string;
-  name: string;
-  sale: number;
-  color: string;
-  image: string;
-  price: number;
-  gender: string;
-  member: number;
-  category: string;
-}
+import { BasketProp } from "../../model/stateProps";
 
 const BASE_URL = "https://api.npoint.io/8fd7fe356036812046a7";
 
@@ -21,7 +10,7 @@ export const requestHTTP = createAsyncThunk(
     if (!response.ok) {
       throw new Error("could not response");
     }
-    return (await response.json()) as MyData[];
+    return (await response.json()) as BasketProp[];
   }
 );
 

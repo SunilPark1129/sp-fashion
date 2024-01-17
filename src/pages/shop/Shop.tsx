@@ -3,11 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import { MyData } from "../../redux/features/getSlice";
+import { FilteredProp, LikeStateProp } from "../../model/stateProps";
 import ShopAside from "./ShopAside";
 import DisplayItems from "./DisplayItems";
 
 type ParamProp = { id: string | undefined };
+
+type CategoryProp = "coat" | "shirt" | "hoodie" | "sweater";
 
 function Shop() {
   /* param states */
@@ -16,14 +18,22 @@ function Shop() {
   const [wrongParam, setWrongParam] = useState(false);
 
   /* resources to fetch and filter */
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryProp | null>(
+    null
+  );
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
-  const [filteredData, setFilteredData] = useState<MyData[] | null>(null);
+  const [filteredData, setFilteredData] = useState<FilteredProp[] | null>(null);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   /* request and receive the data from server */
-  const dispatch = useDispatch<AppDispatch>();
   const { data, loading, error } = useSelector(
     (state: RootState) => state.getPost
+  );
+
+  /* */
+  const likeState: LikeStateProp = useSelector(
+    (state: RootState) => state.likeState
   );
 
   useEffect(() => {
@@ -49,18 +59,32 @@ function Shop() {
   useEffect(() => {
     // new HTTP request
     if (selectedCategory && !wrongParam) {
+      console.log("fetching HTTP notification...");
       dispatch(requestHTTP(selectedCategory));
     }
   }, [selectedCategory]);
 
   useEffect(() => {
+    console.log(likeState);
+  }, [likeState]);
+
+  useEffect(() => {
     // filtering the received data
     if (selectedCategory && data.length !== 0) {
+      console.log("filtering notification...");
       const convertGender = selectedGender === "men" ? "male" : "female";
-      const temp = data.filter(({ gender }) => gender === convertGender);
+      const temp = data
+        .filter(({ gender }) => gender === convertGender)
+        .map((item) => {
+          let hasLike = false;
+          likeState[selectedCategory].forEach(({ id }) => {
+            if (id === item.id) hasLike = true;
+          });
+          return { ...item, like: hasLike };
+        });
       setFilteredData(temp);
     }
-  }, [selectedGender, data]);
+  }, [selectedGender, data, likeState]);
 
   // a component to display current pending stage
   function PendingData() {
@@ -71,12 +95,12 @@ function Shop() {
   }
 
   return (
-    <div>
+    <main>
       <ShopAside />
-      <div>
+      <article>
         <PendingData />
-      </div>
-    </div>
+      </article>
+    </main>
   );
 }
 
