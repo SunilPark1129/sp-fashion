@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-
-import "./navbar.css";
-
 import { Link } from "react-router-dom";
+import "./navbar.css";
+import logo from "../../assets/logo192.png";
 
 function Navbar() {
   /* category lists modal */
@@ -39,6 +38,9 @@ function Navbar() {
         <nav>
           {/* flex 1 */}
           <div className="nav__content">
+            <div className="nav__logo">
+              <img src={logo} alt="SIP logo" />
+            </div>
             <ul>
               {/* home */}
               <li>

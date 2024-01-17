@@ -1,21 +1,28 @@
 header {
-  background-color: rgb(235, 235, 235);
-  border-bottom: 1px solid rgb(212, 206, 206);
+  background-color: var(--clr-white);
+  border-bottom: 1px solid rgb(236, 233, 233);
   position: relative;
 }
 
 nav {
   display: flex;
-  padding: 1.5em 2em;
+  padding: 1em 2em;
   justify-content: space-between;
 }
 
 .nav__content {
   display: flex;
+  align-items: center;
+  gap: 2em;
 }
 .nav__content ul {
   display: flex;
   gap: 2em;
+}
+
+.nav__logo {
+  width: 2.5em;
+  height: 2.5em;
 }
 
 .nav__cloth {
@@ -27,8 +34,8 @@ nav {
   left: 0;
   top: calc(1px + 100%);
   width: 100%;
-  background-color: rgb(235, 235, 235);
-  border-bottom: 1px solid rgb(212, 206, 206);
+  background-color: var(--clr-white);
+  border-bottom: 1px solid rgb(236, 233, 233);
   display: none;
 }
 .nav__lists--active {

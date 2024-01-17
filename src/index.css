@@ -4,12 +4,28 @@
   box-sizing: border-box;
   font: inherit;
 }
+
+:root {
+  --clr-white: #f8f8f8;
+  --clr-light: #f1f1f1;
+  --clr-mid: black;
+  --clr-dark: black;
+  --clr-primary: blue;
+  --clr-secondary: red;
+  --clr-dark-fnt: black;
+  --clr-light-fnt: #fff;
+}
+
 img,
 picture,
 svg,
 video {
   display: block;
   max-width: 100%;
+}
+a {
+  color: black;
+  text-decoration: none;
 }
 li {
   list-style: none;
@@ -21,6 +37,7 @@ button {
 }
 body {
   min-height: 100vh;
+  background-color: var(--clr-light);
 }
 
 .wrapper {
