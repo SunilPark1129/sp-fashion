@@ -10,11 +10,13 @@ export type BasketProp = {
   category: string;
 };
 
-export type FilteredProp = BasketProp & { like: boolean };
+export type FilteredProp = BasketProp & { like?: boolean; basket?: boolean };
 
-export type LikeStateProp = {
+export type CategoryProp = {
   coat: FilteredProp[];
   hoodie: FilteredProp[];
   shirt: FilteredProp[];
   sweater: FilteredProp[];
 };
+
+export type CategoryValidProp = "coat" | "shirt" | "hoodie" | "sweater" | null;

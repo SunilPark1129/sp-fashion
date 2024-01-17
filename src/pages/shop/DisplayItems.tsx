@@ -32,6 +32,14 @@ function CardComponent({ item }: { item: FilteredProp }) {
     }
   }
 
+  function basketClickHandler(payload: FilteredProp) {
+    if (payload.basket === false) {
+      dispatch(addBasket(payload));
+    } else {
+      dispatch(deleteBasket(payload));
+    }
+  }
+
   // id: string;
   // name: string;
   // sale: number;
@@ -46,7 +54,9 @@ function CardComponent({ item }: { item: FilteredProp }) {
     <li key={item.id + item.category}>
       {item.name} {item.gender}
       <p>has Like: {item.like ? "true" : "false"}</p>
+      <p>has Basket: {item.basket ? "true" : "false"}</p>
       <button onClick={() => likeClickHandler(item)}>Like</button>
+      <button onClick={() => basketClickHandler(item)}>Basket</button>
     </li>
   );
 }

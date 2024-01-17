@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { FilteredProp, LikeStateProp } from "../../model/stateProps";
+import { FilteredProp, CategoryProp } from "../../model/stateProps";
 
-const initialState: LikeStateProp = {
+const initialState: CategoryProp = {
   coat: [],
   hoodie: [],
   shirt: [],
