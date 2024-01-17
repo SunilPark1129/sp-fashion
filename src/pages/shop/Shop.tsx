@@ -3,7 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import { FilteredProp, CategoryValidProp } from "../../model/stateProps";
+import {
+  FilteredProp,
+  CategoryValidProp,
+  CategoryProp,
+} from "../../model/stateProps";
 import ShopAside from "./ShopAside";
 import DisplayItems from "./DisplayItems";
 import { getFilter } from "../../utilities/getFilter";
@@ -29,9 +33,11 @@ function Shop() {
     (state: RootState) => state.getPost
   );
 
-  /* */
-  const likeState: any = useSelector((state: RootState) => state.likeState);
-  const basket: any = useSelector((state: RootState) => state.basket);
+  /* GET like & basket lists */
+  const likeState: CategoryProp = useSelector(
+    (state: RootState) => state.likeState
+  );
+  const basket: CategoryProp = useSelector((state: RootState) => state.basket);
 
   useEffect(() => {
     const validCategory = ["coat", "shirt", "hoodie", "sweater"];
