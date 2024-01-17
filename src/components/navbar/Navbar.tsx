@@ -36,12 +36,13 @@ function Navbar() {
     <header>
       <div className="wrapper">
         <nav>
-          {/* flex 1 */}
-          <div className="nav__content">
-            <div className="nav__logo">
-              <img src={logo} alt="SIP logo" />
-            </div>
-            <ul>
+          <Link to={"/"}>
+            <img className="nav__logo" src={logo} alt="SIP logo" />
+          </Link>
+          <div className="nav__flex">
+            {/* flex line 1 */}
+
+            <ul className="nav__content">
               {/* home */}
               <li>
                 <div>
@@ -52,7 +53,9 @@ function Navbar() {
               <li>
                 <div className="nav__cloth">
                   <button
-                    className="nav__cloth__btn--clothes"
+                    className={`nav__cloth__btn--clothes ${
+                      IsModalOpen && "nav__cloth__btn--clothes--active"
+                    }`}
                     onClick={modalOpenHandler}
                     tabIndex={0}
                   >
@@ -73,10 +76,8 @@ function Navbar() {
                 </div>
               </li>
             </ul>
-          </div>
-          {/* flex 2 */}
-          <div className="nav__content">
-            <ul>
+            {/* flex line 2 */}
+            <ul className="nav__content">
               <li>
                 <Link to={"/favorite"}>Fav</Link>
               </li>
@@ -95,40 +96,48 @@ function Navbar() {
         tabIndex={0}
       >
         <div className="wrapper">
-          <div>
-            <div>COAT</div>
+          <div className="nav__lists__box">
+            <div className="nav__lists__category">
+              <p>COAT</p>
+            </div>
             <Link onClick={modalOpenHandler} to={"/shop/coat-men"}>
-              COAT - MEN
+              MEN
             </Link>
             <Link onClick={modalOpenHandler} to={"/shop/coat-women"}>
-              COAT - WOMEN
+              WOMEN
             </Link>
           </div>
-          <div>
-            <div>SHIRT</div>
+          <div className="nav__lists__box">
+            <div className="nav__lists__category">
+              <p>SHIRT</p>
+            </div>
             <Link onClick={modalOpenHandler} to={"/shop/shirt-men"}>
-              SHIRT - MEN
+              MEN
             </Link>
             <Link onClick={modalOpenHandler} to={"/shop/shirt-women"}>
-              COAT - WOMEN
+              WOMEN
             </Link>
           </div>
-          <div>
-            <div>HOODIE</div>
+          <div className="nav__lists__box">
+            <div className="nav__lists__category">
+              <p>HOODIE</p>
+            </div>
             <Link onClick={modalOpenHandler} to={"/shop/hoodie-men"}>
-              HOODIE - MEN
+              MEN
             </Link>
             <Link onClick={modalOpenHandler} to={"/shop/hoodie-women"}>
-              HOODIE - WOMEN
+              WOMEN
             </Link>
           </div>
-          <div>
-            <div>SWEATER</div>
+          <div className="nav__lists__box">
+            <div className="nav__lists__category">
+              <p>SWEATER</p>
+            </div>
             <Link onClick={modalOpenHandler} to={"/shop/sweater-men"}>
-              SWEATER - MEN
+              MEN
             </Link>
             <Link onClick={modalOpenHandler} to={"/shop/sweater-women"}>
-              SWEATER - WOMEN
+              WOMEN
             </Link>
           </div>
         </div>

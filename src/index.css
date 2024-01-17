@@ -1,18 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font: inherit;
+  /* font-family: "Roboto", sans-serif; */
+  /* font-family: "Lato", sans-serif; */
+  font-family: "Merriweather", serif;
 }
 
 :root {
   --clr-white: #f8f8f8;
   --clr-light: #f1f1f1;
-  --clr-mid: black;
+  --clr-mid: rgb(216, 215, 215);
   --clr-dark: black;
   --clr-primary: blue;
   --clr-secondary: red;
-  --clr-dark-fnt: black;
+  --clr-dark-fnt: rgb(80, 80, 80);
   --clr-light-fnt: #fff;
 }
 
@@ -24,7 +31,7 @@ video {
   max-width: 100%;
 }
 a {
-  color: black;
+  color: var(--clr-dark-fnt);
   text-decoration: none;
 }
 li {
@@ -34,6 +41,7 @@ button {
   border: none;
   cursor: pointer;
   background-color: transparent;
+  color: var(--clr-dark-fnt);
 }
 body {
   min-height: 100vh;
