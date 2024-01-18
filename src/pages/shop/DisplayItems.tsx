@@ -4,6 +4,7 @@ import { AppDispatch } from "../../redux/store";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import { FilteredProp } from "../../model/stateProps";
+import { IMAGE_KEY } from "../../model/imageKey";
 
 type Props = {
   filteredData: FilteredProp[];
@@ -55,6 +56,13 @@ function CardComponent({ item }: { item: FilteredProp }) {
       {item.name} {item.gender}
       <p>has Like: {item.like ? "true" : "false"}</p>
       <p>has Basket: {item.basket ? "true" : "false"}</p>
+      <div>
+        {item.image.map((str) => (
+          <div key={str}>
+            <img src={IMAGE_KEY + str} alt={item.name} />
+          </div>
+        ))}
+      </div>
       <button onClick={() => likeClickHandler(item)}>Like</button>
       <button onClick={() => basketClickHandler(item)}>Basket</button>
     </li>

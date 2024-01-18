@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { BasketProp } from "../../model/stateProps";
 
-const BASE_URL = "https://api.npoint.io/8fd7fe356036812046a7";
+// const BASE_URL = "https://api.npoint.io/8fd7fe356036812046a7";
+const BASE_URL = "https://api.npoint.io/918666e7d6c8c48300b8";
 
 export const requestHTTP = createAsyncThunk(
   "cloth/fetchCloth",
@@ -21,10 +22,9 @@ interface PostState {
     name: string;
     sale: number;
     color: string;
-    image: string;
+    image: string[];
     price: number;
     gender: string;
-    member: number;
     category: string;
   }[];
   error: string | undefined;

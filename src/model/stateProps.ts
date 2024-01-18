@@ -3,10 +3,9 @@ export type BasketProp = {
   name: string;
   sale: number;
   color: string;
-  image: string;
+  image: string[];
   price: number;
   gender: string;
-  member: number;
   category: string;
 };
 
