@@ -11,17 +11,17 @@ type SlideIndexProp = {
 function SlideImageComponent({ currentIdx }: { currentIdx: number }) {
   return (
     <>
-      {bannerData.map(({ heading, image }, idx) => (
+      {bannerData.map(({ image }, idx) => (
         <div
           key={idx}
-          className={`banner__image banner__image--${idx} ${
+          className={`banner__image banner__image--${image.size} ${
             currentIdx === idx && "banner__image--active"
           }`}
         >
           <div className="wrapper">
             <div className="banner__image__box">
               <div className="banner__image__bg"></div>
-              <img src={image} alt={heading} />
+              <img src={image.url} alt={image.alt} />
             </div>
           </div>
         </div>
@@ -32,12 +32,28 @@ function SlideImageComponent({ currentIdx }: { currentIdx: number }) {
 
 function TextComponent({ currentIdx }: { currentIdx: number }) {
   return (
-    <section className={`banner__text banner__text--${currentIdx}`}>
-      <h2>{bannerData[currentIdx].heading}</h2>
-      <p>{bannerData[currentIdx].paragraph}</p>
-      {bannerData[currentIdx].link.has && (
-        <Link to={bannerData[currentIdx].link.href}>
-          {bannerData[currentIdx].link.label}
+    <section
+      className={`banner__text ${
+        bannerData[currentIdx]?.unique &&
+        "banner__text--" + bannerData[currentIdx]?.unique
+      }`}
+    >
+      <h2
+        className={`banner__text__color banner__text__color--${bannerData[currentIdx].heading.color}`}
+      >
+        {bannerData[currentIdx].heading.text}
+      </h2>
+      <p
+        className={`banner__text__color banner__text__color--${bannerData[currentIdx].paragraph.color}`}
+      >
+        {bannerData[currentIdx].paragraph.text}
+      </p>
+      {bannerData[currentIdx].link?.has && (
+        <Link
+          className={`banner__text__link banner__text__link--${bannerData[currentIdx].link?.color}`}
+          to={bannerData[currentIdx].link?.href ?? "/"}
+        >
+          {bannerData[currentIdx].link?.label}
         </Link>
       )}
     </section>
@@ -46,7 +62,7 @@ function TextComponent({ currentIdx }: { currentIdx: number }) {
 
 function DotsComponent({ nextSlide, currentIdx }: SlideIndexProp) {
   return (
-    <div className={`banner__dots banner__dots--${currentIdx}`}>
+    <div className={`banner__dots`}>
       {bannerData.map(({ id }, idx) => (
         <button
           onClick={() => nextSlide(idx)}
@@ -62,7 +78,7 @@ function DotsComponent({ nextSlide, currentIdx }: SlideIndexProp) {
 
 function ArrowComponent({ nextSlide, currentIdx }: SlideIndexProp) {
   return (
-    <div className={`banner__arrow banner__arrow--${currentIdx}`}>
+    <div className={`banner__arrow`}>
       <button onClick={() => nextSlide(currentIdx - 1)}>
         <svg
           width="11"
