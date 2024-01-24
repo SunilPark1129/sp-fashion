@@ -23,7 +23,7 @@ nav {
 .nav__content {
   display: flex;
   align-items: center;
-  gap: 2em;
+  gap: 1.5em;
   padding: 0.5em 0;
   flex-shrink: 0;
 }
@@ -37,8 +37,8 @@ nav {
 }
 
 .nav__logo {
-  width: 5em;
-  height: 5em;
+  width: 4em;
+  height: 4em;
   margin: 0 auto;
 }
 
