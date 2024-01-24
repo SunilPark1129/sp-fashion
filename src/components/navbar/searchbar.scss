@@ -1,0 +1,34 @@
+.searchbar {
+  position: relative;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  max-width: 20rem;
+  &__input {
+    width: 100%;
+    height: 100;
+    padding: 0.5em;
+    border: 1px solid rgb(172, 172, 172);
+    outline: none;
+    &:focus {
+      background-color: rgb(228, 228, 250);
+    }
+  }
+  &__lists {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    background-color: var(--clr-white);
+    border: 1px solid rgb(172, 172, 172);
+    border-top: none;
+    &__item {
+      cursor: pointer;
+      padding: 0.5em;
+
+      &:hover {
+        background-color: rgb(228, 228, 250);
+      }
+    }
+  }
+}

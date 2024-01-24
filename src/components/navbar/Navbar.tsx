@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../assets/logo192.png";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
   /* category lists modal */
@@ -78,6 +79,8 @@ function Navbar() {
               </li>
             </ul>
             {/* flex line 2 */}
+            <SearchBar />
+            {/* flex line 3 */}
             <ul className="nav__content">
               <li>
                 <Link to={"/favorite"} className="svg-heart">

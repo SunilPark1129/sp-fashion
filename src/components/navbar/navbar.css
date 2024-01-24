@@ -16,6 +16,8 @@ nav {
 .nav__flex {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 1em;
 }
 
 .nav__content {
@@ -23,6 +25,7 @@ nav {
   align-items: center;
   gap: 2em;
   padding: 0.5em 0;
+  flex-shrink: 0;
 }
 .nav__content:nth-of-type(1) a:hover,
 .nav__content:nth-of-type(1) button:hover {

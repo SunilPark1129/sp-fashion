@@ -1,0 +1,33 @@
+.searchbar {
+  position: relative;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  max-width: 20rem;
+}
+.searchbar__input {
+  width: 100%;
+  height: 100;
+  padding: 0.5em;
+  border: 1px solid rgb(172, 172, 172);
+  outline: none;
+}
+.searchbar__input:focus {
+  background-color: rgb(228, 228, 250);
+}
+.searchbar__lists {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  background-color: var(--clr-white);
+  border: 1px solid rgb(172, 172, 172);
+  border-top: none;
+}
+.searchbar__lists__item {
+  cursor: pointer;
+  padding: 0.5em;
+}
+.searchbar__lists__item:hover {
+  background-color: rgb(228, 228, 250);
+}/*# sourceMappingURL=searchbar.css.map */

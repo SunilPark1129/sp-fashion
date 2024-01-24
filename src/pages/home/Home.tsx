@@ -1,5 +1,9 @@
 import Banner from "./Banner";
 
+function BestSeller() {
+  return <section></section>;
+}
+
 function Home() {
   return (
     <main className="home">
