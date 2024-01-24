@@ -141,7 +141,6 @@
   align-items: center;
 }
 .banner__arrow svg {
-  cursor: pointer;
   width: 1.3em;
   height: 1.3em;
   stroke: rgba(0, 0, 0, 0.26);
@@ -149,6 +148,9 @@
 .banner__arrow svg path {
   fill: #fff;
 }
-.banner__arrow svg:hover path {
+.banner__arrow button {
+  cursor: pointer;
+}
+.banner__arrow button:hover svg path {
   fill: #2d3661;
 }/*# sourceMappingURL=banner.css.map */

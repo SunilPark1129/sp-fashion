@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   width: 100%;
-  max-width: 20rem;
+  max-width: 24rem;
 }
 .searchbar__input {
   width: 100%;
@@ -30,4 +30,24 @@
 }
 .searchbar__lists__item:hover {
   background-color: rgb(228, 228, 250);
+}
+.searchbar__icon {
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 1px solid rgb(172, 172, 172);
+  border-left: none;
+  padding: 0 0.5em;
+  align-items: center;
+  display: flex;
+  background-color: #fff;
+}
+.searchbar__icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+.searchbar__icon svg path {
+  fill: rgb(100, 100, 100);
+}
+.searchbar__icon:hover svg path {
+  fill: rgb(29, 29, 29);
 }/*# sourceMappingURL=searchbar.css.map */

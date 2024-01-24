@@ -30,6 +30,10 @@ video {
   display: block;
   max-width: 100%;
 }
+
+svg {
+  pointer-events: none;
+}
 a {
   color: var(--clr-dark-fnt);
   text-decoration: none;
