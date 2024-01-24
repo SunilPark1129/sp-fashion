@@ -3,7 +3,7 @@ import { BasketProp } from "../../model/stateProps";
 
 // const BASE_URL = "https://api.npoint.io/8fd7fe356036812046a7";
 // const BASE_URL = "https://api.npoint.io/918666e7d6c8c48300b8";
-const BASE_URL = "https://api.npoint.io/2bf88f9d9b4fe6d6531e";
+const BASE_URL = "https://api.npoint.io/a856ba129413c8c6efc6";
 
 export const requestNames = createAsyncThunk("cloth/fetchName", async () => {
   const response = await fetch(`${BASE_URL}/names`);
