@@ -4,7 +4,7 @@ import { AppDispatch } from "../../redux/store";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import { FilteredProp } from "../../model/stateProps";
-import { IMAGE_KEY } from "../../model/imageKey";
+import { IMAGE_KEY } from "../../data/key";
 
 type Props = {
   filteredData: FilteredProp[];
