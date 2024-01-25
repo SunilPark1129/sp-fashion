@@ -1,7 +1,7 @@
-import imgSale from "../../assets/banner_sale.jpg";
-import imgNew from "../../assets/banner_new.jpg";
-import imgRecycle from "../../assets/banner_recycle.jpg";
-import imgJacket from "../../assets/banner_jacket.jpg";
+import imgSale from "./assets/banner_sale.jpg";
+import imgNew from "./assets/banner_new.jpg";
+import imgRecycle from "./assets/banner_recycle.jpg";
+import imgJacket from "./assets/banner_jacket.jpg";
 
 type ColorProp = "dark" | "light";
 
