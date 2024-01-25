@@ -1,0 +1,82 @@
+.footer {
+  padding: 2rem 1rem;
+}
+.footer h3,
+.footer p,
+.footer div {
+  font-family: "Roboto", sans-serif;
+}
+.footer .wrapper {
+  max-width: 1200px;
+}
+.footer .container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.footer__guide {
+  display: flex;
+  justify-content: space-between;
+}
+.footer__guide__box {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.footer__guide__header {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgb(68, 68, 68);
+}
+.footer__guide__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  color: rgb(71, 71, 71);
+  font-size: 0.9em;
+}
+.footer__guide__body p {
+  cursor: pointer;
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+.footer__guide__body p:hover {
+  color: black;
+}
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.footer__social {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.footer__social div {
+  cursor: pointer;
+}
+.footer__social div:hover svg {
+  fill: rgb(43, 43, 43);
+}
+.footer__social div:hover svg path {
+  fill: rgb(43, 43, 43);
+}
+.footer__social svg {
+  width: 1.8em;
+  height: 1.8em;
+  fill: rgb(102, 102, 102);
+}
+.footer__social svg path {
+  fill: rgb(102, 102, 102);
+}
+.footer__copyright {
+  margin: 0 auto;
+  font-size: 0.9em;
+  color: rgb(70, 70, 70);
+}
+.footer__logo {
+  width: 3em;
+  margin: 0 auto;
+  filter: contrast(80%);
+}/*# sourceMappingURL=footer.css.map */
