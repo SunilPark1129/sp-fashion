@@ -9,8 +9,9 @@ import {
   CategoryProp,
 } from "../../model/stateProps";
 import ShopAside from "./ShopAside";
-import DisplayItems from "./DisplayItems";
+import Items from "./Items";
 import { getFilter } from "../../utilities/getFilter";
+import "./shop.css";
 
 type ParamProp = { id: string | undefined };
 
@@ -89,15 +90,17 @@ function Shop() {
     if (wrongParam) return <WrongParamComponent />;
     if (error) return <ErrorComponent err={error} />;
     if (loading || !filteredData) return <LoadingComponent />;
-    return <DisplayItems filteredData={filteredData} />;
+    return <Items filteredData={filteredData} />;
   }
 
   return (
-    <main>
-      <ShopAside />
-      <article>
-        <PendingData />
-      </article>
+    <main className="shop">
+      <div className="wrapper">
+        <div className="container">
+          <ShopAside />
+          <PendingData />
+        </div>
+      </div>
     </main>
   );
 }

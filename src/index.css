@@ -60,6 +60,11 @@ body {
 
 /* sale price style */
 /* <span cross>{price} <span saleoff>{sale} {getCalculator} */
+.sale {
+  display: flex;
+  gap: 0.5em;
+  align-items: center;
+}
 .sale span {
   color: #5c5c5c;
   font-size: 0.8em;
@@ -81,4 +86,23 @@ body {
     padding: 0.2em;
     border-radius: 4px;
   }
+}
+
+.btn-svg svg path {
+  stroke: #505050;
+  stroke-width: 2px;
+}
+
+.btn-svg--like:hover svg path,
+.btn-svg--like--active svg path {
+  stroke: #161616;
+  stroke-width: 2px;
+  fill: rgb(221, 82, 82) !important;
+}
+
+.btn-svg--basket:hover svg path,
+.btn-svg--basket--active svg path {
+  stroke: #161616;
+  stroke-width: 2px;
+  fill: rgb(89, 212, 73) !important;
 }
