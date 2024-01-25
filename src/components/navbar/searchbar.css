@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   width: 100%;
-  max-width: 24rem;
+  max-width: 40rem;
 }
 .searchbar__input {
   width: 100%;

@@ -38,20 +38,19 @@ function Navbar() {
     <header>
       <div className="wrapper">
         <nav>
-          <Link to={"/"}>
-            <img className="nav__logo" src={logo} alt="SIP logo" />
-          </Link>
+          <div className="nav__top">
+            <Link className="nav__logo" to={"/"}>
+              <img src={logo} alt="SIP logo" />
+            </Link>
+            <SearchBar />
+          </div>
           <div className="nav__flex">
-            {/* flex line 1 */}
-
             <ul className="nav__content">
-              {/* home */}
               <li>
                 <div>
                   <Link to={"/"}>HOME</Link>
                 </div>
               </li>
-              {/* shop */}
               <li>
                 <div className="nav__cloth">
                   <button
@@ -65,22 +64,17 @@ function Navbar() {
                   </button>
                 </div>
               </li>
-              {/* career */}
               <li>
                 <div>
                   <Link to={"/"}>CAREER</Link>
                 </div>
               </li>
-              {/* contact */}
               <li>
                 <div>
                   <Link to={"/contact"}>CONTACT</Link>
                 </div>
               </li>
             </ul>
-            {/* flex line 2 */}
-            <SearchBar />
-            {/* flex line 3 */}
             <ul className="nav__content">
               <li>
                 <Link to={"/favorite"} className="svg-heart">

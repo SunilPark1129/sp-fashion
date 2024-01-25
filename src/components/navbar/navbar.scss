@@ -10,7 +10,14 @@ nav {
   padding: 1em 2em;
   flex-direction: column;
   justify-content: space-between;
-  gap: 1em;
+  gap: 0.5em;
+}
+
+.nav__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .nav__flex {
@@ -42,9 +49,9 @@ nav {
 }
 
 .nav__logo {
-  width: 4em;
-  height: 4em;
-  margin: 0 auto;
+  width: 3em;
+  height: 3em;
+  flex-shrink: 0;
 }
 
 .nav__cloth {
