@@ -63,7 +63,7 @@ function BestSeller() {
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <div
-                key={id}
+                key={id + name}
                 className="home__section__item"
                 onClick={() => itemClickHandler(id)}
               >
@@ -142,7 +142,7 @@ function SeasonSales() {
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <div
-                key={id}
+                key={id + name}
                 className="home__section__item"
                 onClick={() => itemClickHandler(id)}
               >
