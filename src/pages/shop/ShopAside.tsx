@@ -35,12 +35,29 @@ const initPriceState = {
   price: { min: 0, max: Infinity },
 };
 
+type ActivedFiltersProp = {
+  name: boolean;
+  color: boolean;
+  price: boolean;
+};
+
+const initActivedFilters = {
+  name: false,
+  color: false,
+  price: false,
+};
+
 function ShopAside({ genderFilterData }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [colorState, setColorState] = useState<ColorProp>(initColorState);
   const [priceState, setPriceState] = useState<PriceProp>(initPriceState);
+
+  const [backupColor, setBackupColor] = useState<ColorProp>(initColorState);
+
+  const [activedFilters, setActivedFilters] =
+    useState<ActivedFiltersProp>(initActivedFilters);
 
   useEffect(() => {
     // when mounted, get all the colors that array has
@@ -54,6 +71,11 @@ function ShopAside({ genderFilterData }: Props) {
         }
       });
       setColorState((prev) => ({
+        ...prev,
+        colors: [...tempArr.sort()],
+        activedColors: { ...hasColor },
+      }));
+      setBackupColor((prev) => ({
         ...prev,
         colors: [...tempArr.sort()],
         activedColors: { ...hasColor },
@@ -85,18 +107,24 @@ function ShopAside({ genderFilterData }: Props) {
 
     /* --------- search term filter ---------- */
     if (searchTerm.trim().length !== 0) {
+      setActivedFilters((prev) => ({ ...prev, name: true }));
+
       const regexp = new RegExp(
         `\\b${searchTerm.replace(/\s+/g, ".*")}.*\\b`,
         "i"
       );
       temp = genderFilterData.filter(({ name }) => name.match(regexp));
     } else {
+      setActivedFilters((prev) => ({ ...prev, name: false }));
       temp = [...genderFilterData];
     }
 
     /* --------- color filter ---------- */
     if (IsColorActived()) {
       temp = temp.filter(({ color }) => colorState.activedColors[color]);
+      setActivedFilters((prev) => ({ ...prev, color: true }));
+    } else {
+      setActivedFilters((prev) => ({ ...prev, color: false }));
     }
 
     /* --------- price filter ---------- */
@@ -105,6 +133,12 @@ function ShopAside({ genderFilterData }: Props) {
         return true;
       } else return false;
     });
+
+    if (priceState.price.min !== 0 || priceState.price.max !== Infinity) {
+      setActivedFilters((prev) => ({ ...prev, price: true }));
+    } else {
+      setActivedFilters((prev) => ({ ...prev, price: false }));
+    }
 
     dispatch(updateSort(temp));
   }, [
@@ -150,9 +184,39 @@ function ShopAside({ genderFilterData }: Props) {
     }));
   }
 
+  function sortClearHandler(item: string) {
+    if (item === "name") {
+      setSearchTerm("");
+      setActivedFilters((prev) => ({ ...prev, name: false }));
+    } else if (item === "color") {
+      setColorState(backupColor);
+      setActivedFilters((prev) => ({ ...prev, color: false }));
+    } else if (item === "price") {
+      setPriceState(initPriceState);
+      setActivedFilters((prev) => ({ ...prev, price: false }));
+    }
+    //  else if (item === "all") {
+    //   setSearchTerm("");
+    //   setColorState(initColorState);
+    //   setPriceState(initPriceState);
+    //   setActivedFilters(initActivedFilters);
+    // }
+  }
+
   return (
     <aside className="shop__aside">
-      <p>filter aside here</p>
+      <div>
+        <p>Filter</p>
+      </div>
+      <div>
+        {Object.entries(activedFilters)
+          .filter(([_, value]) => value)
+          .map(([item]) => (
+            <div key={item} onClick={() => sortClearHandler(item)}>
+              {item}
+            </div>
+          ))}
+      </div>
       <div>
         <div>
           <input
