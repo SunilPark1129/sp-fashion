@@ -9,11 +9,11 @@
   width: 100%;
   height: 100;
   padding: 0.5em;
-  border: 1px solid rgb(172, 172, 172);
+  border: 1px solid var(--clr-line);
   outline: none;
 }
 .searchbar__input:focus {
-  background-color: rgb(228, 228, 250);
+  background-color: var(--clr-focus);
 }
 .searchbar__lists {
   position: absolute;
@@ -21,7 +21,7 @@
   top: 100%;
   width: 100%;
   background-color: var(--clr-white);
-  border: 1px solid rgb(172, 172, 172);
+  border: 1px solid var(--clr-line);
   border-top: none;
 }
 .searchbar__lists__item {
@@ -29,12 +29,12 @@
   padding: 0.5em;
 }
 .searchbar__lists__item:hover {
-  background-color: rgb(228, 228, 250);
+  background-color: var(--clr-focus);
 }
 .searchbar__icon {
   flex-shrink: 0;
   cursor: pointer;
-  border: 1px solid rgb(172, 172, 172);
+  border: 1px solid var(--clr-line);
   border-left: none;
   padding: 0 0.5em;
   align-items: center;

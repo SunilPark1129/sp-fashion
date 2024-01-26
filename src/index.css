@@ -21,6 +21,8 @@
   --clr-secondary: red;
   --clr-dark-fnt: rgb(80, 80, 80);
   --clr-light-fnt: #fff;
+  --clr-line: rgb(172, 172, 172);
+  --clr-focus: rgb(228, 228, 250);
 }
 
 img,

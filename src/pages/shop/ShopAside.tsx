@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./shopaside.css";
 import { BasketProp, FilteredProp } from "../../model/stateProps";
 import { useDispatch } from "react-redux";
@@ -20,7 +20,7 @@ type ColorProp = {
 };
 
 const initColorState = {
-  hasOpen: false,
+  hasOpen: true,
   colors: [],
   activedColors: {},
 };
@@ -31,7 +31,7 @@ type PriceProp = {
 };
 
 const initPriceState = {
-  hasOpen: false,
+  hasOpen: true,
   price: { min: 0, max: Infinity },
 };
 
@@ -58,6 +58,9 @@ function ShopAside({ genderFilterData }: Props) {
 
   const [activedFilters, setActivedFilters] =
     useState<ActivedFiltersProp>(initActivedFilters);
+
+  const minRef = useRef<HTMLInputElement>(null);
+  const maxRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     // when mounted, get all the colors that array has
@@ -194,31 +197,29 @@ function ShopAside({ genderFilterData }: Props) {
     } else if (item === "price") {
       setPriceState(initPriceState);
       setActivedFilters((prev) => ({ ...prev, price: false }));
+      if (minRef.current && maxRef.current) {
+        minRef.current.value = "";
+        maxRef.current.value = "";
+      }
+    } else if (item === "all") {
+      setSearchTerm("");
+      setColorState(backupColor);
+      setPriceState(initPriceState);
+      setActivedFilters(initActivedFilters);
+      if (minRef.current && maxRef.current) {
+        minRef.current.value = "";
+        maxRef.current.value = "";
+      }
     }
-    //  else if (item === "all") {
-    //   setSearchTerm("");
-    //   setColorState(initColorState);
-    //   setPriceState(initPriceState);
-    //   setActivedFilters(initActivedFilters);
-    // }
   }
 
   return (
     <aside className="shop__aside">
-      <div>
-        <p>Filter</p>
+      <div className="shop__aside__header">
+        <p>Filter Options</p>
       </div>
-      <div>
-        {Object.entries(activedFilters)
-          .filter(([_, value]) => value)
-          .map(([item]) => (
-            <div key={item} onClick={() => sortClearHandler(item)}>
-              {item}
-            </div>
-          ))}
-      </div>
-      <div>
-        <div>
+      <div className="shop__aside__container">
+        <div className="shop__aside__search">
           <input
             type="text"
             placeholder="Search Name"
@@ -227,58 +228,184 @@ function ShopAside({ genderFilterData }: Props) {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-      </div>
 
-      <div>
-        <div>
-          <button onClick={colorStateClickHandler}>Color</button>
-          <div>{colorState.hasOpen ? "-" : "+"}</div>
-        </div>
-        {colorState.hasOpen && (
-          <div>
-            {colorState.colors.map((item) => {
-              let activedColor = false;
-              if (colorState.activedColors[item]) {
-                activedColor = true;
-              }
-              return (
-                <div key={item}>
+        <div className="shop__aside__color">
+          <div
+            className={`shop__aside__trigger ${
+              colorState.hasOpen && "shop__aside__trigger--active"
+            }`}
+          >
+            <button onClick={colorStateClickHandler}>COLOR</button>
+            <div>
+              {colorState.hasOpen ? (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="21"
+                    y="9"
+                    width="6"
+                    height="18"
+                    rx="1"
+                    transform="rotate(90 21 9)"
+                    fill="#1E1E1E"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="9"
+                    y="3"
+                    width="6"
+                    height="18"
+                    rx="1"
+                    fill="#1E1E1E"
+                  />
+                  <rect
+                    x="21"
+                    y="9"
+                    width="6"
+                    height="18"
+                    rx="1"
+                    transform="rotate(90 21 9)"
+                    fill="#1E1E1E"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
+          {colorState.hasOpen && (
+            <div className="shop__aside__color__btn-box">
+              {colorState.colors.map((item) => {
+                let activedColor = false;
+                if (colorState.activedColors[item]) {
+                  activedColor = true;
+                }
+                return (
                   <button
-                    style={{ background: activedColor ? "red" : "transparent" }}
+                    className={`shop__aside__color__item ${
+                      activedColor && "shop__aside__color__item--active"
+                    }`}
                     onClick={() => postColor(item)}
+                    key={item}
                   >
                     {item}
                   </button>
-                </div>
-              );
-            })}
-          </div>
-        )}
-      </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
 
-      <div>
-        <div>
-          <div>
-            <button onClick={priceStateClickHandler}>Price</button>
-            <div>{priceState.hasOpen ? "-" : "+"}</div>
+        <div className="shop__aside__price">
+          <div
+            className={`shop__aside__trigger ${
+              priceState.hasOpen && "shop__aside__trigger--active"
+            }`}
+          >
+            <button onClick={priceStateClickHandler}>PRICE</button>
+            <div>
+              {priceState.hasOpen ? (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="21"
+                    y="9"
+                    width="6"
+                    height="18"
+                    rx="1"
+                    transform="rotate(90 21 9)"
+                    fill="#1E1E1E"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect
+                    x="9"
+                    y="3"
+                    width="6"
+                    height="18"
+                    rx="1"
+                    fill="#1E1E1E"
+                  />
+                  <rect
+                    x="21"
+                    y="9"
+                    width="6"
+                    height="18"
+                    rx="1"
+                    transform="rotate(90 21 9)"
+                    fill="#1E1E1E"
+                  />
+                </svg>
+              )}
+            </div>
           </div>
           {priceState.hasOpen && (
-            <div>
+            <div className="shop__aside__price__input-box">
               <input
                 type="text"
                 placeholder="min"
                 autoComplete="off"
                 onChange={(e) => priceChangeHandler(e.target.value, "min")}
+                ref={minRef}
               />
+              <p>~</p>
               <input
                 type="text"
                 placeholder="max"
                 autoComplete="off"
                 onChange={(e) => priceChangeHandler(e.target.value, "max")}
+                ref={maxRef}
               />
             </div>
           )}
         </div>
+      </div>
+
+      <div className="shop__aside__filters">
+        {Object.entries(activedFilters)
+          .filter(([_, value]) => value)
+          .map(([item]) => (
+            <button
+              className="shop__aside__filters__btn"
+              key={item}
+              onClick={() => sortClearHandler(item)}
+            >
+              {item}
+            </button>
+          ))}
+        {(activedFilters.name ||
+          activedFilters.color ||
+          activedFilters.price) && (
+          <button
+            className="shop__aside__filters__btn"
+            onClick={() => sortClearHandler("all")}
+          >
+            clear all
+          </button>
+        )}
       </div>
     </aside>
   );
