@@ -3,14 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
-import {
-  FilteredProp,
-  CategoryValidProp,
-  CategoryProp,
-} from "../../model/stateProps";
+import { BasketProp, CategoryValidProp } from "../../model/stateProps";
 import ShopAside from "./ShopAside";
 import Items from "./Items";
-import { getFilter } from "../../utilities/getFilter";
 import "./shop.css";
 
 type ParamProp = { id: string | undefined };
@@ -28,18 +23,12 @@ function Shop() {
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryValidProp>(null);
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
-  const [filteredData, setFilteredData] = useState<FilteredProp[] | null>(null);
+  const [genderFilterData, setGenderFilterData] = useState<BasketProp[]>([]);
 
   /* request and receive the data from server */
   const { data, loading, error } = useSelector(
     (state: RootState) => state.getPost
   );
-
-  /* GET like & basket lists */
-  const likeState: CategoryProp = useSelector(
-    (state: RootState) => state.likeState
-  );
-  const basket: CategoryProp = useSelector((state: RootState) => state.basket);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -74,30 +63,28 @@ function Shop() {
     if (selectedCategory && data.length !== 0) {
       console.log("filtering notification...");
       const convertGender = selectedGender === "men" ? "male" : "female";
-
-      const res = getFilter(
-        convertGender,
-        data,
-        likeState[selectedCategory],
-        basket[selectedCategory]
-      );
-      setFilteredData(res);
+      const res = data.filter(({ gender }) => gender === convertGender);
+      setGenderFilterData(res);
     }
-  }, [selectedGender, data, likeState, basket]);
+  }, [selectedGender, data]);
 
   // components to display current pending stage
   function PendingData() {
     if (wrongParam) return <WrongParamComponent />;
     if (error) return <ErrorComponent err={error} />;
-    if (loading || !filteredData) return <LoadingComponent />;
-    return <Items filteredData={filteredData} />;
+    if (loading || genderFilterData.length === 0) return <LoadingComponent />;
+    return (
+      <>
+        <ShopAside genderFilterData={genderFilterData} />
+        <Items selectedCategory={selectedCategory} />
+      </>
+    );
   }
 
   return (
     <main className="shop">
       <div className="wrapper">
         <div className="container">
-          <ShopAside />
           <PendingData />
         </div>
       </div>

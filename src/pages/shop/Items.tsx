@@ -1,23 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
-import { FilteredProp } from "../../model/stateProps";
+import {
+  BasketProp,
+  CategoryProp,
+  CategoryValidProp,
+  FilteredProp,
+} from "../../model/stateProps";
 import { IMAGE_KEY } from "../../data/key";
 import "./items.css";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
+import { getFilter } from "../../utilities/getFilter";
 
 type Props = {
-  filteredData: FilteredProp[];
+  selectedCategory: CategoryValidProp;
 };
 
-function Items({ filteredData }: Props) {
-  const reversedData = [...filteredData].reverse();
+function Items({ selectedCategory }: Props) {
+  /* GET like & basket lists */
+  const likeState: CategoryProp = useSelector(
+    (state: RootState) => state.likeState
+  );
+  const basket: CategoryProp = useSelector((state: RootState) => state.basket);
+
+  const data = useSelector((store: RootState) => store.getSort.data);
+
+  if (!selectedCategory) return null;
+  const displayData = getFilter(
+    data,
+    likeState[selectedCategory],
+    basket[selectedCategory]
+  );
+
   return (
     <div className="shop__category">
       <div className="shop__category__box">
-        {reversedData.map((item: FilteredProp) => {
+        {displayData.map((item: FilteredProp) => {
           return <CardComponent item={item} key={item.id + item.category} />;
         })}
       </div>
@@ -47,16 +67,6 @@ function CardComponent({ item }: { item: FilteredProp }) {
   function itemClickHandler() {
     console.log("clicked");
   }
-
-  // id: string;
-  // name: string;
-  // sale: number;
-  // color: string;
-  // image: string;
-  // price: number;
-  // gender: string;
-  // member: number;
-  // category: string;
 
   return (
     <section

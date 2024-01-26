@@ -3,13 +3,14 @@ import basketReducer from "./features/basketSlice";
 import getReducer from "./features/getSlice";
 import likeReducer from "./features/LikeSlice";
 import getNamesReducer from "./features/getName";
-
+import sortReducer from "./features/sortSlice";
 export const store = configureStore({
   reducer: {
     basket: basketReducer,
     getPost: getReducer,
     likeState: likeReducer,
     getNames: getNamesReducer,
+    getSort: sortReducer,
   },
 });
 
