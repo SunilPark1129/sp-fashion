@@ -1,5 +1,10 @@
 .shop .container {
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.5em;
+  padding: 1em 0.5em;
+}
+@media (max-width: 1050px) {
+  .shop .container {
+    flex-direction: column;
+  }
 }/*# sourceMappingURL=shop.css.map */

@@ -3,9 +3,23 @@
   &__box {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, minmax(300px, 1fr));
-    gap: 1em;
+    grid-template-columns: repeat(4, minmax(260px, 1fr));
+    gap: 0.5em;
     justify-items: center;
+    @media (max-width: 1350px) {
+      grid-template-columns: repeat(3, minmax(260px, 1fr));
+    }
+    @media (max-width: 860px) {
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+    @media (max-width: 740px) {
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 0.25em;
+    }
+    @media (max-width: 380px) {
+      grid-template-columns: repeat(1, minmax(180px, 1fr));
+      gap: 0.25em;
+    }
     &__item {
       width: 100%;
       position: relative;
@@ -40,13 +54,16 @@
         flex-direction: column;
         gap: 0.5em;
         padding: 1em;
+        @media (max-width: 1050px) {
+          padding: 0.5em;
+        }
       }
       &__btn {
         display: flex;
-        gap: 1rem;
+        gap: 1em;
         position: absolute;
-        right: 1rem;
-        top: 1rem;
+        right: 1em;
+        top: 1em;
 
         svg path {
           fill: rgb(218, 218, 218);
