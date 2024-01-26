@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import {
-  BasketProp,
   CategoryProp,
   CategoryValidProp,
   FilteredProp,
@@ -52,6 +51,24 @@ function Items({ selectedCategory }: Props) {
 }
 
 function CardComponent({ item }: { item: FilteredProp }) {
+  const [isImgReady, setIsImgReady] = useState<boolean>(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    // imgRef.current
+    if (!imgRef.current) return;
+    let image = document.createElement("img");
+    image.src = imgRef.current.src;
+    image.onload = function () {
+      console.log("image is ready");
+      setIsImgReady(true);
+    };
+
+    return () => {
+      setIsImgReady(false);
+    };
+  }, [item]);
+
   const dispatch = useDispatch<AppDispatch>();
 
   function likeClickHandler(payload: FilteredProp) {
@@ -81,7 +98,13 @@ function CardComponent({ item }: { item: FilteredProp }) {
       key={item.id + item.category}
     >
       <div className="shop__category__box__item__img">
-        <img src={IMAGE_KEY + item.image[0]} alt={item.name} loading="lazy" />
+        <img
+          src={IMAGE_KEY + item.image[0]}
+          alt={item.name}
+          loading="lazy"
+          ref={imgRef}
+        />
+        <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
         <div className="shop__category__box__item__btn">
           <button
             className={`btn-svg btn-svg--like ${
