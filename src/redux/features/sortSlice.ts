@@ -17,17 +17,9 @@ export const sortSlice = createSlice({
     updateSort: (state: any, action: PayloadAction<FilteredProp[]>) => {
       state.data = action.payload;
     },
-    addSort: (state: any, action: PayloadAction<FilteredProp[]>) => {
-      state.data = [...state.data, ...action.payload];
-    },
-    deleteSort: (state: any, action: PayloadAction<string>) => {
-      state.data = state.data.filter(
-        (item: FilteredProp) => item.color !== action.payload
-      );
-    },
   },
 });
 
-export const { updateSort, addSort, deleteSort } = sortSlice.actions;
+export const { updateSort } = sortSlice.actions;
 
 export default sortSlice.reducer;
