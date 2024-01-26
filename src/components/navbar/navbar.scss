@@ -96,19 +96,6 @@ nav {
   }
 }
 
-.svg-heart:hover svg {
-  fill: rgb(224, 114, 114);
-}
-
-.svg-purchase:hover svg {
-  stroke: rgb(0, 0, 0);
-}
-
-.svg-login:hover svg {
-  stroke: rgb(0, 0, 0);
-  fill: rgb(240, 209, 123);
-}
-
 .nav__cloth__btn--clothes--active {
   text-decoration: underline;
   color: black;
