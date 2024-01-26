@@ -101,14 +101,12 @@ function ShopAside({ genderFilterData }: Props) {
 
     /* --------- price filter ---------- */
     temp = temp.filter(({ price }) => {
-      console.log(price);
       if (priceState.price.min <= price && price <= priceState.price.max) {
         return true;
       } else return false;
     });
 
     dispatch(updateSort(temp));
-    console.log("temp:", temp);
   }, [
     searchTerm,
     colorState.activedColors,

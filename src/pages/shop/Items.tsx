@@ -13,12 +13,18 @@ import { IMAGE_KEY } from "../../data/key";
 import "./items.css";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { getFilter } from "../../utilities/getFilter";
+import { updateSort } from "../../redux/features/sortSlice";
 
 type Props = {
   selectedCategory: CategoryValidProp;
 };
 
 function Items({ selectedCategory }: Props) {
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(updateSort([]));
+  }, []);
   /* GET like & basket lists */
   const likeState: CategoryProp = useSelector(
     (state: RootState) => state.likeState

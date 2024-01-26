@@ -53,7 +53,6 @@ function Shop() {
   useEffect(() => {
     // new HTTP request
     if (selectedCategory && !wrongParam) {
-      console.log("fetching HTTP notification...");
       dispatch(requestHTTP(selectedCategory));
     }
   }, [selectedCategory]);
@@ -61,7 +60,6 @@ function Shop() {
   useEffect(() => {
     // filtering the received data
     if (selectedCategory && data.length !== 0) {
-      console.log("filtering notification...");
       const convertGender = selectedGender === "men" ? "male" : "female";
       const res = data.filter(({ gender }) => gender === convertGender);
       setGenderFilterData(res);
