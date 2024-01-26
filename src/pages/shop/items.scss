@@ -3,11 +3,10 @@
   &__box {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
     gap: 1em;
     justify-items: center;
     &__item {
-      max-width: 500px;
       width: 100%;
       position: relative;
       display: flex;
