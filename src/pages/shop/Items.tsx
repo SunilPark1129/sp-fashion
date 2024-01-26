@@ -53,21 +53,22 @@ function Items({ selectedCategory }: Props) {
 function CardComponent({ item }: { item: FilteredProp }) {
   const [isImgReady, setIsImgReady] = useState<boolean>(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const hasMounted = useRef<boolean | null>(null);
 
   useEffect(() => {
-    // imgRef.current
-    if (!imgRef.current) return;
+    if (!imgRef.current || hasMounted.current) return;
+    hasMounted.current = true;
     let image = document.createElement("img");
     image.src = imgRef.current.src;
     image.onload = function () {
-      console.log("image is ready");
       setIsImgReady(true);
     };
 
     return () => {
+      hasMounted.current = true;
       setIsImgReady(false);
     };
-  }, [item]);
+  }, [hasMounted.current]);
 
   const dispatch = useDispatch<AppDispatch>();
 
