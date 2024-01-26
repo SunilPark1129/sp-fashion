@@ -3,10 +3,33 @@ import { Link } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../assets/logo192.png";
 import SearchBar from "./SearchBar";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 function Navbar() {
   /* category lists modal */
   const [IsModalOpen, setIsModalOpen] = useState(false);
+  const [totalLikes, setTotalLikes] = useState<number>(0);
+  const [totalBaskets, setTotalBaskets] = useState<number>(0);
+
+  const likes = useSelector((store: RootState) => store.likeState);
+  const baskets = useSelector((store: RootState) => store.basket);
+
+  useEffect(() => {
+    let total = 0;
+    Object.entries(likes).forEach(([_, array]) => {
+      total = total + array.length;
+    });
+    setTotalLikes(total);
+  }, [likes]);
+
+  useEffect(() => {
+    let total = 0;
+    Object.entries(baskets).forEach(([_, array]) => {
+      total = total + array.length;
+    });
+    setTotalBaskets(total);
+  }, [baskets]);
 
   /* check if user has pressed the modal */
   function focusOnTarget(e: any) {
@@ -76,8 +99,12 @@ function Navbar() {
               </li>
             </ul>
             <ul className="nav__content">
-              <li>
-                <Link to={"/favorite"} className="svg-heart">
+              <li className="nav__count">
+                <Link
+                  to={"/favorite"}
+                  className="svg-heart"
+                  title="link to favorite page"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -93,9 +120,20 @@ function Navbar() {
                     <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
                   </svg>
                 </Link>
+                <div
+                  className={`nav__count__number nav__count__number--heart ${
+                    totalLikes !== 0 && "nav__count__number--active"
+                  }`}
+                >
+                  {totalLikes}
+                </div>
               </li>
-              <li>
-                <Link to={"/purchase"} className="svg-purchase">
+              <li className="nav__count">
+                <Link
+                  to={"/purchase"}
+                  className="svg-purchase"
+                  title="link to purchase page"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -114,9 +152,20 @@ function Navbar() {
                     <path d="M6 5l14 1l-1 7h-13" />
                   </svg>
                 </Link>
+                <div
+                  className={`nav__count__number nav__count__number--basket ${
+                    totalBaskets !== 0 && "nav__count__number--active"
+                  }`}
+                >
+                  {totalBaskets}
+                </div>
               </li>
               <li>
-                <Link to={"/login"} className="svg-login">
+                <Link
+                  to={"/login"}
+                  className="svg-login"
+                  title="link to login page"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
