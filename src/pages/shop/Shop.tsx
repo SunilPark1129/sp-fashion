@@ -5,7 +5,7 @@ import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
 import ShopAside from "./ShopAside";
-import Items from "./Items";
+import Items from "../../components/item/Items";
 import "./shop.css";
 
 type ParamProp = { id: string | undefined };

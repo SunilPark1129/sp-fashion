@@ -40,8 +40,8 @@ function Items({ selectedCategory }: Props) {
   );
 
   return (
-    <div className="shop__category">
-      <div className="shop__category__box">
+    <div className="items">
+      <div className="items__content">
         {displayData.map((item: FilteredProp) => {
           return <CardComponent item={item} key={item.id + item.category} />;
         })}
@@ -94,11 +94,11 @@ function CardComponent({ item }: { item: FilteredProp }) {
 
   return (
     <section
-      className="shop__category__box__item"
+      className="items__content__item"
       onClick={itemClickHandler}
       key={item.id + item.category}
     >
-      <div className="shop__category__box__item__img">
+      <div className="items__content__item__img">
         <img
           src={IMAGE_KEY + item.image[0]}
           alt={item.name}
@@ -106,7 +106,7 @@ function CardComponent({ item }: { item: FilteredProp }) {
           ref={imgRef}
         />
         <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
-        <div className="shop__category__box__item__btn">
+        <div className="items__content__item__btn">
           <button
             className={`btn-svg btn-svg--like ${
               item.like && "btn-svg--like--active"
@@ -152,8 +152,8 @@ function CardComponent({ item }: { item: FilteredProp }) {
           </button>
         </div>
       </div>
-      <div className="shop__category__box__item__info">
-        <h3 className="shop__category__box__item__name">{item.name}</h3>
+      <div className="items__content__item__info">
+        <h3 className="items__content__item__name">{item.name}</h3>
         {item.sale === 0 ? (
           <p>${item.price.toFixed(2)}</p>
         ) : (
