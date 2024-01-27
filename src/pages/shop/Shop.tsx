@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
-import ShopAside from "./ShopAside";
+import ShopAside from "../../components/aside/ShopAside";
 import Items from "../../components/item/Items";
 import "./shop.css";
 
