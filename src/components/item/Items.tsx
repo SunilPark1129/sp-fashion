@@ -11,7 +11,7 @@ import {
 import { IMAGE_KEY } from "../../data/key";
 import "./items.css";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
-import { getFilter } from "../../utilities/getFilter";
+import { getLikeFilter, getFilter } from "../../utilities/getFilter";
 import { updateSort } from "../../redux/features/sortSlice";
 
 type Props = {
@@ -24,6 +24,7 @@ function Items({ selectedCategory }: Props) {
   useEffect(() => {
     dispatch(updateSort([]));
   }, []);
+
   /* GET like & basket lists */
   const likeState: CategoryProp = useSelector(
     (state: RootState) => state.likeState
@@ -32,12 +33,19 @@ function Items({ selectedCategory }: Props) {
 
   const data = useSelector((store: RootState) => store.getSort.data);
 
+  let displayData: FilteredProp[];
   if (!selectedCategory) return null;
-  const displayData = getFilter(
-    data,
-    likeState[selectedCategory],
-    basket[selectedCategory]
-  );
+  if (selectedCategory === "like") {
+    displayData = getLikeFilter({ data, basket });
+  } else if (selectedCategory === "basket") {
+    displayData = getLikeFilter({ data, likeState, basket });
+  } else {
+    displayData = getFilter(
+      data,
+      likeState[selectedCategory],
+      basket[selectedCategory]
+    );
+  }
 
   return (
     <div className="items">

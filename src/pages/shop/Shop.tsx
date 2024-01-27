@@ -73,7 +73,7 @@ function Shop() {
     if (loading || genderFilterData.length === 0) return <LoadingComponent />;
     return (
       <>
-        <ShopAside genderFilterData={genderFilterData} />
+        <ShopAside filteredData={genderFilterData} />
         <Items selectedCategory={selectedCategory} />
       </>
     );

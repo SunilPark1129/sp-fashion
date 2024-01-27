@@ -1,4 +1,4 @@
-import { BasketProp, FilteredProp } from "../model/stateProps";
+import { BasketProp, CategoryProp, FilteredProp } from "../model/stateProps";
 
 /* filter only */
 export function getFilter(
@@ -18,4 +18,41 @@ export function getFilter(
     return { ...item, like: hasLike, basket: hasBasket };
   });
   return temp.reverse();
+}
+
+type GetAllProp = {
+  data: FilteredProp[];
+  likeState?: CategoryProp;
+  basket?: CategoryProp;
+};
+
+export function getLikeFilter({ data, basket }: GetAllProp): FilteredProp[] {
+  if (!basket) return [];
+
+  const temp = data.map((item) => {
+    let hasBasket = false;
+    if (basket[item.category].find(({ id }) => item.id === id)) {
+      hasBasket = true;
+    }
+    return { ...item, basket: hasBasket };
+  });
+
+  return [...temp].reverse();
+}
+
+export function getBasketFilter({
+  data,
+  likeState,
+}: GetAllProp): FilteredProp[] {
+  if (!likeState) return [];
+
+  const temp = data.map((item) => {
+    let hasLike = false;
+    if (likeState[item.category].find(({ id }) => item.id === id)) {
+      hasLike = true;
+    }
+    return { ...item, like: hasLike };
+  });
+
+  return [...temp].reverse();
 }

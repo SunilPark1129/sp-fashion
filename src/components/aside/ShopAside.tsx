@@ -4,9 +4,10 @@ import { BasketProp, FilteredProp } from "../../model/stateProps";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updateSort } from "../../redux/features/sortSlice";
+import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 
 type Props = {
-  genderFilterData: BasketProp[];
+  filteredData: BasketProp[];
 };
 
 type ActivedColorProp = {
@@ -47,7 +48,7 @@ const initActivedFilters = {
   price: false,
 };
 
-function ShopAside({ genderFilterData }: Props) {
+function ShopAside({ filteredData }: Props) {
   const dispatch = useDispatch<AppDispatch>();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -64,27 +65,25 @@ function ShopAside({ genderFilterData }: Props) {
 
   useEffect(() => {
     // when mounted, get all the colors that array has
-    if (colorState.colors.length === 0) {
-      const hasColor: ActivedColorProp = {};
-      const tempArr: string[] = [];
-      genderFilterData.forEach(({ color }) => {
-        if (!hasColor.hasOwnProperty(color)) {
-          hasColor[color] = false;
-          tempArr.push(color);
-        }
-      });
-      setColorState((prev) => ({
-        ...prev,
-        colors: [...tempArr.sort()],
-        activedColors: { ...hasColor },
-      }));
-      setBackupColor((prev) => ({
-        ...prev,
-        colors: [...tempArr.sort()],
-        activedColors: { ...hasColor },
-      }));
-    }
-  }, []);
+    const hasColor: ActivedColorProp = {};
+    const tempArr: string[] = [];
+    filteredData.forEach(({ color }) => {
+      if (!hasColor.hasOwnProperty(color)) {
+        hasColor[color] = false;
+        tempArr.push(color);
+      }
+    });
+    setColorState((prev) => ({
+      ...prev,
+      colors: [...tempArr.sort()],
+      activedColors: { ...hasColor },
+    }));
+    setBackupColor((prev) => ({
+      ...prev,
+      colors: [...tempArr.sort()],
+      activedColors: { ...hasColor },
+    }));
+  }, [filteredData]);
 
   /* button triggers */
   function colorStateClickHandler() {
@@ -116,10 +115,10 @@ function ShopAside({ genderFilterData }: Props) {
         `\\b${searchTerm.replace(/\s+/g, ".*")}.*\\b`,
         "i"
       );
-      temp = genderFilterData.filter(({ name }) => name.match(regexp));
+      temp = filteredData.filter(({ name }) => name.match(regexp));
     } else {
       setActivedFilters((prev) => ({ ...prev, name: false }));
-      temp = [...genderFilterData];
+      temp = [...filteredData];
     }
 
     /* --------- color filter ---------- */
@@ -131,8 +130,15 @@ function ShopAside({ genderFilterData }: Props) {
     }
 
     /* --------- price filter ---------- */
-    temp = temp.filter(({ price }) => {
-      if (priceState.price.min <= price && price <= priceState.price.max) {
+    temp = temp.filter(({ price, sale }) => {
+      let itemPrice = price;
+      if (sale !== 0) {
+        itemPrice = Number(getSaleCalculator(String(price), String(sale)));
+      }
+      if (
+        priceState.price.min <= itemPrice &&
+        itemPrice <= priceState.price.max
+      ) {
         return true;
       } else return false;
     });
@@ -149,6 +155,7 @@ function ShopAside({ genderFilterData }: Props) {
     colorState.activedColors,
     priceState.price.min,
     priceState.price.max,
+    filteredData,
   ]);
 
   function IsColorActived() {

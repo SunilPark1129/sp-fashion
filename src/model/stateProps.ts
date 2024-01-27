@@ -6,7 +6,7 @@ export type BasketProp = {
   image: string[];
   price: number;
   gender: string;
-  category: string;
+  category: "coat" | "hoodie" | "shirt" | "sweater";
 };
 
 export type FilteredProp = BasketProp & { like?: boolean; basket?: boolean };
@@ -18,4 +18,11 @@ export type CategoryProp = {
   sweater: FilteredProp[];
 };
 
-export type CategoryValidProp = "coat" | "shirt" | "hoodie" | "sweater" | null;
+export type CategoryValidProp =
+  | "coat"
+  | "shirt"
+  | "hoodie"
+  | "sweater"
+  | "like"
+  | "basket"
+  | null;

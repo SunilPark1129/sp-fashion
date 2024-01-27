@@ -23,7 +23,7 @@ interface PostState {
     image: string[];
     price: number;
     gender: string;
-    category: string;
+    category: "coat" | "hoodie" | "shirt" | "sweater";
   }[];
   error: string | undefined;
 }
