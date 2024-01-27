@@ -6,7 +6,6 @@
   min-height: 30rem;
   aspect-ratio: 5/2;
   position: relative;
-  //   padding: 1rem;
 
   .wrapper {
     position: relative;
@@ -48,13 +47,6 @@
         }
       }
     }
-
-    // &--contain {
-    //   .banner__image__box {
-    //     img {
-    //     }
-    //   }
-    // }
   }
 
   &__content {
@@ -79,6 +71,7 @@
     h2 {
       font-size: 3em;
       font-weight: bold;
+      padding-bottom: 2rem;
     }
     p {
       font-size: 1.2em;
