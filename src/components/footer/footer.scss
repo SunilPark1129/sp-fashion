@@ -18,6 +18,14 @@
   &__guide {
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
+
+    @media (max-width: 450px) {
+      flex-wrap: wrap;
+      .footer__guide__box {
+        flex: 1 1 40%;
+      }
+    }
 
     &__box {
       display: flex;

@@ -17,6 +17,15 @@
 .footer__guide {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
+}
+@media (max-width: 450px) {
+  .footer__guide {
+    flex-wrap: wrap;
+  }
+  .footer__guide .footer__guide__box {
+    flex: 1 1 40%;
+  }
 }
 .footer__guide__box {
   display: flex;
