@@ -20,6 +20,23 @@ export function getFilter(
   return temp.reverse();
 }
 
+export function getSingleFilter(
+  data: BasketProp,
+  likeState: FilteredProp[],
+  basket: FilteredProp[]
+): FilteredProp {
+  let hasLike = false;
+  let hasBasket = false;
+  console.log(basket);
+  likeState.forEach(({ id }) => {
+    if (id === data.id) hasLike = true;
+  });
+  basket.forEach(({ id }) => {
+    if (id === data.id) hasBasket = true;
+  });
+  return { ...data, like: hasLike, basket: hasBasket };
+}
+
 type GetAllProp = {
   data: FilteredProp[];
   likeState?: CategoryProp;
