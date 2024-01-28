@@ -12,6 +12,7 @@ import Footer from "./components/footer/Footer";
 import Favorite from "./pages/favorite/Favorite";
 import User from "./pages/login/user/User";
 import ErrorPage from "./pages/error/ErrorPage";
+import Detail from "./pages/detail/Detail";
 
 function App() {
   return (
@@ -20,13 +21,15 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop/:id" element={<Shop />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/contact" element={<Contact />} />
 
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/user" element={<User />} />
+
+          <Route path="/detail/:id" element={<Detail />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
         <Footer />

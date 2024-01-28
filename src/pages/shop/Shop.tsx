@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
@@ -16,14 +16,17 @@ const validGender = ["men", "women"];
 function Shop() {
   /* param states */
   const { id }: any = useParams<ParamProp>();
-  const [paramCategory, paramGender] = id.split("-");
+  const [param] = useSearchParams();
+  const paramCategory: any = param.get("category");
+  const paramGender: any = param.get("gender");
+
   const [wrongParam, setWrongParam] = useState(false);
 
   /* resources to fetch and filter */
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryValidProp>(null);
-  const [selectedGender, setSelectedGender] = useState<string | null>(null);
   const [genderFilterData, setGenderFilterData] = useState<BasketProp[]>([]);
+  const [selectedGender, setSelectedGender] = useState<string | null>(null);
 
   /* request and receive the data from server */
   const { data, loading, error } = useSelector(
@@ -32,19 +35,18 @@ function Shop() {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  // check if current id params are validated
   useEffect(() => {
-    if (paramCategory) {
-      // check if current id params are validated
-      if (
-        !validCategory.includes(paramCategory) ||
-        !validGender.includes(paramGender)
-      ) {
-        setWrongParam(true);
-      } else {
-        setSelectedCategory(paramCategory);
-        setSelectedGender(paramGender);
-      }
+    if (
+      validCategory.includes(paramCategory) &&
+      validGender.includes(paramGender)
+    ) {
+      setSelectedCategory(paramCategory);
+      setSelectedGender(paramGender);
+    } else {
+      setWrongParam(true);
     }
+
     return () => {
       setWrongParam(false);
     };

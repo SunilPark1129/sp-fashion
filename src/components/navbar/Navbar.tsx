@@ -197,10 +197,16 @@ function Navbar() {
             <div className="nav__lists__category">
               <p>COAT</p>
             </div>
-            <Link onClick={modalOpenHandler} to={"/shop/coat-men"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=coat&gender=men"}
+            >
               MEN
             </Link>
-            <Link onClick={modalOpenHandler} to={"/shop/coat-women"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=coat&gender=women"}
+            >
               WOMEN
             </Link>
           </div>
@@ -208,10 +214,16 @@ function Navbar() {
             <div className="nav__lists__category">
               <p>SHIRT</p>
             </div>
-            <Link onClick={modalOpenHandler} to={"/shop/shirt-men"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=shirt&gender=men"}
+            >
               MEN
             </Link>
-            <Link onClick={modalOpenHandler} to={"/shop/shirt-women"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=shirt&gender=women"}
+            >
               WOMEN
             </Link>
           </div>
@@ -219,10 +231,16 @@ function Navbar() {
             <div className="nav__lists__category">
               <p>HOODIE</p>
             </div>
-            <Link onClick={modalOpenHandler} to={"/shop/hoodie-men"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=hoodie&gender=men"}
+            >
               MEN
             </Link>
-            <Link onClick={modalOpenHandler} to={"/shop/hoodie-women"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=hoodie&gender=women"}
+            >
               WOMEN
             </Link>
           </div>

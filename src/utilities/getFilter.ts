@@ -6,6 +6,7 @@ export function getFilter(
   likeState: FilteredProp[],
   basket: FilteredProp[]
 ): FilteredProp[] {
+  console.log(data);
   const temp = data.map((item) => {
     let hasLike = false;
     let hasBasket = false;
