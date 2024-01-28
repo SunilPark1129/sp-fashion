@@ -13,6 +13,7 @@ import "./items.css";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { getLikeFilter, getFilter } from "../../utilities/getFilter";
 import { updateSort } from "../../redux/features/sortSlice";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   selectedCategory: CategoryValidProp;
@@ -62,6 +63,7 @@ function CardComponent({ item }: { item: FilteredProp }) {
   const [isImgReady, setIsImgReady] = useState<boolean>(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const hasMounted = useRef<boolean | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!imgRef.current || hasMounted.current) return;
@@ -96,14 +98,14 @@ function CardComponent({ item }: { item: FilteredProp }) {
     }
   }
 
-  function itemClickHandler() {
-    console.log("clicked");
+  function itemClickHandler(category: string, unit: string) {
+    navigate(`/detail?category=${category}&unit=${unit}`);
   }
 
   return (
     <section
       className="items__content__item"
-      onClick={itemClickHandler}
+      onClick={() => itemClickHandler(item.category, item.id)}
       key={item.id + item.category}
     >
       <div className="items__content__item__img">

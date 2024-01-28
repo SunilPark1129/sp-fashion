@@ -64,6 +64,7 @@
 }
 .home__section__text p:nth-of-type(1) {
   color: rgb(184, 16, 16);
+  text-transform: uppercase;
 }
 .home__section__text__sale {
   display: flex;
@@ -124,6 +125,7 @@
 .home__brand-new__text p:nth-of-type(1) {
   font-size: 1.4em;
   font-weight: bold;
+  text-transform: uppercase;
 }
 .home__brand-new__text button {
   width: -moz-max-content;

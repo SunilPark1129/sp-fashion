@@ -13,6 +13,7 @@ import Favorite from "./pages/favorite/Favorite";
 import User from "./pages/login/user/User";
 import ErrorPage from "./pages/error/ErrorPage";
 import Detail from "./pages/detail/Detail";
+import DetailID from "./pages/detail/DetailID";
 
 function App() {
   return (
@@ -22,14 +23,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/detail" element={<Detail />} />
           <Route path="/contact" element={<Contact />} />
-
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/user" element={<User />} />
-
-          <Route path="/detail/:id" element={<Detail />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
         <Footer />

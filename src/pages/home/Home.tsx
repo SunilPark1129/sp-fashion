@@ -12,12 +12,13 @@ import sale3 from "./assets/home_sale_3.jpg";
 import sale4 from "./assets/home_sale_4.jpg";
 
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
+import { useNavigate } from "react-router-dom";
 
 function BestSeller() {
   const bestSellerArray = [
     {
       img: bestSeller1,
-      category: "COAT",
+      category: "coat",
       name: "Short Simple Designed Woman Coat",
       price: "360",
       sale: "0",
@@ -25,7 +26,7 @@ function BestSeller() {
     },
     {
       img: bestSeller2,
-      category: "HOODIE",
+      category: "hoodie",
       name: "Fancy Clean Designed Woman Hoodie",
       price: "220",
       sale: "0",
@@ -33,7 +34,7 @@ function BestSeller() {
     },
     {
       img: bestSeller3,
-      category: "SHIRT",
+      category: "shirt",
       name: "Overfit Simple Designed Man Shirt",
       price: "42",
       sale: "10",
@@ -41,16 +42,16 @@ function BestSeller() {
     },
     {
       img: bestSeller4,
-      category: "SWEATER",
+      category: "sweater",
       name: "Cowl Neck Fancy Woman Sweater",
       price: "148",
       sale: "10",
       id: "19",
     },
   ];
-
-  function itemClickHandler(id: string) {
-    console.log(id);
+  const navigate = useNavigate();
+  function itemClickHandler(category: string, unit: string) {
+    navigate(`/detail?category=${category}&unit=${unit}`);
   }
 
   return (
@@ -65,7 +66,7 @@ function BestSeller() {
               <div
                 key={id + name}
                 className="home__section__item"
-                onClick={() => itemClickHandler(id)}
+                onClick={() => itemClickHandler(category, id)}
               >
                 <div className="home__section__img">
                   <img src={img} alt={name} />
@@ -96,7 +97,7 @@ function SeasonSales() {
   const bestSellerArray = [
     {
       img: sale1,
-      category: "COAT",
+      category: "coat",
       name: "Fancy Simple Man Coat",
       price: "320",
       sale: "25",
@@ -104,7 +105,7 @@ function SeasonSales() {
     },
     {
       img: sale2,
-      category: "HOODIE",
+      category: "hoodie",
       name: "Fancy Smooth Woman Hoodie",
       price: "180",
       sale: "20",
@@ -112,7 +113,7 @@ function SeasonSales() {
     },
     {
       img: sale3,
-      category: "SHIRT",
+      category: "shirt",
       name: "Open Neck Designed Woman Shirt",
       price: "52",
       sale: "25",
@@ -120,16 +121,16 @@ function SeasonSales() {
     },
     {
       img: sale4,
-      category: "SWEATER",
+      category: "sweater",
       name: "Thin Cable Knit Woman Sweater",
       price: "78",
       sale: "30",
       id: "20",
     },
   ];
-
-  function itemClickHandler(id: string) {
-    console.log(id);
+  const navigate = useNavigate();
+  function itemClickHandler(category: string, unit: string) {
+    navigate(`/detail?category=${category}&unit=${unit}`);
   }
 
   return (
@@ -144,7 +145,7 @@ function SeasonSales() {
               <div
                 key={id + name}
                 className="home__section__item"
-                onClick={() => itemClickHandler(id)}
+                onClick={() => itemClickHandler(category, id)}
               >
                 <div className="home__section__img">
                   <img src={img} alt={name} />
@@ -172,6 +173,11 @@ function SeasonSales() {
 }
 
 function BrandNew() {
+  const navigate = useNavigate();
+  function itemClickHandler(category: string, unit: string) {
+    navigate(`/detail?category=${category}&unit=${unit}`);
+  }
+
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
@@ -185,8 +191,9 @@ function BrandNew() {
           <div className="home__brand-new__text">
             <p>Short Fashioned Woman Coat</p>
             <p>$364</p>
-            <button>See detail</button>
-            {/* 41 */}
+            <button onClick={() => itemClickHandler("coat", "41")}>
+              See detail
+            </button>
           </div>
         </div>
       </div>

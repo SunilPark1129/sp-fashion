@@ -62,6 +62,7 @@
       border-top: none;
       p:nth-of-type(1) {
         color: rgb(184, 16, 16);
+        text-transform: uppercase;
       }
       &__sale {
         display: flex;
@@ -117,6 +118,7 @@
       p:nth-of-type(1) {
         font-size: 1.4em;
         font-weight: bold;
+        text-transform: uppercase;
       }
       button {
         width: max-content;
