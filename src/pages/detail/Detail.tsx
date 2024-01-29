@@ -71,6 +71,15 @@ type DisplayProp = {
 
 const sizes = ["SIZE", "X-Small", "Small", "Medium", "Large", "X-Large"];
 
+type TPosProp = {
+  x: number;
+  y: number;
+};
+const initTPos: TPosProp = {
+  x: 0,
+  y: 0,
+};
+
 function DisplayComponent({ data }: DisplayProp) {
   const dispatch = useDispatch();
   const [like, setLike] = useState<boolean | undefined>(data.like);
@@ -135,7 +144,7 @@ function DisplayComponent({ data }: DisplayProp) {
                     currentImg === idx && "detail__imgs__front__item--active"
                   }`}
                 >
-                  <img src={IMAGE_KEY + item} alt={name} />
+                  <ZoomInImageComponent item={IMAGE_KEY + item} />
                 </div>
               ))}
             </div>
@@ -314,6 +323,63 @@ function DisplayComponent({ data }: DisplayProp) {
         </div>
       </div>
     </main>
+  );
+}
+
+let timer: ReturnType<typeof setTimeout>;
+
+function ZoomInImageComponent({ item }: { item: string }) {
+  const [isMoving, setIsMoving] = useState<boolean>(false);
+  const [tPos, setTPos] = useState<TPosProp>(initTPos);
+  const [isMoveAble, setIsMoveAble] = useState<boolean>(false);
+  const [firstPos, setFirstPos] = useState<TPosProp>(initTPos);
+
+  function zoomInHandler(e: any) {
+    const { layerX, layerY } = e.nativeEvent;
+    const { offsetWidth, offsetHeight } = e.target;
+    const halfWidth = offsetWidth / 2;
+    const halfHeight = offsetHeight / 2;
+
+    const halfLeft = layerX - halfWidth;
+    const halfTop = layerY - halfHeight;
+
+    setTPos({ x: halfLeft, y: halfTop });
+    setIsMoving(true);
+  }
+
+  function zoomInLeaveHandler() {
+    setTPos(initTPos);
+    setIsMoving(false);
+  }
+
+  useEffect(() => {
+    if (isMoving) {
+      setFirstPos(tPos);
+      timer = setTimeout(() => {
+        setIsMoveAble(true);
+      }, 300);
+    } else {
+      setIsMoveAble(false);
+      clearTimeout(timer);
+      setFirstPos(initTPos);
+    }
+  }, [isMoving]);
+
+  return (
+    <img
+      src={item}
+      alt={"img"}
+      onMouseMove={zoomInHandler}
+      onMouseLeave={zoomInLeaveHandler}
+      style={{
+        transition: `${
+          isMoveAble ? "transform 0.3s" : "transform 0.3s, left 0.2s, top 0.2s"
+        }`,
+        left: `${isMoveAble ? -tPos.x / 2 : -firstPos.x / 2}px`,
+        top: `${isMoveAble ? -tPos.y / 2 : -firstPos.y / 2}px`,
+        transform: `scale(${isMoving ? 2 : 1})`,
+      }}
+    />
   );
 }
 
