@@ -65,7 +65,7 @@
   width: 4px;
 }
 .detail__imgs__select::-webkit-scrollbar-thumb {
-  background-color: rgb(85, 119, 211);
+  background-color: rgb(38, 40, 48);
   border-radius: 20px;
 }
 .detail__imgs__select__item {
