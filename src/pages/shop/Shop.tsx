@@ -17,15 +17,10 @@ function Shop() {
   /* param states */
   const { id }: any = useParams<ParamProp>();
   const [param] = useSearchParams();
-  const location = useLocation();
-
-  console.log(location);
   const paramCategory: any = param.get("category");
   const paramGender: any = param.get("gender");
 
   const [wrongParam, setWrongParam] = useState(false);
-
-  console.log(paramCategory, paramGender, id);
 
   /* resources to fetch and filter */
   const [selectedCategory, setSelectedCategory] =

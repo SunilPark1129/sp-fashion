@@ -27,7 +27,6 @@ export function getSingleFilter(
 ): FilteredProp {
   let hasLike = false;
   let hasBasket = false;
-  console.log(basket);
   likeState.forEach(({ id }) => {
     if (id === data.id) hasLike = true;
   });

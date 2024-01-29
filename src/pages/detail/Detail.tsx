@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import "./detail.css";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { BASE_URL, IMAGE_KEY } from "../../data/key";
 import { CategoryProp, FilteredProp } from "../../model/stateProps";
@@ -68,12 +69,38 @@ type DisplayProp = {
   data: FilteredProp;
 };
 
+const sizes = ["SIZE", "X-Small", "Small", "Medium", "Large", "X-Large"];
+
 function DisplayComponent({ data }: DisplayProp) {
   const dispatch = useDispatch();
   const [like, setLike] = useState<boolean | undefined>(data.like);
   const [basket, setBasket] = useState<boolean | undefined>(data.basket);
   const { id, name, sale, color, image, price, gender, category } = data;
 
+  const [currentImg, setCurrentImg] = useState<number>(0);
+  const [currentSize, setCurrentSize] = useState<number>(0);
+  const [hasSizeModalOpened, setHasSizeModalOpened] = useState<boolean>(false);
+  const [shippingMethod, setShippingMethod] = useState<string>("free-shipping");
+
+  /* ------------- size handlers ------------ */
+  function hasClickedSize(e: any) {
+    // if size content is not clicked then focus-out
+    if (!e?.target?.className.includes("detail__text__size__cover")) {
+      setHasSizeModalOpened(false);
+    }
+  }
+  // cleanup reference type
+  useEffect(() => {
+    if (hasSizeModalOpened) {
+      document.addEventListener("click", hasClickedSize);
+    }
+    if (!hasSizeModalOpened) {
+      document.removeEventListener("click", hasClickedSize);
+    }
+    return () => document.removeEventListener("click", hasClickedSize);
+  }, [hasSizeModalOpened]);
+
+  /* ----------- wish-list click handler ---------- */
   function likeClickHandler() {
     if (like) {
       dispatch(deleteLikeState(data));
@@ -83,7 +110,6 @@ function DisplayComponent({ data }: DisplayProp) {
       setLike(true);
     }
   }
-
   function basketClickHandler() {
     if (basket) {
       dispatch(deleteBasket(data));
@@ -95,110 +121,199 @@ function DisplayComponent({ data }: DisplayProp) {
   }
 
   return (
-    <div>
-      {/* image */}
-      <div>
-        <div>
-          <img src="" alt="" />
-        </div>
-        <div>
-          {image.map((item, idx) => (
-            <div key={idx}>
-              <img src={IMAGE_KEY + item} alt={name} />
+    <main className="detail">
+      <div className="wrapper">
+        <div className="container">
+          {/* image */}
+
+          <div className="detail__imgs">
+            <div className="detail__imgs__front">
+              {image.map((item, idx) => (
+                <div
+                  key={id + "/" + idx}
+                  className={`detail__imgs__front__item ${
+                    currentImg === idx && "detail__imgs__front__item--active"
+                  }`}
+                >
+                  <img src={IMAGE_KEY + item} alt={name} />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-      {/* text */}
-      <div>
-        <div>
-          <h2>{name}</h2>
-          <p>Gender: {gender}</p>
-          <p>Category: {category}</p>
-          <p>Color: {color}</p>
-        </div>
-        <div>
-          <div>Size</div>
-          <div>
-            <div>X-Small</div>
-            <div>Small</div>
-            <div>Medium</div>
-            <div>Large</div>
-            <div>X-Large</div>
+            <div className="detail__imgs__select">
+              {image.map((item, idx) => (
+                <div
+                  key={idx}
+                  className={`detail__imgs__select__item ${
+                    currentImg === idx && "detail__imgs__select__item--active"
+                  }`}
+                  onClick={() => setCurrentImg(idx)}
+                >
+                  <img src={IMAGE_KEY + item} alt={name} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* text */}
+          <div className="detail__text">
+            {/* info */}
+            <div className="detail__text__info">
+              <h1>{name}</h1>
+              <p>
+                Model: {id}
+                {gender.slice(0, 2).toUpperCase()}
+                {category.slice(0, 2).toUpperCase()}
+                {color.slice(0, 2).toUpperCase()}
+              </p>
+            </div>
+
+            {/* trait */}
+            <div className="detail__text__trait">
+              <p>
+                Color: <span>{color}</span>
+              </p>
+              <p>
+                Gender: <span>{gender}</span>
+              </p>
+              <p>
+                Category: <span>{category}</span>
+              </p>
+            </div>
+            <div className="detail__text__sale">
+              {sale === 0 ? (
+                <p>Price: ${price.toFixed(2)}</p>
+              ) : (
+                <>
+                  <p className="hasSale">Sale: {sale}%</p>
+                  <p className="sale">
+                    Price: <span className="cross">${price}</span>$
+                    {getSaleCalculator(String(price), String(sale))}
+                  </p>
+                </>
+              )}
+            </div>
+
+            {/* size */}
+            <div
+              className="detail__text__size"
+              onClick={() => setHasSizeModalOpened((prev) => !prev)}
+            >
+              <div className="detail__text__size__cover">
+                {currentSize === 0
+                  ? sizes[currentSize]
+                  : `SIZE: ${sizes[currentSize]}`}
+              </div>
+              <div
+                className={`detail__text__size__item ${
+                  hasSizeModalOpened && "detail__text__size__item--active"
+                }`}
+              >
+                {sizes.slice(1).map((item, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => setCurrentSize(idx + 1)}
+                    className={`${
+                      currentSize === idx + 1 &&
+                      "detail__text__size__item__active"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* shipping */}
+            <div className="detail__text__shipping">
+              <label htmlFor="free-shipping">
+                <input
+                  type="radio"
+                  name="shipping"
+                  id="free-shipping"
+                  checked={shippingMethod === "free-shipping"}
+                  onChange={(e) => setShippingMethod(e.target.id)}
+                />
+                Free Shipping
+                <span>Delivered within a week</span>
+              </label>
+              <label htmlFor="fast-shipping">
+                <input
+                  type="radio"
+                  name="shipping"
+                  id="fast-shipping"
+                  checked={shippingMethod === "fast-shipping"}
+                  onChange={(e) => setShippingMethod(e.target.id)}
+                />
+                Fast Shipping
+                <span>Delivered within 1 to 3 business days</span>
+              </label>
+              <p
+                className={`detail__text__shipping__warning ${
+                  shippingMethod === "fast-shipping" &&
+                  "detail__text__shipping__warning--active"
+                }`}
+              >
+                *Business Day - Monday through Friday from 9 a.m. to 5 p.m.
+              </p>
+            </div>
+
+            {/* purchase */}
+            <div className="detail__text__purchase">
+              <Link className="detail__text__purchase__link" to={"/purchase"}>
+                Purchase Cloth
+              </Link>
+              <div
+                className="detail__text__purchase__btn"
+                onClick={basketClickHandler}
+              >
+                <button
+                  className={`btn-svg btn-svg--basket ${
+                    basket && "btn-svg--basket--active"
+                  }`}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M20 3H4V21H20V3ZM9.17157 9.82843C8.42143 9.07828 8 8.06087 8 7L16 7C16 8.06087 15.5786 9.07828 14.8284 9.82843C14.0783 10.5786 13.0609 11 12 11C10.9391 11 9.92172 10.5786 9.17157 9.82843Z"
+                      stroke="black"
+                    />
+                  </svg>
+                </button>
+                Add to Bag
+              </div>
+              <div
+                className="detail__text__purchase__btn"
+                onClick={likeClickHandler}
+              >
+                <button
+                  className={`btn-svg btn-svg--like ${
+                    like && "btn-svg--like--active"
+                  }`}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M11.7935 19.8932L3.97038 12.07C2.00987 10.1095 2.00988 6.93087 3.97037 4.97037C5.93087 3.00988 9.1095 3.00988 11.07 4.97037L11.4236 4.61682L11.07 4.97038L11.4402 5.34061L11.7938 5.69416L12.1474 5.3406L12.5136 4.97429C14.4741 3.01386 17.6526 3.01386 19.613 4.97429C21.5734 6.93472 21.5734 10.1132 19.613 12.0736L11.7935 19.8932Z" />
+                  </svg>
+                </button>
+                Add to Wish List
+              </div>
+            </div>
           </div>
         </div>
-        <div>
-          {sale === 0 ? (
-            <p>Price: ${price.toFixed(2)}</p>
-          ) : (
-            <>
-              <p>Sale: {sale}%</p>
-              <p className="sale">
-                Price: <span className="cross">${price}</span>$
-                {getSaleCalculator(String(price), String(sale))}
-              </p>
-            </>
-          )}
-        </div>
       </div>
-      {/* Purchase */}
-      <div>
-        <div>
-          <label htmlFor="free-shipping">
-            <input type="radio" name="shipping" id="free-shipping" checked />
-            Free Shipping
-            <span>Delivered within a week</span>
-          </label>
-          <label htmlFor="fast-shipping">
-            <input type="radio" name="shipping" id="fast-shipping" />
-            Fast Shipping
-            <span>Delivered within 1 to 3 business days</span>
-          </label>
-        </div>
-        <Link to={"/purchase"}>Purchase Cloth</Link>
-        <div onClick={basketClickHandler}>
-          <button
-            className={`btn-svg btn-svg--basket ${
-              basket && "btn-svg--basket--active"
-            }`}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M20 3H4V21H20V3ZM9.17157 9.82843C8.42143 9.07828 8 8.06087 8 7L16 7C16 8.06087 15.5786 9.07828 14.8284 9.82843C14.0783 10.5786 13.0609 11 12 11C10.9391 11 9.92172 10.5786 9.17157 9.82843Z"
-                stroke="black"
-              />
-            </svg>
-          </button>
-          Add to Bag
-        </div>
-        <div onClick={likeClickHandler}>
-          <button
-            className={`btn-svg btn-svg--like ${
-              like && "btn-svg--like--active"
-            }`}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M11.7935 19.8932L3.97038 12.07C2.00987 10.1095 2.00988 6.93087 3.97037 4.97037C5.93087 3.00988 9.1095 3.00988 11.07 4.97037L11.4236 4.61682L11.07 4.97038L11.4402 5.34061L11.7938 5.69416L12.1474 5.3406L12.5136 4.97429C14.4741 3.01386 17.6526 3.01386 19.613 4.97429C21.5734 6.93472 21.5734 10.1132 19.613 12.0736L11.7935 19.8932Z" />
-            </svg>
-          </button>
-          Add to Wish List
-        </div>
-      </div>
-    </div>
+    </main>
   );
 }
 
