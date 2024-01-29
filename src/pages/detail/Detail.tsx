@@ -369,8 +369,8 @@ function ZoomInImageComponent({ item }: { item: string }) {
     <img
       src={item}
       alt={"img"}
-      onMouseMove={zoomInHandler}
-      onMouseLeave={zoomInLeaveHandler}
+      onPointerMove={zoomInHandler}
+      onPointerLeave={zoomInLeaveHandler}
       style={{
         transition: `${
           isMoveAble ? "transform 0.3s" : "transform 0.3s, left 0.2s, top 0.2s"
