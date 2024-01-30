@@ -30,7 +30,7 @@ export const bannerData: BannerDataProp[] = [
     link: {
       has: true,
       label: "Shop now",
-      href: "/shop/coat-women",
+      href: "/shop?category=shirt&gender=men",
       color: "light",
     },
     image: { url: imgSale, size: "cover", alt: "man with a smile" },
@@ -48,7 +48,7 @@ export const bannerData: BannerDataProp[] = [
     link: {
       has: true,
       label: "Shop now",
-      href: "/shop/coat-women",
+      href: "/shop?category=hoodie&gender=women",
       color: "light",
     },
     image: { url: imgNew, size: "cover", alt: "woman with a hoodie" },
