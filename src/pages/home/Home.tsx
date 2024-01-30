@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updateLikeState } from "../../redux/features/LikeSlice";
 import { updateBasketState } from "../../redux/features/basketSlice";
+import { useState } from "react";
 
 function BestSeller() {
   const bestSellerArray = [
@@ -207,7 +208,11 @@ function BrandNew() {
 
 /* ------------- remove localstorage ------------- */
 function RemoveLocalStorage() {
+  const [hasData, setHasData] = useState<string | null>(
+    localStorage.getItem("like-state") || localStorage.getItem("basket-state")
+  );
   const dispatch = useDispatch<AppDispatch>();
+
   function deleteCacheHandler() {
     // remove all caches
     localStorage.removeItem("like-state");
@@ -217,6 +222,9 @@ function RemoveLocalStorage() {
     const initValue = { coat: [], hoodie: [], shirt: [], sweater: [] };
     dispatch(updateLikeState(initValue));
     dispatch(updateBasketState(initValue));
+    setHasData(
+      localStorage.getItem("like-state") || localStorage.getItem("basket-state")
+    );
   }
   return (
     <section className="remove-localstorage">
@@ -229,6 +237,11 @@ function RemoveLocalStorage() {
               has been included. If you want to clear all caches, press DELETE.
               This will remove the recorded history of Wishlists from your
               device.
+            </p>
+          </div>
+          <div>
+            <p>
+              data is in storage: <span>{hasData ? "true" : "false"}</span>
             </p>
           </div>
           <button onClick={deleteCacheHandler}>DELETE</button>
