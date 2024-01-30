@@ -122,6 +122,7 @@ function CardComponent({ item }: { item: FilteredProp }) {
   const hasMounted = useRef<boolean | null>(null);
   const navigate = useNavigate();
 
+  // when image is onloaded, display image on the screen
   useEffect(() => {
     if (!imgRef.current || hasMounted.current) return;
     hasMounted.current = true;
