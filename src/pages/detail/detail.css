@@ -12,6 +12,9 @@
   color: black;
   text-decoration: underline;
 }
+.detail__path a:hover ~ p {
+  color: var(--clr-dark-fnt);
+}
 @media (max-width: 900px) {
   .detail .container {
     flex-direction: column;

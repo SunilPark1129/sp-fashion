@@ -13,6 +13,9 @@
         color: black;
         text-decoration: underline;
       }
+      &:hover ~ p {
+        color: var(--clr-dark-fnt);
+      }
     }
   }
   @media (max-width: 900px) {
