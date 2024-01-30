@@ -23,6 +23,11 @@
   --clr-light-fnt: #fff;
   --clr-line: rgb(172, 172, 172);
   --clr-focus: rgb(228, 228, 250);
+
+  /* loading component */
+  --clr-loading-light: rgb(219, 219, 219);
+  --clr-loading-dark: rgb(185, 185, 185);
+  --ani-loading: ani-loading 1.5s ease-in-out infinite;
 }
 
 img,
@@ -143,5 +148,14 @@ body {
 @media (max-width: 740px) {
   body {
     font-size: 0.8rem;
+  }
+}
+
+@keyframes ani-loading {
+  50% {
+    filter: brightness(90%);
+  }
+  100% {
+    filter: brightness(100%);
   }
 }
