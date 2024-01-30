@@ -248,10 +248,16 @@ function Navbar() {
             <div className="nav__lists__category">
               <p>SWEATER</p>
             </div>
-            <Link onClick={modalOpenHandler} to={"/shop/sweater-men"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=sweater&gender=men"}
+            >
               MEN
             </Link>
-            <Link onClick={modalOpenHandler} to={"/shop/sweater-women"}>
+            <Link
+              onClick={modalOpenHandler}
+              to={"/shop?category=sweater&gender=women"}
+            >
               WOMEN
             </Link>
           </div>

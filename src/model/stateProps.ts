@@ -9,6 +9,13 @@ export type BasketProp = {
   category: "coat" | "hoodie" | "shirt" | "sweater";
 };
 
+export type CategoryBasketProp = {
+  coat: BasketProp[];
+  hoodie: BasketProp[];
+  shirt: BasketProp[];
+  sweater: BasketProp[];
+};
+
 export type FilteredProp = BasketProp & { like?: boolean; basket?: boolean };
 
 export type CategoryProp = {
@@ -25,4 +32,5 @@ export type CategoryValidProp =
   | "sweater"
   | "like"
   | "basket"
+  | "all"
   | null;

@@ -4,6 +4,7 @@
   display: flex;
   width: 100%;
   max-width: 40rem;
+  z-index: 999;
 }
 .searchbar__input {
   width: 100%;

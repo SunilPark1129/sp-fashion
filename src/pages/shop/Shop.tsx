@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
@@ -8,14 +8,11 @@ import ShopAside from "../../components/aside/ShopAside";
 import Items from "../../components/item/Items";
 import "./shop.css";
 
-type ParamProp = { id: string | undefined };
-
 const validCategory = ["coat", "shirt", "hoodie", "sweater"];
 const validGender = ["men", "women"];
 
 function Shop() {
   /* param states */
-  const { id }: any = useParams<ParamProp>();
   const [param] = useSearchParams();
   const paramCategory: any = param.get("category");
   const paramGender: any = param.get("gender");
@@ -25,7 +22,9 @@ function Shop() {
   /* resources to fetch and filter */
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryValidProp>(null);
-  const [genderFilterData, setGenderFilterData] = useState<BasketProp[]>([]);
+  const [genderFilterData, setGenderFilterData] = useState<BasketProp[] | null>(
+    null
+  );
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
 
   /* request and receive the data from server */
@@ -50,7 +49,7 @@ function Shop() {
     return () => {
       setWrongParam(false);
     };
-  }, [id]);
+  }, [paramCategory, paramGender]);
 
   useEffect(() => {
     // new HTTP request
@@ -61,34 +60,54 @@ function Shop() {
 
   useEffect(() => {
     // filtering the received data
-    if (selectedCategory && data.length !== 0) {
+    if (selectedCategory && Array.isArray(data) && data) {
       const convertGender = selectedGender === "men" ? "male" : "female";
       const res = data.filter(({ gender }) => gender === convertGender);
       setGenderFilterData(res);
     }
   }, [selectedGender, data]);
 
-  // components to display current pending stage
-  function PendingData() {
-    if (wrongParam) return <WrongParamComponent />;
-    if (error) return <ErrorComponent err={error} />;
-    if (loading || genderFilterData.length === 0) return <LoadingComponent />;
-    return (
-      <>
-        <ShopAside filteredData={genderFilterData} />
-        <Items selectedCategory={selectedCategory} />
-      </>
-    );
-  }
-
   return (
     <main className="shop">
       <div className="wrapper">
         <div className="container">
-          <PendingData />
+          <PendingData
+            wrongParam={wrongParam}
+            error={error}
+            loading={loading}
+            genderFilterData={genderFilterData}
+            selectedCategory={selectedCategory}
+          />
         </div>
       </div>
     </main>
+  );
+}
+
+type PendingProp = {
+  wrongParam: boolean;
+  error: string | undefined;
+  loading: boolean;
+  genderFilterData: BasketProp[] | null;
+  selectedCategory: CategoryValidProp;
+};
+
+// components to display current pending stage
+function PendingData({
+  wrongParam,
+  error,
+  loading,
+  genderFilterData,
+  selectedCategory,
+}: PendingProp) {
+  if (wrongParam) return <WrongParamComponent />;
+  if (error) return <ErrorComponent err={error} />;
+  if (loading) return <LoadingComponent />;
+  return (
+    <>
+      <ShopAside filteredData={genderFilterData} />
+      <Items selectedCategory={selectedCategory} />
+    </>
   );
 }
 

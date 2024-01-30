@@ -18,7 +18,7 @@ function SearchBar() {
   }, []);
 
   useEffect(() => {
-    if (searchTerm.trim().length !== 0) {
+    if (searchTerm.trim().length !== 0 && hasFocus) {
       /* find all names if item is related with searched term */
       const regexp = new RegExp(
         `\\b${searchTerm.replace(/\s+/g, ".*")}.*\\b`,
@@ -26,6 +26,7 @@ function SearchBar() {
       );
       const temp = data.filter((name) => name.match(regexp));
       setFilteredLists(temp.slice(0, 6));
+      setHasFocus(true);
     } else {
       setFilteredLists([]);
     }
@@ -54,20 +55,20 @@ function SearchBar() {
 
   function keyDownHandler(e: React.KeyboardEvent) {
     if (e.key === "Enter") {
-      searchClickHandler();
+      searchClickHandler(null);
     }
   }
 
   function listClickHandler(item: string) {
     setSearchTerm(item);
     setHasFocus(false);
-    searchClickHandler();
+    searchClickHandler(item);
   }
 
   /* pass searched term to other route location */
-  function searchClickHandler() {
+  function searchClickHandler(item: string | null) {
     if (searchTerm.trim().length === 0) return;
-    navigate("/shop/coat-women");
+    navigate(`/search?term=${!item ? searchTerm : item}`);
   }
 
   return (
@@ -84,7 +85,7 @@ function SearchBar() {
         placeholder="Search Clothes"
         autoComplete="off"
       />
-      <div className="searchbar__icon" onClick={searchClickHandler}>
+      <div className="searchbar__icon" onClick={() => searchClickHandler(null)}>
         <svg
           width="18"
           height="18"

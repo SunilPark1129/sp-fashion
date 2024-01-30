@@ -48,7 +48,7 @@ const initActivedFilters = {
   price: false,
 };
 
-function ShopAside({ filteredData }: Props) {
+function ShopAside({ filteredData }: { filteredData: BasketProp[] | null }) {
   const dispatch = useDispatch<AppDispatch>();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -64,6 +64,7 @@ function ShopAside({ filteredData }: Props) {
   const maxRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (!filteredData) return;
     // when mounted, get all the colors that array has
     const hasColor: ActivedColorProp = {};
     const tempArr: string[] = [];
@@ -105,6 +106,7 @@ function ShopAside({ filteredData }: Props) {
   }
 
   useEffect(() => {
+    if (!filteredData) return;
     let temp: FilteredProp[] = [];
 
     /* --------- search term filter ---------- */

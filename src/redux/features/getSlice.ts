@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BasketProp } from "../../model/stateProps";
+import { BasketProp, CategoryBasketProp } from "../../model/stateProps";
 import { BASE_URL } from "../../data/key";
 
 export const requestHTTP = createAsyncThunk(
-  "cloth/fetchCloth",
+  "api/fetchSingle",
   async (category: string) => {
     const response = await fetch(`${BASE_URL}/results/${category}`);
     if (!response.ok) {
@@ -15,22 +15,24 @@ export const requestHTTP = createAsyncThunk(
 
 interface PostState {
   loading: boolean;
-  data: {
-    id: string;
-    name: string;
-    sale: number;
-    color: string;
-    image: string[];
-    price: number;
-    gender: string;
-    category: "coat" | "hoodie" | "shirt" | "sweater";
-  }[];
+  data:
+    | {
+        id: string;
+        name: string;
+        sale: number;
+        color: string;
+        image: string[];
+        price: number;
+        gender: string;
+        category: "coat" | "hoodie" | "shirt" | "sweater";
+      }[]
+    | null;
   error: string | undefined;
 }
 
 const initialState: PostState = {
   loading: false,
-  data: [],
+  data: null,
   error: "",
 };
 

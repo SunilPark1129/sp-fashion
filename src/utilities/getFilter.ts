@@ -1,6 +1,6 @@
 import { BasketProp, CategoryProp, FilteredProp } from "../model/stateProps";
 
-/* filter only */
+/* ------------ filtering item (for shop page) ------------- */
 export function getFilter(
   data: BasketProp[],
   likeState: FilteredProp[],
@@ -17,9 +17,9 @@ export function getFilter(
     });
     return { ...item, like: hasLike, basket: hasBasket };
   });
-  return temp.reverse();
+  return [...temp].reverse();
 }
-
+/* ------------ filtering single item (for purchase page) ------------- */
 export function getSingleFilter(
   data: BasketProp,
   likeState: FilteredProp[],
@@ -36,13 +36,11 @@ export function getSingleFilter(
   return { ...data, like: hasLike, basket: hasBasket };
 }
 
-type GetAllProp = {
-  data: FilteredProp[];
-  likeState?: CategoryProp;
-  basket?: CategoryProp;
-};
-
-export function getLikeFilter({ data, basket }: GetAllProp): FilteredProp[] {
+/* ------------ filtering likes (for favorite page) ------------- */
+export function getLikeFilter(
+  data: FilteredProp[],
+  basket: CategoryProp
+): FilteredProp[] {
   if (!basket) return [];
 
   const temp = data.map((item) => {
@@ -56,10 +54,11 @@ export function getLikeFilter({ data, basket }: GetAllProp): FilteredProp[] {
   return [...temp].reverse();
 }
 
-export function getBasketFilter({
-  data,
-  likeState,
-}: GetAllProp): FilteredProp[] {
+/* ------------ filtering baskets (not worked on it yet) ------------- */
+export function getBasketFilter(
+  data: FilteredProp[],
+  likeState: CategoryProp
+): FilteredProp[] {
   if (!likeState) return [];
 
   const temp = data.map((item) => {
@@ -68,6 +67,54 @@ export function getBasketFilter({
       hasLike = true;
     }
     return { ...item, like: hasLike };
+  });
+
+  return [...temp].reverse();
+}
+
+/* ------------ filtering all (for search page) ------------- */
+export function getAllFilter(
+  data: BasketProp[],
+  likeState: CategoryProp,
+  basket: CategoryProp
+): FilteredProp[] {
+  let getAllWishLists: {
+    [key: string]: { hasLike: boolean; hasBasket: boolean };
+  } = {};
+
+  // put all user's wishlists into one variable
+  Object.values(likeState).forEach((array: FilteredProp[]) => {
+    array.forEach((item) => {
+      getAllWishLists[item.id + item.category] = {
+        hasLike: true,
+        hasBasket: false,
+      };
+    });
+  });
+  Object.values(basket).forEach((array: FilteredProp[]) => {
+    array.forEach((item) => {
+      if (getAllWishLists[item.id + item.category]) {
+        getAllWishLists[item.id + item.category] = {
+          hasLike: true,
+          hasBasket: true,
+        };
+      } else {
+        getAllWishLists[item.id + item.category] = {
+          hasLike: false,
+          hasBasket: true,
+        };
+      }
+    });
+  });
+
+  const temp = data.map((item) => {
+    let like = false;
+    let basket = false;
+    if (getAllWishLists[item.id + item.category]) {
+      like = getAllWishLists[item.id + item.category].hasLike;
+      basket = getAllWishLists[item.id + item.category].hasBasket;
+    }
+    return { ...item, like, basket };
   });
 
   return [...temp].reverse();

@@ -3,11 +3,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { FilteredProp } from "../../model/stateProps";
 
 type SortedProp = {
-  data: FilteredProp[];
+  data: FilteredProp[] | null;
 };
 
 const initialState: SortedProp = {
-  data: [],
+  data: null,
 };
 
 export const sortSlice = createSlice({
@@ -17,9 +17,12 @@ export const sortSlice = createSlice({
     updateSort: (state: any, action: PayloadAction<FilteredProp[]>) => {
       state.data = action.payload;
     },
+    cleanupSort: (state: any) => {
+      state.data = null;
+    },
   },
 });
 
-export const { updateSort } = sortSlice.actions;
+export const { updateSort, cleanupSort } = sortSlice.actions;
 
 export default sortSlice.reducer;

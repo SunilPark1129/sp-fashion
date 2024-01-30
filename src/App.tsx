@@ -14,6 +14,7 @@ import User from "./pages/login/user/User";
 import ErrorPage from "./pages/error/ErrorPage";
 import Detail from "./pages/detail/Detail";
 import DetailID from "./pages/detail/DetailID";
+import Search from "./pages/search/Search";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/purchase" element={<Purchase />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/user" element={<User />} />
           <Route path="/*" element={<ErrorPage />} />

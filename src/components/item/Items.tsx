@@ -11,9 +11,14 @@ import {
 import { IMAGE_KEY } from "../../data/key";
 import "./items.css";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
-import { getLikeFilter, getFilter } from "../../utilities/getFilter";
-import { updateSort } from "../../redux/features/sortSlice";
+import {
+  getLikeFilter,
+  getFilter,
+  getBasketFilter,
+  getAllFilter,
+} from "../../utilities/getFilter";
 import { useNavigate } from "react-router-dom";
+import { cleanupSort } from "../../redux/features/sortSlice";
 
 type Props = {
   selectedCategory: CategoryValidProp;
@@ -21,39 +26,70 @@ type Props = {
 
 function Items({ selectedCategory }: Props) {
   const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(updateSort([]));
-  }, []);
+  const [displayData, setDisplayData] = useState<FilteredProp[] | null>(null);
+  const [keptData, setKeptData] = useState<FilteredProp[] | null>(null);
 
   /* GET like & basket lists */
   const likeState: CategoryProp = useSelector(
     (state: RootState) => state.likeState
   );
   const basket: CategoryProp = useSelector((state: RootState) => state.basket);
-
   const data = useSelector((store: RootState) => store.getSort.data);
 
-  let displayData: FilteredProp[];
-  if (!selectedCategory) return null;
-  if (selectedCategory === "like") {
-    displayData = getLikeFilter({ data, basket });
-  } else if (selectedCategory === "basket") {
-    displayData = getLikeFilter({ data, likeState, basket });
-  } else {
-    displayData = getFilter(
-      data,
-      likeState[selectedCategory],
-      basket[selectedCategory]
-    );
+  // check and set wishlists for individual items if there states are true
+  function getAutoFilter(data: FilteredProp[]) {
+    if (!selectedCategory || !data) return null;
+    let temp;
+    if (selectedCategory === "like") {
+      temp = getLikeFilter(data, basket);
+    } else if (selectedCategory === "basket") {
+      temp = getBasketFilter(data, likeState);
+    } else if (selectedCategory === "all") {
+      temp = getAllFilter(data, likeState, basket);
+    } else {
+      temp = getFilter(
+        data,
+        likeState[selectedCategory],
+        basket[selectedCategory]
+      );
+    }
+    return temp;
   }
+
+  // when requested a new data (move to other link)
+  useEffect(() => {
+    if (!selectedCategory || !data) return;
+    let temp = getAutoFilter(data);
+    setDisplayData(temp);
+  }, [data]);
+
+  // when like or basket trigger has been clicked
+  useEffect(() => {
+    if (!selectedCategory || !keptData) return;
+    let temp = getAutoFilter(keptData);
+    setDisplayData(temp);
+  }, [likeState, basket]);
+
+  // keep new data into keptData state
+  // - data state will be cleanup to reduce the re-rendering purpose
+  useEffect(() => {
+    if (data) {
+      setKeptData(data);
+    }
+  }, [data]);
+
+  // cleanup the state
+  useEffect(() => {
+    dispatch(cleanupSort());
+  }, [displayData]);
 
   return (
     <div className="items">
       <div className="items__content">
-        {displayData.map((item: FilteredProp) => {
-          return <CardComponent item={item} key={item.id + item.category} />;
-        })}
+        {displayData &&
+          displayData.map((item: FilteredProp) => {
+            return <CardComponent item={item} key={item.id + item.category} />;
+          })}
       </div>
     </div>
   );
