@@ -1,4 +1,3 @@
-import React from "react";
 import "./detailloading.css";
 
 function DetailLoading() {

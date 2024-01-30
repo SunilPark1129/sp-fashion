@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BasketProp, CategoryBasketProp } from "../../model/stateProps";
+import { BasketProp } from "../../model/stateProps";
 import { BASE_URL } from "../../data/key";
 
 export const requestHTTP = createAsyncThunk(

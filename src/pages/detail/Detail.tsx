@@ -1,5 +1,5 @@
 import "./detail.css";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { BASE_URL, IMAGE_KEY } from "../../data/key";
 import { CategoryProp, FilteredProp } from "../../model/stateProps";

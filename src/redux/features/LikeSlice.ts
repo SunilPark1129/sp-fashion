@@ -33,7 +33,6 @@ export const likeSlice = createSlice({
     },
     updateLikeState: (state: any, action: PayloadAction<CategoryProp>) => {
       state.results = action.payload;
-      console.log(state.results);
     },
   },
 });

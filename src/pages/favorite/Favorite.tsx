@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ShopAside from "../../components/aside/ShopAside";
 import { FilteredProp } from "../../model/stateProps";

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { BasketProp } from "../../model/stateProps";
 import { BASE_URL } from "../../data/key";
 
 export const requestNames = createAsyncThunk("cloth/fetchName", async () => {

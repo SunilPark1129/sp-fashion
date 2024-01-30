@@ -140,11 +140,7 @@ body {
     font-size: 0.9rem;
   }
 }
-/* @media (max-width: 860px) {
-  body {
-    font-size: 0.9rem;
-  }
-} */
+
 @media (max-width: 740px) {
   body {
     font-size: 0.8rem;
