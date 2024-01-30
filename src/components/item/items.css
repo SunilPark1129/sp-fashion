@@ -105,4 +105,16 @@
   font-size: 2em;
   font-weight: bold;
   color: rgb(70, 63, 63);
+}
+.no-data--fav {
+  height: 40em;
+}
+.no-data--fav .container {
+  max-width: 24rem;
+  width: 100%;
+  gap: 1em !important;
+}
+.no-data--fav .container span {
+  color: rgb(231, 105, 105);
+  font-weight: bold;
 }/*# sourceMappingURL=items.css.map */

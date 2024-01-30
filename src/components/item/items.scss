@@ -96,4 +96,17 @@
     font-weight: bold;
     color: rgb(70, 63, 63);
   }
+
+  &--fav {
+    height: 40em;
+    .container {
+      max-width: 24rem;
+      width: 100%;
+      gap: 1em !important;
+      span {
+        color: rgb(231, 105, 105);
+        font-weight: bold;
+      }
+    }
+  }
 }
