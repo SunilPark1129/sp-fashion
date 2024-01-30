@@ -7,6 +7,7 @@ import Items from "../../components/item/Items";
 import { requestHTTPAll } from "../../redux/features/getAllSlice";
 import { useSearchParams } from "react-router-dom";
 import LoadingPage from "../../components/loading/LoadingPage";
+import Advertisement from "../../components/advertisement/Advertisement";
 
 const b: CategoryValidProp = "coat";
 function Search() {
@@ -57,6 +58,7 @@ function Search() {
         <div className="container">
           <PendingData />
         </div>
+        <Advertisement />
       </div>
     </main>
   );

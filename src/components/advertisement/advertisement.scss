@@ -1,0 +1,32 @@
+.advertisement {
+  height: 14em;
+  width: 100%;
+  position: relative;
+  padding: 0.5em;
+  margin: 4em 0;
+
+  &__img {
+    cursor: pointer;
+    object-position: top;
+    object-fit: cover;
+  }
+
+  &__text {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #fff;
+    pointer-events: none;
+    user-select: none;
+
+    h4 {
+      font-weight: bold;
+      font-size: 2em;
+    }
+    h4,
+    p {
+      text-shadow: 1px 1px 1px black;
+    }
+  }
+}

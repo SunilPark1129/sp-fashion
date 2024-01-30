@@ -1,5 +1,5 @@
 .items {
-  min-height: 40em;
+  min-height: 100vh;
   width: 100%;
 }
 .items__content {

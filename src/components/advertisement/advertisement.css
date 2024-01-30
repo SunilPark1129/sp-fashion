@@ -1,0 +1,33 @@
+.advertisement {
+  height: 14em;
+  width: 100%;
+  position: relative;
+  padding: 0.5em;
+  margin: 4em 0;
+}
+.advertisement__img {
+  cursor: pointer;
+  -o-object-position: top;
+     object-position: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.advertisement__text {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.advertisement__text h4 {
+  font-weight: bold;
+  font-size: 2em;
+}
+.advertisement__text h4,
+.advertisement__text p {
+  text-shadow: 1px 1px 1px black;
+}/*# sourceMappingURL=advertisement.css.map */

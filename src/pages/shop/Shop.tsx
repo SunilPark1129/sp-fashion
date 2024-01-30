@@ -8,6 +8,7 @@ import ShopAside from "../../components/aside/ShopAside";
 import Items from "../../components/item/Items";
 import "./shop.css";
 import LoadingPage from "../../components/loading/LoadingPage";
+import Advertisement from "../../components/advertisement/Advertisement";
 
 const validCategory = ["coat", "shirt", "hoodie", "sweater"];
 const validGender = ["men", "women"];
@@ -80,6 +81,7 @@ function Shop() {
             selectedCategory={selectedCategory}
           />
         </div>
+        <Advertisement />
       </div>
     </main>
   );

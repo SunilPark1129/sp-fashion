@@ -4,6 +4,7 @@ import { RootState } from "../../redux/store";
 import ShopAside from "../../components/aside/ShopAside";
 import { FilteredProp } from "../../model/stateProps";
 import Items from "../../components/item/Items";
+import Advertisement from "../../components/advertisement/Advertisement";
 
 type Props = {};
 
@@ -34,6 +35,7 @@ function Favorite({}: Props) {
             <NoItemComponent />
           )}
         </div>
+        <Advertisement />
       </div>
     </main>
   );
