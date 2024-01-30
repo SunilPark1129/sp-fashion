@@ -1,0 +1,24 @@
+.errorpage {
+  .container {
+    min-height: 40em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+  }
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+
+    h3 {
+      font-weight: bolder;
+      font-size: 4em;
+    }
+
+    h3,
+    p {
+      color: rgb(53, 47, 47);
+    }
+  }
+}

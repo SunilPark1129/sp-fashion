@@ -14,14 +14,13 @@ const validCategory = ["coat", "shirt", "hoodie", "sweater"];
 const validGender = ["men", "women"];
 
 function Shop() {
+  const navigate = useNavigate();
+
   /* param states */
   const [param] = useSearchParams();
   const paramCategory: any = param.get("category");
   const paramGender: any = param.get("gender");
 
-  const [wrongParam, setWrongParam] = useState(false);
-
-  /* resources to fetch and filter */
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryValidProp>(null);
   const [genderFilterData, setGenderFilterData] = useState<BasketProp[] | null>(
@@ -45,17 +44,14 @@ function Shop() {
       setSelectedCategory(paramCategory);
       setSelectedGender(paramGender);
     } else {
-      setWrongParam(true);
+      navigate("/404page");
     }
-
-    return () => {
-      setWrongParam(false);
-    };
   }, [paramCategory, paramGender]);
 
   useEffect(() => {
     // new HTTP request
-    if (selectedCategory && !wrongParam) {
+    if (selectedCategory) {
+      console.log("ren");
       dispatch(requestHTTP(selectedCategory));
     }
   }, [selectedCategory]);
@@ -74,7 +70,6 @@ function Shop() {
       <div className="wrapper">
         <div className="container">
           <PendingData
-            wrongParam={wrongParam}
             error={error}
             loading={loading}
             genderFilterData={genderFilterData}
@@ -88,7 +83,6 @@ function Shop() {
 }
 
 type PendingProp = {
-  wrongParam: boolean;
   error: string | undefined;
   loading: boolean;
   genderFilterData: BasketProp[] | null;
@@ -97,16 +91,11 @@ type PendingProp = {
 
 // components to display current pending stage
 function PendingData({
-  wrongParam,
   error,
   loading,
   genderFilterData,
   selectedCategory,
 }: PendingProp) {
-  const navigate = useNavigate();
-  if (wrongParam) {
-    navigate("/404page");
-  }
   if (error) return <ErrorComponent err={error} />;
   if (loading) return <LoadingPage />;
   return (
