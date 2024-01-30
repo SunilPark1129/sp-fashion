@@ -1,4 +1,20 @@
 .detail {
+  &__path {
+    padding: 0 1em;
+    padding-top: 1em;
+    display: flex;
+    gap: 0.5em;
+    p,
+    span {
+      pointer-events: none;
+    }
+    a {
+      &:hover {
+        color: black;
+        text-decoration: underline;
+      }
+    }
+  }
   @media (max-width: 900px) {
     .container {
       flex-direction: column;

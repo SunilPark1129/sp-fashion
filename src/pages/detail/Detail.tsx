@@ -21,6 +21,8 @@ function Detail() {
     (state: RootState) => state.likeState
   );
   const basket: CategoryProp = useSelector((state: RootState) => state.basket);
+  const pathParam: string | null = params.get("path");
+  const termParam: string | null = params.get("term");
 
   useEffect(() => {
     const categoryParam = params.get("category");
@@ -62,11 +64,15 @@ function Detail() {
 
   if (isLoading) return <div>Loading...</div>;
   if (!data || error) return <div>Error:{error}</div>;
-  return <DisplayComponent data={data} />;
+  return (
+    <DisplayComponent data={data} pathParam={pathParam} termParam={termParam} />
+  );
 }
 
 type DisplayProp = {
   data: FilteredProp;
+  pathParam: string | null;
+  termParam: string | null;
 };
 
 const sizes = ["SIZE", "X-Small", "Small", "Medium", "Large", "X-Large"];
@@ -80,7 +86,9 @@ const initTPos: TPosProp = {
   y: 0,
 };
 
-function DisplayComponent({ data }: DisplayProp) {
+const shopLists = ["coat", "shirt", "hoodie", "sweater"];
+
+function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
   const dispatch = useDispatch();
   const [like, setLike] = useState<boolean | undefined>(data.like);
   const [basket, setBasket] = useState<boolean | undefined>(data.basket);
@@ -129,12 +137,27 @@ function DisplayComponent({ data }: DisplayProp) {
     }
   }
 
+  let path;
+  if (pathParam && shopLists.includes(pathParam)) {
+    const str = gender === "male" ? "men" : "women";
+    path = `/shop?category=${pathParam}&gender=${str}`;
+  } else if (pathParam === "favorite") {
+    path = `/favorite`;
+  } else if (pathParam === "search") {
+    path = `/search?term=${termParam}`;
+  }
   return (
     <main className="detail">
       <div className="wrapper">
+        <div className="detail__path">
+          <Link to={"/"}>home</Link>
+          <span>&#62;</span>
+          <Link to={`${path}`}>shop</Link>
+          <span>&#62;</span>
+          <p>detail</p>
+        </div>
         <div className="container">
           {/* image */}
-
           <div className="detail__imgs">
             <div className="detail__imgs__front">
               {image.map((item, idx) => (

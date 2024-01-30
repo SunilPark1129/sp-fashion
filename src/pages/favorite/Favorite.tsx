@@ -28,7 +28,7 @@ function Favorite({}: Props) {
           {filteredData.length !== 0 ? (
             <>
               <ShopAside filteredData={filteredData} />
-              <Items selectedCategory={"like"} />
+              <Items selectedCategory={"favorite"} />
             </>
           ) : (
             <NoItemComponent />

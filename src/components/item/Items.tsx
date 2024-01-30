@@ -17,7 +17,7 @@ import {
   getBasketFilter,
   getAllFilter,
 } from "../../utilities/getFilter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { cleanupSort } from "../../redux/features/sortSlice";
 
 type Props = {
@@ -28,7 +28,6 @@ function Items({ selectedCategory }: Props) {
   const dispatch = useDispatch<AppDispatch>();
   const [displayData, setDisplayData] = useState<FilteredProp[] | null>(null);
   const [keptData, setKeptData] = useState<FilteredProp[] | null>(null);
-  const [hasData, setHasData] = useState<boolean>(false);
 
   /* GET like & basket lists */
   const likeState: CategoryProp = useSelector(
@@ -41,11 +40,11 @@ function Items({ selectedCategory }: Props) {
   function getAutoFilter(data: FilteredProp[]) {
     if (!selectedCategory || !data) return null;
     let temp;
-    if (selectedCategory === "like") {
+    if (selectedCategory === "favorite") {
       temp = getLikeFilter(data, basket);
-    } else if (selectedCategory === "basket") {
+    } else if (selectedCategory === "purchase") {
       temp = getBasketFilter(data, likeState);
-    } else if (selectedCategory === "all") {
+    } else if (selectedCategory === "search") {
       temp = getAllFilter(data, likeState, basket);
     } else {
       temp = getFilter(
@@ -91,7 +90,11 @@ function Items({ selectedCategory }: Props) {
           <div className="items__content">
             {displayData.map((item: FilteredProp) => {
               return (
-                <CardComponent item={item} key={item.id + item.category} />
+                <CardComponent
+                  key={item.id + item.category}
+                  item={item}
+                  selectedCategory={selectedCategory}
+                />
               );
             })}
           </div>
@@ -116,11 +119,18 @@ function NoItemComponent() {
   );
 }
 
-function CardComponent({ item }: { item: FilteredProp }) {
+function CardComponent({
+  item,
+  selectedCategory,
+}: {
+  item: FilteredProp;
+  selectedCategory: CategoryValidProp;
+}) {
   const [isImgReady, setIsImgReady] = useState<boolean>(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const hasMounted = useRef<boolean | null>(null);
   const navigate = useNavigate();
+  const [params] = useSearchParams();
 
   // when image is onloaded, display image on the screen
   useEffect(() => {
@@ -157,7 +167,14 @@ function CardComponent({ item }: { item: FilteredProp }) {
   }
 
   function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}`);
+    const searchTerm = params.get("term");
+    let str: string | null = "";
+    if (selectedCategory === "search") {
+      str = `&term=${searchTerm}`;
+    }
+    navigate(
+      `/detail?category=${category}&unit=${unit}&path=${selectedCategory}${str}`
+    );
   }
 
   return (

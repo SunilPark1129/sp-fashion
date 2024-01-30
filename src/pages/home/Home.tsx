@@ -51,7 +51,7 @@ function BestSeller() {
   ];
   const navigate = useNavigate();
   function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}`);
+    navigate(`/detail?category=${category}&unit=${unit}&path=${category}`);
   }
 
   return (
@@ -130,7 +130,7 @@ function SeasonSales() {
   ];
   const navigate = useNavigate();
   function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}`);
+    navigate(`/detail?category=${category}&unit=${unit}&path=${category}`);
   }
 
   return (
@@ -175,7 +175,7 @@ function SeasonSales() {
 function BrandNew() {
   const navigate = useNavigate();
   function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}`);
+    navigate(`/detail?category=${category}&unit=${unit}&path=${category}`);
   }
 
   return (

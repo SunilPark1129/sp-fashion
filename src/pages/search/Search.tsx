@@ -57,7 +57,7 @@ function Search({}: Props) {
     return (
       <>
         <ShopAside filteredData={filteredData} />
-        <Items selectedCategory={"all"} />
+        <Items selectedCategory={"search"} />
       </>
     );
   }

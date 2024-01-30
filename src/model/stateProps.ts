@@ -30,7 +30,7 @@ export type CategoryValidProp =
   | "shirt"
   | "hoodie"
   | "sweater"
-  | "like"
-  | "basket"
-  | "all"
+  | "favorite"
+  | "purchase"
+  | "search"
   | null;
