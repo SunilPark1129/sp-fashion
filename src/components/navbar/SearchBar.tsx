@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { requestNames } from "../../redux/features/getName";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -13,6 +13,8 @@ function SearchBar() {
   const dispatch = useDispatch<AppDispatch>();
   const { data, error } = useSelector((state: RootState) => state.getNames);
 
+  const searchRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     dispatch(requestNames());
   }, []);
@@ -26,7 +28,6 @@ function SearchBar() {
       );
       const temp = data.filter((name) => name.match(regexp));
       setFilteredLists(temp.slice(0, 6));
-      setHasFocus(true);
     } else {
       setFilteredLists([]);
     }
@@ -39,15 +40,15 @@ function SearchBar() {
     if (!hasFocus) {
       document.removeEventListener("click", focusOnTarget);
     }
-    return () => document.removeEventListener("click", focusOnTarget);
   }, [hasFocus]);
 
-  /* check if user has pressed the modal */
+  /* check currnet focus */
   function focusOnTarget(e: any) {
     if (
       !e?.target?.className.includes("searchbar__input") &&
       !e?.target?.className.includes("searchbar__lists__item") &&
-      !e?.target?.className.includes("nav__flex")
+      !e?.target?.className.includes("nav__flex") &&
+      searchRef.current !== document.activeElement
     ) {
       setHasFocus(false);
     }
@@ -61,13 +62,13 @@ function SearchBar() {
 
   function listClickHandler(item: string) {
     setSearchTerm(item);
-    setHasFocus(false);
     searchClickHandler(item);
   }
 
   /* pass searched term to other route location */
   function searchClickHandler(item: string | null) {
     if (searchTerm.trim().length === 0) return;
+    setHasFocus(false);
     navigate(`/search?term=${!item ? searchTerm : item}`);
   }
 
@@ -84,6 +85,7 @@ function SearchBar() {
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search Clothes"
         autoComplete="off"
+        ref={searchRef}
       />
       <div className="searchbar__icon" onClick={() => searchClickHandler(null)}>
         <svg
