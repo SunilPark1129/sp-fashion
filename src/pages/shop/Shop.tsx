@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
@@ -30,7 +30,7 @@ function Shop() {
 
   /* request and receive the data from server */
   const { data, loading, error } = useSelector(
-    (state: RootState) => state.getPost
+    (store: RootState) => store.getPost
   );
 
   const dispatch = useDispatch<AppDispatch>();
@@ -101,7 +101,10 @@ function PendingData({
   genderFilterData,
   selectedCategory,
 }: PendingProp) {
-  if (wrongParam) return <WrongParamComponent />;
+  const navigate = useNavigate();
+  if (wrongParam) {
+    navigate("/404page");
+  }
   if (error) return <ErrorComponent err={error} />;
   if (loading) return <LoadingPage />;
   return (
@@ -110,11 +113,6 @@ function PendingData({
       <Items selectedCategory={selectedCategory} />
     </>
   );
-}
-
-/* When id param is not validated */
-function WrongParamComponent() {
-  return <div>Wrong Param...</div>;
 }
 
 /* When received an error from fetching */

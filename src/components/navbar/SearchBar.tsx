@@ -11,7 +11,7 @@ function SearchBar() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [hasFocus, setHasFocus] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { data, error } = useSelector((state: RootState) => state.getNames);
+  const { data, error } = useSelector((store: RootState) => store.getNames);
 
   const searchRef = useRef<HTMLInputElement>(null);
 

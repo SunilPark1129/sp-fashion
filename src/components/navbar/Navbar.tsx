@@ -22,8 +22,8 @@ function Navbar() {
   const [totalLikes, setTotalLikes] = useState<number>(0);
   const [totalBaskets, setTotalBaskets] = useState<number>(0);
 
-  const likes = useSelector((store: RootState) => store.likeState);
-  const baskets = useSelector((store: RootState) => store.basket);
+  const likes = useSelector((store: RootState) => store.likeState.results);
+  const baskets = useSelector((store: RootState) => store.basket.results);
 
   useEffect(() => {
     let total = 0;

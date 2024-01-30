@@ -13,6 +13,10 @@ import sale4 from "./assets/home_sale_4.jpg";
 
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { updateLikeState } from "../../redux/features/LikeSlice";
+import { updateBasketState } from "../../redux/features/basketSlice";
 
 function BestSeller() {
   const bestSellerArray = [
@@ -201,6 +205,39 @@ function BrandNew() {
   );
 }
 
+/* ------------- remove localstorage ------------- */
+function RemoveLocalStorage() {
+  const dispatch = useDispatch<AppDispatch>();
+  function deleteCacheHandler() {
+    // remove all caches
+    localStorage.removeItem("like-state");
+    localStorage.removeItem("basket-state");
+
+    // passing the initial state to update the current state management
+    const initValue = { coat: [], hoodie: [], shirt: [], sweater: [] };
+    dispatch(updateLikeState(initValue));
+    dispatch(updateBasketState(initValue));
+  }
+  return (
+    <section className="remove-localstorage">
+      <div className="wrapper">
+        <div className="container">
+          <div className="remove-localstorage__text">
+            <h3>Remove All Caches</h3>
+            <p>
+              This website has been added for project purposes, so this section
+              has been included. If you want to clear all caches, press DELETE.
+              This will remove the recorded history of Wishlists from your
+              device.
+            </p>
+          </div>
+          <button onClick={deleteCacheHandler}>DELETE</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Home() {
   return (
     <main className="home">
@@ -211,6 +248,8 @@ function Home() {
       <BrandNew />
 
       <SeasonSales />
+
+      <RemoveLocalStorage />
     </main>
   );
 }

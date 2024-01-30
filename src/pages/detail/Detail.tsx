@@ -19,9 +19,11 @@ function Detail() {
   const [error, setError] = useState<string | null>(null);
 
   const likeState: CategoryProp = useSelector(
-    (state: RootState) => state.likeState
+    (store: RootState) => store.likeState.results
   );
-  const basket: CategoryProp = useSelector((state: RootState) => state.basket);
+  const basket: CategoryProp = useSelector(
+    (store: RootState) => store.basket.results
+  );
   const pathParam: string | null = params.get("path");
   const termParam: string | null = params.get("term");
 

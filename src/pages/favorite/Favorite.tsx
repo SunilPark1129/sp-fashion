@@ -8,7 +8,7 @@ import Items from "../../components/item/Items";
 type Props = {};
 
 function Favorite({}: Props) {
-  const likes = useSelector((store: RootState) => store.likeState);
+  const likes = useSelector((store: RootState) => store.likeState.results);
   const [filteredData, setFilteredData] = useState<FilteredProp[]>([]);
 
   useEffect(() => {

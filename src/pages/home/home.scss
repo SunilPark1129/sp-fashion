@@ -133,3 +133,45 @@
     }
   }
 }
+
+.remove-localstorage {
+  padding: 0.5em;
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2em;
+    min-height: 30em;
+    padding: 2em;
+    border: 1px solid var(--clr-line);
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    max-width: 60rem;
+
+    h3 {
+      font-weight: bold;
+      margin: 0 auto;
+    }
+  }
+
+  button {
+    padding: 1em 2em;
+    background-color: rgb(100, 100, 100);
+    color: #fff;
+    font-size: 0.9em;
+    &:hover {
+      background-color: rgb(46, 46, 46);
+    }
+  }
+
+  h3,
+  p,
+  button {
+    font-family: "Roboto", sans-serif;
+  }
+}

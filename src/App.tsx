@@ -1,5 +1,4 @@
-import React from "react";
-import "./App.css";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
@@ -15,8 +14,31 @@ import ErrorPage from "./pages/error/ErrorPage";
 import Detail from "./pages/detail/Detail";
 import Career from "./pages/career/Career";
 import Search from "./pages/search/Search";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./redux/store";
+import { updateLikeState } from "./redux/features/LikeSlice";
+import { updateBasketState } from "./redux/features/basketSlice";
 
 function App() {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    const getLikeStorage: string | null = localStorage.getItem("like-state");
+    if (getLikeStorage) {
+      const { state } = JSON.parse(getLikeStorage);
+      if (state) {
+        dispatch(updateLikeState(state));
+      }
+    }
+
+    const getBasketStorage: string | null =
+      localStorage.getItem("basket-state");
+    if (getBasketStorage) {
+      const { state } = JSON.parse(getBasketStorage);
+      if (state) {
+        dispatch(updateBasketState(state));
+      }
+    }
+  }, []);
   return (
     <div className="App">
       <Router>

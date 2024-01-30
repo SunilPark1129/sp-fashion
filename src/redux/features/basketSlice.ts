@@ -2,11 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { FilteredProp, CategoryProp } from "../../model/stateProps";
 
-const initialState: CategoryProp = {
-  coat: [],
-  hoodie: [],
-  shirt: [],
-  sweater: [],
+type ResultType = { results: CategoryProp };
+
+const initialState: ResultType = {
+  results: {
+    coat: [],
+    hoodie: [],
+    shirt: [],
+    sweater: [],
+  },
 };
 
 export const basketSlice = createSlice({
@@ -14,19 +18,31 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addBasket: (state: any, action: PayloadAction<FilteredProp>) => {
-      state[action.payload.category] = [
-        ...state[action.payload.category],
+      state.results[action.payload.category] = [
+        ...state.results[action.payload.category],
         { ...action.payload, basket: true },
       ];
+      localStorage.setItem(
+        "basket-state",
+        JSON.stringify({ state: state.results })
+      );
     },
     deleteBasket: (state: any, action: PayloadAction<FilteredProp>) => {
-      state[action.payload.category] = state[action.payload.category].filter(
-        (item: FilteredProp) => item.id !== action.payload.id
+      state.results[action.payload.category] = state.results[
+        action.payload.category
+      ].filter((item: FilteredProp) => item.id !== action.payload.id);
+      localStorage.setItem(
+        "basket-state",
+        JSON.stringify({ state: state.results })
       );
+    },
+    updateBasketState: (state: any, action: PayloadAction<CategoryProp>) => {
+      state.results = action.payload;
     },
   },
 });
 
-export const { addBasket, deleteBasket } = basketSlice.actions;
+export const { addBasket, deleteBasket, updateBasketState } =
+  basketSlice.actions;
 
 export default basketSlice.reducer;

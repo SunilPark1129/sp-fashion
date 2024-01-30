@@ -31,9 +31,11 @@ function Items({ selectedCategory }: Props) {
 
   /* GET like & basket lists */
   const likeState: CategoryProp = useSelector(
-    (state: RootState) => state.likeState
+    (store: RootState) => store.likeState.results
   );
-  const basket: CategoryProp = useSelector((state: RootState) => state.basket);
+  const basket: CategoryProp = useSelector(
+    (store: RootState) => store.basket.results
+  );
   const data = useSelector((store: RootState) => store.getSort.data);
 
   // check and set wishlists for individual items if there states are true

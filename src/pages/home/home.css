@@ -137,4 +137,42 @@
 .home__brand-new__text button:hover {
   border: 1px solid black;
   color: black;
+}
+
+.remove-localstorage {
+  padding: 0.5em;
+}
+.remove-localstorage .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2em;
+  min-height: 30em;
+  padding: 2em;
+  border: 1px solid var(--clr-line);
+}
+.remove-localstorage__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  max-width: 60rem;
+}
+.remove-localstorage__text h3 {
+  font-weight: bold;
+  margin: 0 auto;
+}
+.remove-localstorage button {
+  padding: 1em 2em;
+  background-color: rgb(100, 100, 100);
+  color: #fff;
+  font-size: 0.9em;
+}
+.remove-localstorage button:hover {
+  background-color: rgb(46, 46, 46);
+}
+.remove-localstorage h3,
+.remove-localstorage p,
+.remove-localstorage button {
+  font-family: "Roboto", sans-serif;
 }/*# sourceMappingURL=home.css.map */
