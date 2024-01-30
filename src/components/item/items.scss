@@ -1,4 +1,5 @@
 .items {
+  min-height: 40em;
   width: 100%;
   &__content {
     width: 100%;
@@ -70,5 +71,29 @@
         }
       }
     }
+  }
+}
+
+.no-data {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 4px;
+  .wrapper {
+    height: 100%;
+  }
+  .container {
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    margin: 0 auto;
+    height: 100%;
+  }
+  h3 {
+    font-size: 2em;
+    font-weight: bold;
+    color: rgb(70, 63, 63);
   }
 }

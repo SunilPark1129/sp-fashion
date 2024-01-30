@@ -28,6 +28,7 @@ function Items({ selectedCategory }: Props) {
   const dispatch = useDispatch<AppDispatch>();
   const [displayData, setDisplayData] = useState<FilteredProp[] | null>(null);
   const [keptData, setKeptData] = useState<FilteredProp[] | null>(null);
+  const [hasData, setHasData] = useState<boolean>(false);
 
   /* GET like & basket lists */
   const likeState: CategoryProp = useSelector(
@@ -85,13 +86,33 @@ function Items({ selectedCategory }: Props) {
 
   return (
     <div className="items">
-      <div className="items__content">
-        {displayData &&
-          displayData.map((item: FilteredProp) => {
-            return <CardComponent item={item} key={item.id + item.category} />;
-          })}
-      </div>
+      {displayData ? (
+        displayData.length !== 0 ? (
+          <div className="items__content">
+            {displayData.map((item: FilteredProp) => {
+              return (
+                <CardComponent item={item} key={item.id + item.category} />
+              );
+            })}
+          </div>
+        ) : (
+          <NoItemComponent />
+        )
+      ) : null}
     </div>
+  );
+}
+
+function NoItemComponent() {
+  return (
+    <section className="no-data">
+      <div className="wrapper">
+        <div className="container">
+          <h3>NO ITEM</h3>
+          <p>No clothes have been found...</p>
+        </div>
+      </div>
+    </section>
   );
 }
 
