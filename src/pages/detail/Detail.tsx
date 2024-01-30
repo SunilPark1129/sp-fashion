@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
+import DetailLoading from "./DetailLoading";
 
 function Detail() {
   const [params] = useSearchParams();
@@ -62,7 +63,7 @@ function Detail() {
     };
   }, [params]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <DetailLoading />;
   if (!data || error) return <div>Error:{error}</div>;
   return (
     <DisplayComponent data={data} pathParam={pathParam} termParam={termParam} />

@@ -256,7 +256,6 @@
       }
 
       input[type="radio"]:checked {
-        // background-color: blue;
         &::after {
           background-color: rgb(35, 38, 44);
         }
