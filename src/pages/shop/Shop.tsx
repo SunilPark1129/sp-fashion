@@ -9,6 +9,7 @@ import Items from "../../components/item/Items";
 import "./shop.css";
 import LoadingPage from "../../components/loading/LoadingPage";
 import Advertisement from "../../components/advertisement/Advertisement";
+import FetchError from "../../components/fetcherror/FetchError";
 
 const validCategory = ["coat", "shirt", "hoodie", "sweater"];
 const validGender = ["men", "women"];
@@ -96,7 +97,7 @@ function PendingData({
   genderFilterData,
   selectedCategory,
 }: PendingProp) {
-  if (error) return <ErrorComponent err={error} />;
+  if (error) return <FetchError error={error} />;
   if (loading) return <LoadingPage />;
   return (
     <>
@@ -104,11 +105,6 @@ function PendingData({
       <Items selectedCategory={selectedCategory} />
     </>
   );
-}
-
-/* When received an error from fetching */
-function ErrorComponent({ err }: any) {
-  return <div>{err}</div>;
 }
 
 export default Shop;

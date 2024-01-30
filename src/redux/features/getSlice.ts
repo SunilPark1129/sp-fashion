@@ -7,7 +7,7 @@ export const requestHTTP = createAsyncThunk(
   async (category: string) => {
     const response = await fetch(`${BASE_URL}/results/${category}`);
     if (!response.ok) {
-      throw new Error("could not response");
+      throw new Error(String(response.status));
     }
     return (await response.json()) as BasketProp[];
   }

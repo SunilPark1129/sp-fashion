@@ -1,0 +1,19 @@
+.fetch-error {
+  width: 100%;
+}
+.fetch-error .container {
+  min-height: 40em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.fetch-error__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.fetch-error h4 {
+  font-weight: bold;
+  font-size: 2em;
+}/*# sourceMappingURL=fetcherror.css.map */

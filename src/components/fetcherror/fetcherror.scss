@@ -1,0 +1,19 @@
+.fetch-error {
+  width: 100%;
+  .container {
+    min-height: 40em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+  }
+  h4 {
+    font-weight: bold;
+    font-size: 2em;
+  }
+}
