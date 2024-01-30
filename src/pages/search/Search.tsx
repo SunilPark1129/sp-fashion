@@ -2,26 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import ShopAside from "../../components/aside/ShopAside";
-import {
-  BasketProp,
-  CategoryValidProp,
-  FilteredProp,
-} from "../../model/stateProps";
+import { BasketProp, CategoryValidProp } from "../../model/stateProps";
 import Items from "../../components/item/Items";
 import { requestHTTPAll } from "../../redux/features/getAllSlice";
 import { useSearchParams } from "react-router-dom";
-
-type Props = {};
-
-const validCategory = ["coat", "shirt", "hoodie", "sweater"];
-const validGender = ["men", "women"];
+import LoadingPage from "../../components/loading/LoadingPage";
 
 const b: CategoryValidProp = "coat";
-function Search({}: Props) {
+function Search() {
   const dispatch = useDispatch<AppDispatch>();
-  const [paramEmpty, setParamEmpty] = useState();
-  //   const [selectedCategory, setSelectedCategory] =
-  //     useState<CategoryValidProp>(null);
   const { loading, data, error } = useSelector(
     (store: RootState) => store.getAllPost
   );
@@ -53,7 +42,7 @@ function Search({}: Props) {
   function PendingData() {
     if (!searchTerm) return <NeedTermComponent />;
     if (error) return <ErrorComponent err={error} />;
-    if (loading) return <LoadingComponent />;
+    if (loading) return <LoadingPage />;
     return (
       <>
         <ShopAside filteredData={filteredData} />
@@ -81,11 +70,6 @@ function NeedTermComponent() {
 /* When received an error from fetching */
 function ErrorComponent({ err }: any) {
   return <div>{err}</div>;
-}
-
-/* When currently pending */
-function LoadingComponent() {
-  return <div>Loading ...</div>;
 }
 
 export default Search;

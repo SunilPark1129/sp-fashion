@@ -7,6 +7,7 @@ import { BasketProp, CategoryValidProp } from "../../model/stateProps";
 import ShopAside from "../../components/aside/ShopAside";
 import Items from "../../components/item/Items";
 import "./shop.css";
+import LoadingPage from "../../components/loading/LoadingPage";
 
 const validCategory = ["coat", "shirt", "hoodie", "sweater"];
 const validGender = ["men", "women"];
@@ -102,7 +103,7 @@ function PendingData({
 }: PendingProp) {
   if (wrongParam) return <WrongParamComponent />;
   if (error) return <ErrorComponent err={error} />;
-  if (loading) return <LoadingComponent />;
+  if (loading) return <LoadingPage />;
   return (
     <>
       <ShopAside filteredData={genderFilterData} />
@@ -119,11 +120,6 @@ function WrongParamComponent() {
 /* When received an error from fetching */
 function ErrorComponent({ err }: any) {
   return <div>{err}</div>;
-}
-
-/* When currently pending */
-function LoadingComponent() {
-  return <div>Loading ...</div>;
 }
 
 export default Shop;
