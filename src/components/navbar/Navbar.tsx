@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../assets/logo192.png";
 import SearchBar from "./SearchBar";
@@ -7,6 +7,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 function Navbar() {
+  const location = useLocation();
+  const [isShopPage, setIsShopPage] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (location.pathname === "/shop") {
+      setIsShopPage(true);
+    } else {
+      setIsShopPage(false);
+    }
+  }, [location.pathname]);
   /* category lists modal */
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [totalLikes, setTotalLikes] = useState<number>(0);
@@ -71,7 +81,7 @@ function Navbar() {
             <ul className="nav__content">
               <li>
                 <div>
-                  <Link to={"/"}>HOME</Link>
+                  <NavLink to={"/"}>HOME</NavLink>
                 </div>
               </li>
               <li>
@@ -79,7 +89,7 @@ function Navbar() {
                   <button
                     className={`nav__cloth__btn--clothes ${
                       IsModalOpen && "nav__cloth__btn--clothes--active"
-                    }`}
+                    } ${isShopPage && "active"}`}
                     onClick={modalOpenHandler}
                     tabIndex={0}
                   >
@@ -89,12 +99,12 @@ function Navbar() {
               </li>
               <li>
                 <div>
-                  <Link to={"/"}>CAREER</Link>
+                  <NavLink to={"/career"}>CAREER</NavLink>
                 </div>
               </li>
               <li>
                 <div>
-                  <Link to={"/contact"}>CONTACT</Link>
+                  <NavLink to={"/contact"}>CONTACT</NavLink>
                 </div>
               </li>
             </ul>

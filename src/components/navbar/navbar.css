@@ -50,9 +50,10 @@ nav {
   }
 }
 .nav__content:nth-of-type(1) a:hover,
-.nav__content:nth-of-type(1) button:hover {
-  text-decoration: underline;
-  color: black;
+.nav__content:nth-of-type(1) button:hover,
+.nav__content:nth-of-type(1) .active {
+  font-weight: bold;
+  color: rgb(63, 52, 52);
 }
 .nav__content svg {
   pointer-events: none;
@@ -113,7 +114,6 @@ nav {
 
 .nav__cloth__btn--clothes--active {
   text-decoration: underline;
-  color: black;
 }
 
 .nav__count {

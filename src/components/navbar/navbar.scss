@@ -36,6 +36,7 @@ nav {
   gap: 1.5em;
   padding: 0.5em 0;
   flex-shrink: 0;
+
   @media (max-width: 600px) {
     gap: 1em;
   }
@@ -45,9 +46,10 @@ nav {
 
   &:nth-of-type(1) {
     a:hover,
-    button:hover {
-      text-decoration: underline;
-      color: black;
+    button:hover,
+    .active {
+      font-weight: bold;
+      color: rgb(63, 52, 52);
     }
   }
 
@@ -113,7 +115,6 @@ nav {
 
 .nav__cloth__btn--clothes--active {
   text-decoration: underline;
-  color: black;
 }
 
 .nav__count {
