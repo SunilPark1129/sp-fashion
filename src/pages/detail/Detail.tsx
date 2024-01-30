@@ -136,6 +136,11 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
       setBasket(true);
     }
   }
+  function purchaseClickHandler() {
+    if (!basket) {
+      dispatch(addBasket(data));
+    }
+  }
 
   let path;
   if (pathParam && shopLists.includes(pathParam)) {
@@ -291,7 +296,11 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
 
             {/* purchase */}
             <div className="detail__text__purchase">
-              <Link className="detail__text__purchase__link" to={"/purchase"}>
+              <Link
+                className="detail__text__purchase__link"
+                to={"/purchase"}
+                onClick={purchaseClickHandler}
+              >
                 Purchase Cloth
               </Link>
               <div
