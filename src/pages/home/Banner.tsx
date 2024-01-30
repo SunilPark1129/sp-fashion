@@ -20,7 +20,6 @@ function SlideImageComponent({ currentIdx }: { currentIdx: number }) {
         >
           <div className="wrapper">
             <div className="banner__image__box">
-              <div className="banner__image__bg"></div>
               <img src={image.url} alt={image.alt} />
             </div>
           </div>
