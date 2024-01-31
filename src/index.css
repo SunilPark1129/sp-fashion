@@ -27,7 +27,8 @@
   /* loading component */
   --clr-loading-light: rgb(219, 219, 219);
   --clr-loading-dark: rgb(185, 185, 185);
-  --ani-loading: ani-loading 1.5s ease-in-out infinite;
+  --clr-loading-move: rgb(146, 146, 146);
+  --ani-loading: ani-loading 2s ease-in-out infinite;
 
   --clr-line-light: #e2e2e2;
 }
@@ -150,10 +151,10 @@ body {
 }
 
 @keyframes ani-loading {
-  50% {
-    filter: brightness(90%);
+  0% {
+    left: -100%;
   }
   100% {
-    filter: brightness(100%);
+    left: 100%;
   }
 }

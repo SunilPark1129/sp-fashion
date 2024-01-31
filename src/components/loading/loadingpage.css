@@ -25,17 +25,25 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: rgb(219, 219, 219);
+  background-color: var(--clr-loading-light);
   gap: 1em;
   padding: 1em;
 }
 .loading__aside__box__text {
   width: 100%;
   height: 1em;
-  background-color: rgb(185, 185, 185);
+  background-color: var(--clr-loading-dark);
   position: relative;
   overflow: hidden;
+}
+.loading__aside__box__text::after {
   animation: var(--ani-loading);
+  background-color: var(--clr-loading-move);
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .loading__main {
@@ -80,11 +88,22 @@
   gap: 1em;
 }
 .loading__main__box__img {
+  overflow: hidden;
   width: 100%;
   height: 100%;
   aspect-ratio: 4/5;
   background-color: var(--clr-loading-dark);
+  position: relative;
+}
+.loading__main__box__img::after {
   animation: var(--ani-loading);
+  background-color: var(--clr-loading-move);
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 .loading__main__box__text {
   width: 100%;
@@ -95,8 +114,18 @@
 .loading__main__box__text > div {
   width: 100%;
   height: 100%;
+  position: relative;
+  overflow: hidden;
   background-color: var(--clr-loading-dark);
+}
+.loading__main__box__text > div::after {
   animation: var(--ani-loading);
+  background-color: var(--clr-loading-move);
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
 .loading__main__box__btn {
   display: flex;
