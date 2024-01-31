@@ -52,7 +52,6 @@ function Shop() {
   useEffect(() => {
     // new HTTP request
     if (selectedCategory) {
-      console.log("ren");
       dispatch(requestHTTP(selectedCategory));
     }
   }, [selectedCategory]);
