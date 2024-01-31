@@ -22,24 +22,16 @@ function Navbar() {
   const [totalLikes, setTotalLikes] = useState<number>(0);
   const [totalBaskets, setTotalBaskets] = useState<number>(0);
 
-  const likes = useSelector((store: RootState) => store.likeState.results);
-  const baskets = useSelector((store: RootState) => store.basket.results);
+  const likeState = useSelector((store: RootState) => store.likeState.results);
+  const basketState = useSelector((store: RootState) => store.basket.results);
 
+  /* display number of wishlists the user has */
   useEffect(() => {
-    let total = 0;
-    Object.entries(likes).forEach(([_, array]) => {
-      total = total + array.length;
-    });
-    setTotalLikes(total);
-  }, [likes]);
-
+    setTotalLikes(likeState.length ?? 0);
+  }, [likeState]);
   useEffect(() => {
-    let total = 0;
-    Object.entries(baskets).forEach(([_, array]) => {
-      total = total + array.length;
-    });
-    setTotalBaskets(total);
-  }, [baskets]);
+    setTotalBaskets(basketState.length ?? 0);
+  }, [basketState]);
 
   /* check if user has pressed the modal */
   function focusOnTarget(e: any) {

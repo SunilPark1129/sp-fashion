@@ -18,13 +18,6 @@ export type CategoryBasketProp = {
 
 export type FilteredProp = BasketProp & { like?: boolean; basket?: boolean };
 
-export type CategoryProp = {
-  coat: FilteredProp[];
-  hoodie: FilteredProp[];
-  shirt: FilteredProp[];
-  sweater: FilteredProp[];
-};
-
 export type CategoryValidProp =
   | "coat"
   | "shirt"

@@ -3,20 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
-import {
-  CategoryProp,
-  CategoryValidProp,
-  FilteredProp,
-} from "../../model/stateProps";
+import { CategoryValidProp, FilteredProp } from "../../model/stateProps";
 import { IMAGE_KEY } from "../../data/key";
 import "./items.css";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
-import {
-  getLikeFilter,
-  getFilter,
-  getBasketFilter,
-  getAllFilter,
-} from "../../utilities/getFilter";
+import { getFilter } from "../../utilities/getFilter";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { cleanupSort } from "../../redux/features/sortSlice";
 
@@ -30,10 +21,10 @@ function Items({ selectedCategory }: Props) {
   const [keptData, setKeptData] = useState<FilteredProp[] | null>(null);
 
   /* GET like & basket lists */
-  const likeState: CategoryProp = useSelector(
+  const likeState: FilteredProp[] = useSelector(
     (store: RootState) => store.likeState.results
   );
-  const basket: CategoryProp = useSelector(
+  const basketState: FilteredProp[] = useSelector(
     (store: RootState) => store.basket.results
   );
   const data = useSelector((store: RootState) => store.getSort.data);
@@ -42,19 +33,7 @@ function Items({ selectedCategory }: Props) {
   function getAutoFilter(data: FilteredProp[]) {
     if (!selectedCategory || !data) return null;
     let temp;
-    if (selectedCategory === "favorite") {
-      temp = getLikeFilter(data, basket);
-    } else if (selectedCategory === "purchase") {
-      temp = getBasketFilter(data, likeState);
-    } else if (selectedCategory === "search") {
-      temp = getAllFilter(data, likeState, basket);
-    } else {
-      temp = getFilter(
-        data,
-        likeState[selectedCategory],
-        basket[selectedCategory]
-      );
-    }
+    temp = getFilter(data, likeState, basketState);
     return temp;
   }
 
@@ -70,7 +49,7 @@ function Items({ selectedCategory }: Props) {
     if (!selectedCategory || !keptData) return;
     let temp = getAutoFilter(keptData);
     setDisplayData(temp);
-  }, [likeState, basket]);
+  }, [likeState, basketState]);
 
   // keep new data into keptData state
   // - data state will be cleanup to reduce the re-rendering purpose

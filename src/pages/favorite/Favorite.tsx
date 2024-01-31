@@ -9,18 +9,16 @@ import Advertisement from "../../components/advertisement/Advertisement";
 type Props = {};
 
 function Favorite({}: Props) {
-  const likes = useSelector((store: RootState) => store.likeState.results);
+  const likeState = useSelector((store: RootState) => store.likeState.results);
   const [filteredData, setFilteredData] = useState<FilteredProp[]>([]);
 
   useEffect(() => {
     let temp: FilteredProp[] = [];
-    Object.entries(likes).forEach(([_, array]) => {
-      array.forEach((item) => {
-        temp.push(item);
-      });
+    likeState.forEach((item) => {
+      temp.push(item);
     });
     setFilteredData(temp);
-  }, [likes]);
+  }, [likeState]);
 
   return (
     <main className="shop">

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { FilteredProp, CategoryProp } from "../../model/stateProps";
+import { FilteredProp } from "../../model/stateProps";
 
-type ResultType = { results: CategoryProp };
+type ResultType = { results: FilteredProp[] };
 
 const initialState: ResultType = {
-  results: { coat: [], hoodie: [], shirt: [], sweater: [] },
+  results: [],
 };
 
 export const likeSlice = createSlice({
@@ -13,25 +13,22 @@ export const likeSlice = createSlice({
   initialState,
   reducers: {
     addLikeState: (state: any, action: PayloadAction<FilteredProp>) => {
-      state.results[action.payload.category] = [
-        ...state.results[action.payload.category],
-        { ...action.payload, like: true },
-      ];
+      state.results = [...state.results, { ...action.payload, like: true }];
       localStorage.setItem(
         "like-state",
         JSON.stringify({ state: state.results })
       );
     },
     deleteLikeState: (state: any, action: PayloadAction<FilteredProp>) => {
-      state.results[action.payload.category] = state.results[
-        action.payload.category
-      ].filter((item: FilteredProp) => item.id !== action.payload.id);
+      state.results = state.results.filter(
+        ({ id }: { id: string }) => id !== action.payload.id
+      );
       localStorage.setItem(
         "like-state",
         JSON.stringify({ state: state.results })
       );
     },
-    updateLikeState: (state: any, action: PayloadAction<CategoryProp>) => {
+    updateLikeState: (state: any, action: PayloadAction<[]>) => {
       state.results = action.payload;
     },
   },

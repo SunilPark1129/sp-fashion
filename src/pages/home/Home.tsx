@@ -219,9 +219,8 @@ function RemoveLocalStorage() {
     localStorage.removeItem("basket-state");
 
     // passing the initial state to update the current state management
-    const initValue = { coat: [], hoodie: [], shirt: [], sweater: [] };
-    dispatch(updateLikeState(initValue));
-    dispatch(updateBasketState(initValue));
+    dispatch(updateLikeState([]));
+    dispatch(updateBasketState([]));
     setHasData(
       localStorage.getItem("like-state") || localStorage.getItem("basket-state")
     );

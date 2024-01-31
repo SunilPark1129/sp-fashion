@@ -2,15 +2,16 @@ import "./detail.css";
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { BASE_URL, IMAGE_KEY } from "../../data/key";
-import { CategoryProp, FilteredProp } from "../../model/stateProps";
+import { FilteredProp } from "../../model/stateProps";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { getSingleFilter } from "../../utilities/getFilter";
+import { getFilter } from "../../utilities/getFilter";
 import { useDispatch } from "react-redux";
 import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import DetailLoading from "./DetailLoading";
+import FetchError from "../../components/fetcherror/FetchError";
 
 function Detail() {
   const [params] = useSearchParams();
@@ -18,10 +19,10 @@ function Detail() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const likeState: CategoryProp = useSelector(
+  const likeState: FilteredProp[] = useSelector(
     (store: RootState) => store.likeState.results
   );
-  const basket: CategoryProp = useSelector(
+  const basketState: FilteredProp[] = useSelector(
     (store: RootState) => store.basket.results
   );
   const pathParam: string | null = params.get("path");
@@ -38,11 +39,7 @@ function Detail() {
       )
         .then((res) => res.json())
         .then((data) => {
-          const filtered = getSingleFilter(
-            data,
-            likeState[category as keyof typeof likeState],
-            basket[category as keyof typeof basket]
-          );
+          const filtered = getFilter([data], likeState, basketState);
           setIsLoading(false);
           setError(null);
           return filtered;
@@ -52,7 +49,7 @@ function Detail() {
           setError(err.message);
           return null;
         });
-      setData(res);
+      if (res) setData(res[0]);
     }
 
     if (categoryParam && unitParam) {
@@ -66,7 +63,7 @@ function Detail() {
   }, [params]);
 
   if (isLoading) return <DetailLoading />;
-  if (!data || error) return <div>Error:{error}</div>;
+  if (!data || error) return <FetchError error={error} />;
   return (
     <DisplayComponent data={data} pathParam={pathParam} termParam={termParam} />
   );
@@ -146,13 +143,20 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
   }
 
   let path;
+  let label;
   if (pathParam && shopLists.includes(pathParam)) {
     const str = gender === "male" ? "men" : "women";
     path = `/shop?category=${pathParam}&gender=${str}`;
+    label = "shop";
   } else if (pathParam === "favorite") {
     path = `/favorite`;
+    label = "favorite";
   } else if (pathParam === "search") {
     path = `/search?term=${termParam}`;
+    label = "search";
+  } else if (pathParam === "purchase") {
+    path = `/purchase`;
+    label = "purchase";
   }
   return (
     <main className="detail">
@@ -160,7 +164,7 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
         <div className="detail__path">
           <Link to={"/"}>home</Link>
           <span>&#62;</span>
-          <Link to={`${path}`}>shop</Link>
+          <Link to={`${path}`}>{label}</Link>
           <span>&#62;</span>
           <p>detail</p>
         </div>

@@ -1,5 +1,5 @@
 import "./fetcherror.css";
-type Props = { error: string };
+type Props = { error: string | null };
 
 function FetchError({ error }: Props) {
   return (
