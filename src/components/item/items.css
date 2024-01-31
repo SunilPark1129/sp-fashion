@@ -108,6 +108,7 @@
 }
 .no-data--fav {
   height: 40em;
+  border: none;
 }
 .no-data--fav .container {
   max-width: 24rem;
