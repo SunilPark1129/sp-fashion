@@ -1,0 +1,140 @@
+.login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  p,
+  button,
+  h1,
+  label,
+  input {
+    font-family: "Roboto", sans-serif;
+  }
+
+  .container {
+    display: flex;
+    gap: 1em;
+    margin: auto;
+    justify-content: center;
+    padding: 0.5em;
+  }
+
+  &__img {
+    max-width: 40em;
+    width: 100%;
+    margin: 4em 0;
+
+    img {
+      object-fit: cover;
+    }
+
+    @media (max-width: 900px) {
+      display: none;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4em;
+    width: 100%;
+    margin: 4em 0;
+    border: 1px solid var(--clr-line);
+    padding: 8em 4em;
+    border-radius: 4px;
+    align-items: center;
+    max-width: 40rem;
+
+    @media (max-width: 900px) {
+      padding: 8em 1em;
+      border: none;
+    }
+  }
+
+  &__header {
+    h1 {
+      color: var(--clr-dark-fnt);
+      font-size: 2em;
+      font-weight: bold;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    max-width: 20em;
+    width: 100%;
+  }
+
+  &__input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 0.2em;
+      color: var(--clr-dark-fnt);
+    }
+
+    input {
+      padding: 0.5em;
+      border: 1px solid var(--clr-line);
+      outline: none;
+      &:focus {
+        background-color: var(--clr-focus);
+      }
+    }
+  }
+
+  &__validated {
+    height: 2em;
+    display: flex;
+    align-items: center;
+    max-width: 20em;
+    width: 100%;
+    p {
+      color: rgb(230, 16, 16);
+      font-size: 0.8em;
+    }
+  }
+
+  &__btn-box {
+    display: flex;
+    gap: 1em;
+    width: 100%;
+    justify-content: space-between;
+    button {
+      flex: 1 1 100%;
+      padding: 0.6em 1.2em;
+      background-color: var(--clr-dark-fnt);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1em;
+
+      &:hover {
+        background-color: rgb(56, 56, 56);
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    gap: 0.5em;
+
+    a {
+      font-size: 0.8em;
+      color: rgb(67, 76, 201);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

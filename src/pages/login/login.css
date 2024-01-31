@@ -1,0 +1,126 @@
+.login {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.login p,
+.login button,
+.login h1,
+.login label,
+.login input {
+  font-family: "Roboto", sans-serif;
+}
+.login .container {
+  display: flex;
+  gap: 1em;
+  margin: auto;
+  justify-content: center;
+  padding: 0.5em;
+}
+.login__img {
+  max-width: 40em;
+  width: 100%;
+  margin: 4em 0;
+}
+.login__img img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+@media (max-width: 900px) {
+  .login__img {
+    display: none;
+  }
+}
+.login__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4em;
+  width: 100%;
+  margin: 4em 0;
+  border: 1px solid var(--clr-line);
+  padding: 8em 4em;
+  border-radius: 4px;
+  align-items: center;
+  max-width: 40rem;
+}
+@media (max-width: 900px) {
+  .login__text {
+    padding: 8em 1em;
+    border: none;
+  }
+}
+.login__header h1 {
+  color: var(--clr-dark-fnt);
+  font-size: 2em;
+  font-weight: bold;
+}
+.login__form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  max-width: 20em;
+  width: 100%;
+}
+.login__input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+}
+.login__input-box label {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.2em;
+  color: var(--clr-dark-fnt);
+}
+.login__input-box input {
+  padding: 0.5em;
+  border: 1px solid var(--clr-line);
+  outline: none;
+}
+.login__input-box input:focus {
+  background-color: var(--clr-focus);
+}
+.login__validated {
+  height: 2em;
+  display: flex;
+  align-items: center;
+  max-width: 20em;
+  width: 100%;
+}
+.login__validated p {
+  color: rgb(230, 16, 16);
+  font-size: 0.8em;
+}
+.login__btn-box {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  justify-content: space-between;
+}
+.login__btn-box button {
+  flex: 1 1 100%;
+  padding: 0.6em 1.2em;
+  background-color: var(--clr-dark-fnt);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1em;
+}
+.login__btn-box button:hover {
+  background-color: rgb(56, 56, 56);
+}
+.login__links {
+  display: flex;
+  flex-direction: column;
+  margin: 2em 0;
+  gap: 0.5em;
+}
+.login__links a {
+  font-size: 0.8em;
+  color: rgb(67, 76, 201);
+}
+.login__links a:hover {
+  text-decoration: underline;
+}/*# sourceMappingURL=login.css.map */
