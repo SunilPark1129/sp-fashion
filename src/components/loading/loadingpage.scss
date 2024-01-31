@@ -13,7 +13,7 @@
 
 .loading__aside {
   display: flex;
-  width: 16rem;
+  width: 17rem;
   flex-direction: column;
   gap: 1em;
 
@@ -61,7 +61,7 @@
   &__box {
     background-color: var(--clr-loading-light);
     display: flex;
-    padding: 1em;
+    // padding: 1em;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -84,16 +84,23 @@
     &__text {
       width: 100%;
       height: 4em;
-      background-color: var(--clr-loading-dark);
-      animation: var(--ani-loading);
+      padding: 1em;
+      padding-top: 0;
+
+      > div {
+        width: 100%;
+        height: 100%;
+        background-color: var(--clr-loading-dark);
+        animation: var(--ani-loading);
+      }
     }
 
     &__btn {
       display: flex;
       position: absolute;
       gap: 1em;
-      right: 2em;
-      top: 2em;
+      right: 1em;
+      top: 1em;
     }
 
     &__svg {
