@@ -125,7 +125,6 @@ function CardComponent({
 
     return () => {
       hasMounted.current = true;
-      setIsImgReady(false);
     };
   }, [hasMounted.current]);
 

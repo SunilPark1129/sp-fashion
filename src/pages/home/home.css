@@ -54,7 +54,7 @@
 }
 .home__section__img img {
   width: 100%;
-  aspect-ratio: 8/9;
+  aspect-ratio: 3/4;
   -o-object-fit: cover;
      object-fit: cover;
 }
