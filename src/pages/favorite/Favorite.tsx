@@ -7,9 +7,7 @@ import Items from "../../components/item/Items";
 import Advertisement from "../../components/advertisement/Advertisement";
 import NoWishListFound from "../../components/nowishlist/NoWishList";
 
-type Props = {};
-
-function Favorite({}: Props) {
+function Favorite() {
   const likeState = useSelector((store: RootState) => store.likeState.results);
   const [filteredData, setFilteredData] = useState<FilteredProp[]>([]);
 
@@ -24,6 +22,7 @@ function Favorite({}: Props) {
   return (
     <main className="shop">
       <div className="wrapper">
+        <Advertisement />
         <div className="container">
           {filteredData.length !== 0 ? (
             <>
@@ -34,7 +33,6 @@ function Favorite({}: Props) {
             <NoWishListFound />
           )}
         </div>
-        <Advertisement />
       </div>
     </main>
   );

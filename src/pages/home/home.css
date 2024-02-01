@@ -4,17 +4,12 @@
   gap: 2em;
 }
 .home__main-section .container {
-  padding: 1em;
-}
-@media (max-width: 900px) {
-  .home__main-section .container {
-    padding: 0.5em;
-  }
+  padding: 0.5em;
+  gap: 1em;
 }
 .home__main-section h2 {
   padding-top: 0.5em;
-  font-size: 2em;
-  text-align: center;
+  font-size: 1.4em;
   font-weight: bold;
 }
 .home__section .container {
@@ -22,26 +17,23 @@
   flex-direction: column;
 }
 .home__section__box {
-  max-width: 1600px;
   margin: 0 auto;
   display: grid;
-  gap: 1em;
+  gap: 0.5em;
   grid-template-columns: repeat(4, minmax(200px, 1fr));
 }
 @media (max-width: 900px) {
   .home__section__box {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
     max-width: 600px;
-    gap: 0.5em;
   }
 }
-@media (max-width: 460px) {
+@media (max-width: 400px) {
   .home__section__box {
     grid-template-columns: repeat(1, minmax(240px, 1fr));
   }
 }
 .home__section__item {
-  max-width: 22rem;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -72,12 +64,11 @@
   gap: 0.5em;
 }
 .home__brand-new {
-  background-color: rgb(226, 226, 226);
   padding-bottom: 2em;
+  padding-top: 1em;
 }
 .home__brand-new .container {
   display: flex;
-  gap: 1em;
 }
 @media (max-width: 740px) {
   .home__brand-new .container {
@@ -85,7 +76,7 @@
   }
 }
 .home__brand-new__img {
-  aspect-ratio: 11/4;
+  aspect-ratio: 11/5;
   width: 100%;
   max-width: 1400px;
 }
@@ -118,7 +109,7 @@
   justify-content: center;
   padding: 1em;
   flex: 1 1 40%;
-  border: 1px solid rgb(189, 189, 189);
+  border: 1px solid var(--clr-line);
   align-items: center;
   text-align: center;
 }
@@ -130,9 +121,8 @@
 .home__brand-new__text button {
   width: -moz-max-content;
   width: max-content;
-  border: 1px solid rgb(158, 158, 158);
+  border: 1px solid var(--clr-line);
   padding: 0.5em 1.5em;
-  border-radius: 8px;
 }
 .home__brand-new__text button:hover {
   border: 1px solid black;
@@ -150,7 +140,6 @@
   gap: 2em;
   min-height: 30em;
   padding: 2em;
-  border: 1px solid var(--clr-line);
 }
 .remove-localstorage__text {
   display: flex;

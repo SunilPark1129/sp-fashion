@@ -62,10 +62,10 @@ function BestSeller() {
   return (
     <section className="home__main-section home__section">
       <div className="wrapper">
-        <div>
-          <h2>BEST SELLTER of the year</h2>
-        </div>
         <div className="container">
+          <div>
+            <h2>BEST SELLTER of the year</h2>
+          </div>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <div
@@ -141,10 +141,10 @@ function SeasonSales() {
   return (
     <section className="home__main-section home__section">
       <div className="wrapper">
-        <div>
-          <h2>BIG SALES</h2>
-        </div>
         <div className="container">
+          <div>
+            <h2>BIG SALES</h2>
+          </div>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <div
@@ -186,14 +186,14 @@ function BrandNew() {
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
-        <div>
-          <h2>Brand New</h2>
-        </div>
         <div className="container">
           <div className="home__brand-new__img">
             <img src={brandNewLarge} alt="" />
           </div>
           <div className="home__brand-new__text">
+            <div>
+              <h2>Brand New</h2>
+            </div>
             <p>Short Fashioned Woman Coat</p>
             <p>$364</p>
             <button onClick={() => itemClickHandler("coat", "41")}>
@@ -255,9 +255,9 @@ function Home() {
     <main className="home">
       <Banner />
 
-      <BestSeller />
-
       <BrandNew />
+
+      <BestSeller />
 
       <SeasonSales />
 

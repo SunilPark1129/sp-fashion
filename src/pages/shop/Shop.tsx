@@ -68,6 +68,7 @@ function Shop() {
   return (
     <main className="shop">
       <div className="wrapper">
+        <Advertisement />
         <div className="container">
           <PendingData
             error={error}
@@ -76,7 +77,6 @@ function Shop() {
             selectedCategory={selectedCategory}
           />
         </div>
-        <Advertisement />
       </div>
     </main>
   );

@@ -20,6 +20,7 @@ function SearchBar() {
   }, []);
 
   useEffect(() => {
+    setHasFocus(true);
     if (searchTerm.trim().length !== 0 && hasFocus) {
       /* find all names if item is related with searched term */
       const regexp = new RegExp(

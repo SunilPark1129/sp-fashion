@@ -3,7 +3,7 @@
   width: 100%;
   position: relative;
   padding: 0.5em;
-  margin: 4em 0;
+  padding-bottom: 0;
 }
 .advertisement__img {
   cursor: pointer;

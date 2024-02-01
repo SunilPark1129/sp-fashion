@@ -116,7 +116,6 @@ function CardComponent({
   // when image is onloaded, display image on the screen
   useEffect(() => {
     if (!imgRef.current || hasMounted.current) return;
-    console.log("imgRef");
     hasMounted.current = true;
     let image = document.createElement("img");
     image.src = imgRef.current.src;

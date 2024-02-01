@@ -55,10 +55,10 @@ function Search() {
   return (
     <main className="shop">
       <div className="wrapper">
+        <Advertisement />
         <div className="container">
           <PendingData />
         </div>
-        <Advertisement />
       </div>
     </main>
   );
