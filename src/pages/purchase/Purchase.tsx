@@ -5,27 +5,35 @@ import { useEffect, useState } from "react";
 import { FilteredProp } from "../../model/stateProps";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { IMAGE_KEY } from "../../data/key";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteBasket } from "../../redux/features/basketSlice";
+import NoWishListFound from "../../components/nowishlist/NoWishList";
 
-type Props = {};
-
-type checkItemsProp = {
-  [key: string]: {
-    qty: number | string | null;
-    hasChecked: boolean;
-    price: number;
-    name: string;
-  };
+type ItemProperty = {
+  qty: number | string;
+  hasChecked: boolean;
+  price: number;
+  name: string;
+  id: string;
 };
 
-function Purchase({}: Props) {
+type ItemObjectProperty = {
+  [key: string]: ItemProperty;
+};
+
+type checkArrayProp = ItemProperty[];
+
+function Purchase() {
   const navigate = useNavigate();
   const basketState = useSelector((store: RootState) => store.basket.results);
   const dispatch = useDispatch<AppDispatch>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [data, setData] = useState<FilteredProp[] | null>(null);
+  const [total, setTotal] = useState<string>("0");
+  const [displayItems, setDisplayItems] = useState<checkArrayProp>([]);
 
-  const [checkItems, setCheckItems] = useState<checkItemsProp>({});
+  const [checkItems, setCheckItems] = useState<ItemObjectProperty>({});
+  const [currentStep, setCurrentStep] = useState<number>(0);
 
   useEffect(() => {
     if (basketState) {
@@ -34,6 +42,7 @@ function Purchase({}: Props) {
         temp.push(item);
       });
       setData(temp);
+      setIsLoading(false);
     }
   }, [basketState]);
 
@@ -42,10 +51,43 @@ function Purchase({}: Props) {
     navigate(`/detail?category=${item.category}&unit=${item.id}&path=purchase`);
   }
 
+  function selectClickHandler(checked: boolean, item: FilteredProp) {
+    const { id, category, price, name, sale } = item;
+
+    if (checked) {
+      setCheckItems((prev) => ({
+        ...prev,
+        [id + category]: {
+          price:
+            sale === 0
+              ? Number(price.toFixed(2))
+              : Number(
+                  Number(
+                    getSaleCalculator(String(price), String(sale))
+                  ).toFixed(2)
+                ),
+          name: name,
+          hasChecked: checked,
+          qty: !prev[id + category]?.qty ? 1 : prev[id + category]?.qty,
+          id: id + category,
+        },
+      }));
+    } else {
+      setCheckItems((prev) => ({
+        ...prev,
+        [id + category]: {
+          ...prev[id + category],
+          hasChecked: checked,
+          qty: prev[id + category]?.qty,
+        },
+      }));
+    }
+  }
+
   function deleteHandler(item: FilteredProp) {
-    const temp = checkItems;
+    const temp = { ...checkItems };
     delete temp[item.id + item.category];
-    setCheckItems(temp);
+    setCheckItems({ ...temp });
     dispatch(deleteBasket(item));
   }
 
@@ -54,29 +96,8 @@ function Purchase({}: Props) {
     item: FilteredProp
   ) {
     const { checked } = e.target;
-    const { id, category, price, name } = item;
 
-    if (checked) {
-      setCheckItems((prev) => ({
-        ...prev,
-        [id + category]: {
-          price: price,
-          name: name,
-          hasChecked: checked,
-          qty: prev[id + category]?.qty ?? 1,
-        },
-      }));
-    } else {
-      setCheckItems((prev) => ({
-        ...prev,
-        [id + category]: {
-          price: price,
-          name: name,
-          hasChecked: checked,
-          qty: prev[id + category]?.qty,
-        },
-      }));
-    }
+    selectClickHandler(checked, item);
   }
 
   function qtyChangeHandler(
@@ -94,20 +115,38 @@ function Purchase({}: Props) {
     } else {
       setCheckItems((prev) => ({
         ...prev,
-        [id + category]: { ...prev[id + category], qty: null },
+        [id + category]: { ...prev[id + category], qty: "" },
       }));
     }
   }
+
+  useEffect(() => {
+    const filterArray: checkArrayProp = Object.values(checkItems).filter(
+      ({ hasChecked }) => hasChecked
+    );
+    const temp = filterArray.reduce((a, b) => {
+      if (b.hasChecked) {
+        return a + b.price * Number(b.qty === "" ? 1 : b.qty);
+      }
+      return a;
+    }, 0);
+    setDisplayItems(filterArray);
+    setTotal(temp.toFixed(2));
+  }, [checkItems]);
+
+  if (isLoading) return <div className="purchase--loading"></div>;
+  if (data && data.length === 0) return <NoWishListFound />;
 
   return (
     <div className="purchase">
       <div className="wrapper">
         <div className="container">
-          <div className="purchase__lists">
+          <div className={`purchase__lists ${currentStep !== 0 && "disabled"}`}>
             {data &&
               data.map((item) => (
                 <label key={item.category + item.id}>
                   <input
+                    className="display-none"
                     type="checkbox"
                     name="card"
                     onChange={(e) => checkboxChangeHandler(e, item)}
@@ -115,11 +154,22 @@ function Purchase({}: Props) {
                       checkItems[item.id + item.category]?.hasChecked ?? false
                     }
                   />
-                  <div className="purchase__card">
+                  <div
+                    className={`purchase__lists__checkbox ${
+                      checkItems[item.id + item.category]?.hasChecked &&
+                      "purchase__lists__checkbox--active"
+                    }`}
+                  ></div>
+                  <div
+                    className={`purchase__card ${
+                      checkItems[item.id + item.category]?.hasChecked &&
+                      "purchase__card--active"
+                    }`}
+                  >
                     <div className="purchase__card__img">
                       <img src={IMAGE_KEY + item.image[0]} alt={item.name} />
                     </div>
-                    <div className="purchase__card__text">
+                    <div className={`purchase__card__text`}>
                       <p>{item.name}</p>
                       <p className="purchase__card__text__model">
                         Model:{" "}
@@ -138,7 +188,7 @@ function Purchase({}: Props) {
                             )}
                       </p>
                     </div>
-                    <div className="purchase__card__btn">
+                    <div className="purchase__card__btn-box">
                       <label htmlFor="qty">
                         QTY:{" "}
                         <input
@@ -162,49 +212,146 @@ function Purchase({}: Props) {
                         Detail
                       </button>
                     </div>
-                    <button
-                      className="purchase__card__delete"
-                      onClick={() => deleteHandler(item)}
-                    >
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                    <div className="purchase__card__btn-box">
+                      <button
+                        className={`purchase__card__btn ${
+                          checkItems[item.id + item.category]?.hasChecked &&
+                          "purchase__card__btn--active"
+                        }`}
+                        onClick={() =>
+                          selectClickHandler(
+                            !checkItems[item.id + item.category]?.hasChecked ??
+                              true,
+                            item
+                          )
+                        }
                       >
-                        <rect
-                          x="15.818"
-                          y="4"
-                          width="5.57105"
-                          height="16.7132"
-                          rx="1"
-                          transform="rotate(45 15.818 4)"
-                          fill="#1E1E1E"
-                        />
-                        <rect
-                          x="19.7573"
-                          y="15.818"
-                          width="5.57105"
-                          height="16.7132"
-                          rx="1"
-                          transform="rotate(135 19.7573 15.818)"
-                          fill="#1E1E1E"
-                        />
-                      </svg>
-                    </button>
+                        Select
+                      </button>
+                      <button
+                        className="purchase__card__btn"
+                        onClick={() => deleteHandler(item)}
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </label>
               ))}
           </div>
-          {/* <div>
-            {Object.values(checkItems).map((item) => (
-              <p>{item.name}</p>
-            ))}
-          </div> */}
+
+          {/* purchase form  */}
+          <div className="purchase__form">
+            <div className="purchase__form__progress">
+              <div
+                className={`purchase__form__progress__label ${
+                  currentStep === 0 && "active"
+                }`}
+              >
+                Statement
+              </div>
+              <div
+                className={`purchase__form__progress__label ${
+                  currentStep === 1 && "active"
+                }`}
+              >
+                User Info
+              </div>
+              <div className="purchase__form__progress__label">Shipping</div>
+              <div className="purchase__form__progress__label">Payment</div>
+              <div className="purchase__form__progress__line"></div>
+            </div>
+            <div className="purchase__form__content">
+              <div
+                className="purchase__form__step"
+                style={{ left: `${currentStep * -100}%` }}
+              >
+                <StatementComponent displayItems={displayItems} total={total} />
+                <UserInfoComponent />
+              </div>
+            </div>
+            <div className="purchase__form__next">
+              <button
+                disabled={currentStep === 0}
+                onClick={() => setCurrentStep((prev) => prev - 1)}
+              >
+                Prev
+              </button>
+              <button
+                disabled={
+                  currentStep === 1 ||
+                  (currentStep === 0 && displayItems.length === 0)
+                }
+                onClick={() => setCurrentStep((prev) => prev + 1)}
+              >
+                Next
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  );
+}
+
+function StatementComponent({
+  displayItems,
+  total,
+}: {
+  displayItems: checkArrayProp;
+  total: string;
+}) {
+  return (
+    <section className="purchase__form__step__page purchase__form__text">
+      <div>
+        <h2>Statement</h2>
+      </div>
+      <div className="purchase__form__invoice">
+        <p>Invoice:</p>
+        <div className="purchase__form__invoice__box">
+          {displayItems.length === 0 ? (
+            <div
+              className="purchase__form__invoice__item"
+              style={{ pointerEvents: "none", userSelect: "none" }}
+            >
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+            </div>
+          ) : (
+            displayItems.map(({ id, name, qty, price }) => (
+              <div className="purchase__form__invoice__item" key={id}>
+                <p>{name}</p>
+                <p>{qty}</p>
+                <p>${(price * Number(qty)).toFixed(2)}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+      <div className="purchase__form__total">
+        <p>
+          <span>Total Items</span>: {displayItems.length}
+        </p>
+        <p>
+          <span>Total Price</span>: ${total}
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function UserInfoComponent() {
+  return (
+    <section className="purchase__form__step__page purchase__form__user">
+      <div>
+        <h2>User Info</h2>
+      </div>
+      <div className="purchase__form__user__content">
+        <p>For a safer and faster delivery, customers need to log in.</p>
+        <Link to={"/login"}>SIGN IN</Link>
+      </div>
+    </section>
   );
 }
 
