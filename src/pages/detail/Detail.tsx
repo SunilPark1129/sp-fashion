@@ -1,6 +1,6 @@
 import "./detail.css";
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { BASE_URL, IMAGE_KEY } from "../../data/key";
 import { FilteredProp } from "../../model/stateProps";
 import { useSelector } from "react-redux";
@@ -89,6 +89,7 @@ const initTPos: TPosProp = {
 const shopLists = ["coat", "shirt", "hoodie", "sweater"];
 
 function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [like, setLike] = useState<boolean | undefined>(data.like);
   const [basket, setBasket] = useState<boolean | undefined>(data.basket);
@@ -98,6 +99,8 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
   const [currentSize, setCurrentSize] = useState<number>(0);
   const [hasSizeModalOpened, setHasSizeModalOpened] = useState<boolean>(false);
   const [shippingMethod, setShippingMethod] = useState<string>("free-shipping");
+
+  const [hasSelectedSize, setHasSelectedSize] = useState<boolean>(false);
 
   /* ------------- size handlers ------------ */
   function hasClickedSize(e: any) {
@@ -136,10 +139,12 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
       setBasket(true);
     }
   }
+
   function purchaseClickHandler() {
-    if (!basket) {
-      dispatch(addBasket(data));
+    if (currentSize !== 0) {
+      navigate("/login");
     }
+    setHasSelectedSize(true);
   }
 
   let path;
@@ -266,6 +271,15 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
                 ))}
               </div>
             </div>
+            <p
+              className={`detail__text__warning ${
+                hasSelectedSize &&
+                currentSize === 0 &&
+                "detail__text__warning--active"
+              }`}
+            >
+              *Please select a size.
+            </p>
 
             {/* shipping */}
             <div className="detail__text__shipping">
@@ -291,25 +305,24 @@ function DisplayComponent({ data, pathParam, termParam }: DisplayProp) {
                 Fast Shipping
                 <span>Delivered within 1 to 3 business days</span>
               </label>
-              <p
-                className={`detail__text__shipping__warning ${
-                  shippingMethod === "fast-shipping" &&
-                  "detail__text__shipping__warning--active"
-                }`}
-              >
-                *Business Day - Monday through Friday from 9 a.m. to 5 p.m.
-              </p>
             </div>
+            <p
+              className={`detail__text__warning ${
+                shippingMethod === "fast-shipping" &&
+                "detail__text__warning--active"
+              }`}
+            >
+              *Business Day - Monday through Friday from 9 a.m. to 5 p.m.
+            </p>
 
             {/* purchase */}
             <div className="detail__text__purchase">
-              <Link
+              <button
                 className="detail__text__purchase__link"
-                to={"/purchase"}
                 onClick={purchaseClickHandler}
               >
-                Purchase Cloth
-              </Link>
+                Buy Now
+              </button>
               <div
                 className="detail__text__purchase__btn"
                 onClick={basketClickHandler}

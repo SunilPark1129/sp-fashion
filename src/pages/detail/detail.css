@@ -8,13 +8,6 @@
 .detail__path span {
   pointer-events: none;
 }
-.detail__path a:hover {
-  color: black;
-  text-decoration: underline;
-}
-.detail__path a:hover ~ p {
-  color: var(--clr-dark-fnt);
-}
 @media (max-width: 900px) {
   .detail .container {
     flex-direction: column;
@@ -235,28 +228,20 @@
 .detail__text__shipping input[type=radio]:checked::after {
   background-color: rgb(35, 38, 44);
 }
-.detail__text__shipping__warning {
-  font-size: 0.8em;
-  color: rgb(245, 78, 78);
-  display: none;
-}
-.detail__text__shipping__warning--active {
-  display: block;
-}
 .detail__text__purchase {
   display: flex;
   flex-direction: column;
   gap: 1em;
   max-width: 40rem;
 }
-.detail__text__purchase a {
+.detail__text__purchase__link {
   background-color: rgb(54, 54, 54);
   color: #fff;
   padding: 1em 2em;
   text-align: center;
   border-radius: 4px;
 }
-.detail__text__purchase a:hover {
+.detail__text__purchase__link:hover {
   background-color: rgb(73, 73, 73);
 }
 .detail__text__purchase__btn {
@@ -284,6 +269,14 @@
   stroke: #161616;
   stroke-width: 2px;
   fill: rgb(221, 82, 82);
+}
+.detail__text__warning {
+  font-size: 0.8em;
+  color: rgb(245, 78, 78);
+  display: none;
+}
+.detail__text__warning--active {
+  display: block;
 }
 @media (max-width: 900px) {
   .detail {

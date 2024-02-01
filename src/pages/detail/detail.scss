@@ -8,15 +8,6 @@
     span {
       pointer-events: none;
     }
-    a {
-      &:hover {
-        color: black;
-        text-decoration: underline;
-      }
-      &:hover ~ p {
-        color: var(--clr-dark-fnt);
-      }
-    }
   }
   @media (max-width: 900px) {
     .container {
@@ -260,15 +251,6 @@
           background-color: rgb(35, 38, 44);
         }
       }
-
-      &__warning {
-        font-size: 0.8em;
-        color: rgb(245, 78, 78);
-        display: none;
-        &--active {
-          display: block;
-        }
-      }
     }
 
     &__purchase {
@@ -277,7 +259,7 @@
       gap: 1em;
       max-width: 40rem;
 
-      a {
+      &__link {
         background-color: rgb(54, 54, 54);
         color: #fff;
         padding: 1em 2em;
@@ -316,6 +298,15 @@
             fill: rgb(221, 82, 82);
           }
         }
+      }
+    }
+
+    &__warning {
+      font-size: 0.8em;
+      color: rgb(245, 78, 78);
+      display: none;
+      &--active {
+        display: block;
       }
     }
   }
