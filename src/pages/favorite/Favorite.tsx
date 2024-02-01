@@ -5,6 +5,7 @@ import ShopAside from "../../components/aside/ShopAside";
 import { FilteredProp } from "../../model/stateProps";
 import Items from "../../components/item/Items";
 import Advertisement from "../../components/advertisement/Advertisement";
+import NoWishListFound from "../../components/nowishlist/NoWishList";
 
 type Props = {};
 
@@ -30,31 +31,12 @@ function Favorite({}: Props) {
               <Items selectedCategory={"favorite"} />
             </>
           ) : (
-            <NoItemComponent />
+            <NoWishListFound />
           )}
         </div>
         <Advertisement />
       </div>
     </main>
-  );
-}
-
-function NoItemComponent() {
-  return (
-    <div className="no-data no-data--fav">
-      <div className="wrapper">
-        <div className="container">
-          <h3>NO WISHLIST...</h3>
-          <p>
-            You don't have any <span>saved wishlist</span>.
-          </p>
-          <p>
-            Add new items to <span>your favorites</span> to check your wishlist
-            anytime.
-          </p>
-        </div>
-      </div>
-    </div>
   );
 }
 
