@@ -13,8 +13,14 @@
   font-weight: bold;
 }
 .home__section .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+}
+@media (max-width: 1200px) {
+  .home__section .container {
+    grid-template-columns: 1fr;
+  }
 }
 .home__section__box {
   margin: 0 auto;
@@ -151,14 +157,20 @@
   font-weight: bold;
   margin: 0 auto;
 }
+.remove-localstorage__text__btn-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 .remove-localstorage button {
-  padding: 1em 2em;
-  background-color: rgb(100, 100, 100);
+  padding: 0.5em 1em;
+  background-color: rgb(194, 39, 39);
   color: #fff;
   font-size: 0.9em;
+  margin: 0 auto;
 }
 .remove-localstorage button:hover {
-  background-color: rgb(46, 46, 46);
+  background-color: rgb(185, 85, 85);
 }
 .remove-localstorage h3,
 .remove-localstorage p,

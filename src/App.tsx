@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Cookies from "js-cookie";
+
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import Shop from "./pages/shop/Shop";
@@ -21,7 +23,10 @@ import { updateBasketState } from "./redux/features/basketSlice";
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    const getLikeStorage: string | null = localStorage.getItem("like-state");
+    const getLikeStorage: string | undefined = Cookies.get(
+      "project-sp1129-like-wishlist"
+    );
+
     if (getLikeStorage) {
       const { state } = JSON.parse(getLikeStorage);
       if (state) {
@@ -29,8 +34,10 @@ function App() {
       }
     }
 
-    const getBasketStorage: string | null =
-      localStorage.getItem("basket-state");
+    const getBasketStorage: string | undefined = Cookies.get(
+      "project-sp1129-basket-wishlist"
+    );
+
     if (getBasketStorage) {
       const { state } = JSON.parse(getBasketStorage);
       if (state) {

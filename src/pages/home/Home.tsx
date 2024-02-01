@@ -18,6 +18,8 @@ import { AppDispatch } from "../../redux/store";
 import { updateLikeState } from "../../redux/features/LikeSlice";
 import { updateBasketState } from "../../redux/features/basketSlice";
 import { useState } from "react";
+import Advertisement from "../../components/advertisement/Advertisement";
+import Cookies from "js-cookie";
 
 function BestSeller() {
   const bestSellerArray = [
@@ -208,21 +210,23 @@ function BrandNew() {
 
 /* ------------- remove localstorage ------------- */
 function RemoveLocalStorage() {
-  const [hasData, setHasData] = useState<string | null>(
-    localStorage.getItem("like-state") || localStorage.getItem("basket-state")
+  const [hasData, setHasData] = useState<string | undefined>(
+    Cookies.get("project-sp1129-like-wishlist") ||
+      Cookies.get("project-sp1129-basket-wishlist")
   );
   const dispatch = useDispatch<AppDispatch>();
 
   function deleteCacheHandler() {
     // remove all caches
-    localStorage.removeItem("like-state");
-    localStorage.removeItem("basket-state");
+    Cookies.remove("project-sp1129-like-wishlist");
+    Cookies.remove("project-sp1129-basket-wishlist");
 
     // passing the initial state to update the current state management
     dispatch(updateLikeState([]));
     dispatch(updateBasketState([]));
     setHasData(
-      localStorage.getItem("like-state") || localStorage.getItem("basket-state")
+      Cookies.get("project-sp1129-like-wishlist") ||
+        Cookies.get("project-sp1129-basket-wishlist")
     );
   }
   return (
@@ -231,19 +235,26 @@ function RemoveLocalStorage() {
         <div className="container">
           <div className="remove-localstorage__text">
             <h3>Remove All Caches</h3>
+            <div>
+              <p>
+                This website has been created for the purpose of a project, so I
+                added this section.
+              </p>
+              <p>
+                Every time you click like or basket button, your wishlist is
+                stored in cookies. All cookies are automatically removed after 7
+                days, or you can manually delete them by clicking the delete
+                button below.
+              </p>
+            </div>
+          </div>
+          <div className="remove-localstorage__text__btn-box">
+            <button onClick={deleteCacheHandler}>DELETE</button>
             <p>
-              This website has been added for project purposes, so this section
-              has been included. If you want to clear all caches, press DELETE.
-              This will remove the recorded history of Wishlists from your
-              device.
+              Currently data is in cookie:{" "}
+              <span>{hasData ? "true" : "false"}</span>
             </p>
           </div>
-          <div>
-            <p>
-              data is in storage: <span>{hasData ? "true" : "false"}</span>
-            </p>
-          </div>
-          <button onClick={deleteCacheHandler}>DELETE</button>
         </div>
       </div>
     </section>
@@ -262,6 +273,10 @@ function Home() {
       <SeasonSales />
 
       <RemoveLocalStorage />
+
+      <div className="wrapper">
+        <Advertisement />
+      </div>
     </main>
   );
 }
