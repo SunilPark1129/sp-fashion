@@ -50,12 +50,19 @@
         cursor: crosshair;
         pointer-events: none;
 
+        &__user-select-prevention {
+          width: 100%;
+          height: 100%;
+        }
+
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           position: absolute;
           transition: transform 0.2s;
+          user-select: none;
+          pointer-events: none;
         }
         &--active {
           opacity: 1;

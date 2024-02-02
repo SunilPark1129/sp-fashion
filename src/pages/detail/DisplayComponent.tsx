@@ -337,6 +337,8 @@ function ZoomInImageComponent({ item }: { item: string }) {
     const halfLeft = layerX - halfWidth;
     const halfTop = layerY - halfHeight;
 
+    console.log(halfLeft, halfTop);
+
     setTPos({ x: halfLeft, y: halfTop });
     setIsMoving(true);
   }
@@ -360,19 +362,25 @@ function ZoomInImageComponent({ item }: { item: string }) {
   }, [isMoving]);
 
   return (
-    <img
-      src={item}
-      alt={"img"}
+    <div
+      className="detail__imgs__front__item__user-select-prevention"
       onPointerMove={zoomInHandler}
       onPointerLeave={zoomInLeaveHandler}
-      style={{
-        transition: `${
-          isMoveAble ? "transform 0.3s" : "transform 0.3s, left 0.2s, top 0.2s"
-        }`,
-        left: `${isMoveAble ? -tPos.x / 2 : -firstPos.x / 2}px`,
-        top: `${isMoveAble ? -tPos.y / 2 : -firstPos.y / 2}px`,
-        transform: `scale(${isMoving ? 2 : 1})`,
-      }}
-    />
+    >
+      <img
+        src={item}
+        alt={"img"}
+        style={{
+          transition: `${
+            isMoveAble
+              ? "transform 0.3s"
+              : "transform 0.3s, left 0.2s, top 0.2s"
+          }`,
+          left: `${isMoveAble ? -tPos.x / 2 : -firstPos.x / 2}px`,
+          top: `${isMoveAble ? -tPos.y / 2 : -firstPos.y / 2}px`,
+          transform: `scale(${isMoving ? 2 : 1})`,
+        }}
+      />
+    </div>
   );
 }
