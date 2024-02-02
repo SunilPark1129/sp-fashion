@@ -5,7 +5,7 @@ import { requestHTTP } from "../../redux/features/getSlice";
 import { AppDispatch, RootState } from "../../redux/store";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
 import ShopAside from "../../components/aside/ShopAside";
-import Items from "../../components/item/Items";
+import Items from "../../components/card/Card";
 import "./shop.css";
 import LoadingPage from "../../components/loading/LoadingPage";
 import Advertisement from "../../components/advertisement/Advertisement";
@@ -14,7 +14,7 @@ import FetchError from "../../components/fetcherror/FetchError";
 const validCategory = ["coat", "shirt", "hoodie", "sweater"];
 const validGender = ["men", "women"];
 
-function Shop() {
+function ShopPage() {
   const navigate = useNavigate();
 
   /* param states */
@@ -106,4 +106,4 @@ function PendingData({
   );
 }
 
-export default Shop;
+export default ShopPage;

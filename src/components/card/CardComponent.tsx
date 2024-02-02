@@ -1,106 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
-import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
+import { useEffect, useRef, useState } from "react";
 import { CategoryValidProp, FilteredProp } from "../../model/stateProps";
-import { IMAGE_KEY } from "../../data/key";
-import "./items.css";
-import { getSaleCalculator } from "../../utilities/getSaleCalculator";
-import { getFilter } from "../../utilities/getFilter";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { cleanupSort } from "../../redux/features/sortSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
+import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
+import { IMAGE_KEY } from "../../data/key";
+import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 
-type Props = {
-  selectedCategory: CategoryValidProp;
-};
-
-function Items({ selectedCategory }: Props) {
-  const dispatch = useDispatch<AppDispatch>();
-  const [displayData, setDisplayData] = useState<FilteredProp[] | null>(null);
-  const [keptData, setKeptData] = useState<FilteredProp[] | null>(null);
-
-  /* GET like & basket lists */
-  const likeState: FilteredProp[] = useSelector(
-    (store: RootState) => store.likeState.results
-  );
-  const basketState: FilteredProp[] = useSelector(
-    (store: RootState) => store.basket.results
-  );
-  const data = useSelector((store: RootState) => store.getSort.data);
-
-  // check and set wishlists for individual items if there states are true
-  function getAutoFilter(data: FilteredProp[]) {
-    if (!selectedCategory || !data) return null;
-    let temp;
-    temp = getFilter(data, likeState, basketState);
-    return temp;
-  }
-
-  // when requested a new data (move to other link)
-  useEffect(() => {
-    if (!selectedCategory || !data) return;
-    let temp = getAutoFilter(data);
-    setDisplayData(temp);
-  }, [data]);
-
-  // when like or basket trigger has been clicked
-  useEffect(() => {
-    if (!selectedCategory || !keptData) return;
-    let temp = getAutoFilter(keptData);
-    setDisplayData(temp);
-  }, [likeState, basketState]);
-
-  // keep new data into keptData state
-  // - data state will be cleanup to reduce the re-rendering purpose
-  useEffect(() => {
-    if (data) {
-      setKeptData(data);
-    }
-  }, [data]);
-
-  // cleanup the state
-  useEffect(() => {
-    dispatch(cleanupSort());
-  }, [displayData]);
-
-  return (
-    <div className="items">
-      {displayData ? (
-        displayData.length !== 0 ? (
-          <div className="items__content">
-            {displayData.map((item: FilteredProp) => {
-              return (
-                <CardComponent
-                  key={item.id + item.category}
-                  item={item}
-                  selectedCategory={selectedCategory}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <NoItemComponent />
-        )
-      ) : null}
-    </div>
-  );
-}
-
-function NoItemComponent() {
-  return (
-    <section className="no-data">
-      <div className="wrapper">
-        <div className="container">
-          <h3>NO ITEM</h3>
-          <p>No clothes have been found...</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function CardComponent({
+export default function CardComponent({
   item,
   selectedCategory,
 }: {
@@ -160,11 +68,11 @@ function CardComponent({
 
   return (
     <section
-      className="items__content__item"
+      className="card__content__item"
       onClick={() => itemClickHandler(item.category, item.id)}
       key={item.id + item.category}
     >
-      <div className="items__content__item__img">
+      <div className="card__content__item__img">
         <img
           src={IMAGE_KEY + item.image[0]}
           alt={item.name}
@@ -172,7 +80,7 @@ function CardComponent({
           ref={imgRef}
         />
         <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
-        <div className="items__content__item__btn">
+        <div className="card__content__item__btn">
           <button
             className={`btn-svg btn-svg--like ${
               item.like && "btn-svg--like--active"
@@ -218,8 +126,8 @@ function CardComponent({
           </button>
         </div>
       </div>
-      <div className="items__content__item__info">
-        <h3 className="items__content__item__name">{item.name}</h3>
+      <div className="card__content__item__info">
+        <h3 className="card__content__item__name">{item.name}</h3>
         {item.sale === 0 ? (
           <p>${item.price.toFixed(2)}</p>
         ) : (
@@ -233,5 +141,3 @@ function CardComponent({
     </section>
   );
 }
-
-export default Items;

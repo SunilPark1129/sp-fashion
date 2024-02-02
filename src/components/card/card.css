@@ -1,8 +1,8 @@
-.items {
+.card {
   min-height: 60vh;
   width: 100%;
 }
-.items__content {
+.card__content {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(4, minmax(260px, 1fr));
@@ -10,45 +10,45 @@
   justify-items: center;
 }
 @media (max-width: 1350px) {
-  .items__content {
+  .card__content {
     grid-template-columns: repeat(3, minmax(260px, 1fr));
   }
 }
 @media (max-width: 860px) {
-  .items__content {
+  .card__content {
     grid-template-columns: repeat(3, minmax(220px, 1fr));
   }
 }
 @media (max-width: 740px) {
-  .items__content {
+  .card__content {
     grid-template-columns: repeat(2, minmax(180px, 1fr));
     gap: 0.25em;
   }
 }
 @media (max-width: 380px) {
-  .items__content {
+  .card__content {
     grid-template-columns: repeat(1, minmax(180px, 1fr));
     gap: 0.25em;
   }
 }
-.items__content__item {
+.card__content__item {
   width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   cursor: pointer;
 }
-.items__content__item:hover {
+.card__content__item:hover {
   outline: 1px solid rgb(168, 168, 168);
 }
-.items__content__item__img {
+.card__content__item__img {
   width: 100%;
   aspect-ratio: 4/5;
   transition: 0.3s filter ease-in-out;
   position: relative;
   border: 1px solid rgb(209, 209, 209);
 }
-.items__content__item__img img {
+.card__content__item__img img {
   position: absolute;
   left: 0;
   top: 0;
@@ -57,27 +57,27 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.items__content__item__name {
+.card__content__item__name {
   font-weight: bold;
 }
-.items__content__item__info {
+.card__content__item__info {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
   padding: 1em;
 }
 @media (max-width: 1050px) {
-  .items__content__item__info {
+  .card__content__item__info {
     padding: 0.5em;
   }
 }
-.items__content__item__btn {
+.card__content__item__btn {
   display: flex;
   gap: 1em;
   position: absolute;
   right: 1em;
   top: 1em;
 }
-.items__content__item__btn svg path {
+.card__content__item__btn svg path {
   fill: rgb(218, 218, 218);
-}/*# sourceMappingURL=items.css.map */
+}/*# sourceMappingURL=card.css.map */

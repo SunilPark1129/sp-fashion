@@ -3,14 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import ShopAside from "../../components/aside/ShopAside";
 import { BasketProp, CategoryValidProp } from "../../model/stateProps";
-import Items from "../../components/item/Items";
+import Items from "../../components/card/Card";
 import { requestHTTPAll } from "../../redux/features/getAllSlice";
 import { useSearchParams } from "react-router-dom";
 import LoadingPage from "../../components/loading/LoadingPage";
 import Advertisement from "../../components/advertisement/Advertisement";
+import FetchError from "../../components/fetcherror/FetchError";
+import EmptyItemComponent from "../../components/emptyItem/EmptyItemComponent";
 
 const b: CategoryValidProp = "coat";
-function Search() {
+function SearchPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { loading, data, error } = useSelector(
     (store: RootState) => store.getAllPost
@@ -41,8 +43,8 @@ function Search() {
 
   // components to display current pending stage
   function PendingData() {
-    if (!searchTerm) return <NeedTermComponent />;
-    if (error) return <ErrorComponent err={error} />;
+    if (!searchTerm) return <EmptyItemComponent />;
+    if (error) return <FetchError error={error} />;
     if (loading) return <LoadingPage />;
     return (
       <>
@@ -64,14 +66,4 @@ function Search() {
   );
 }
 
-/* When id param is not validated */
-function NeedTermComponent() {
-  return <div>need a search term...</div>;
-}
-
-/* When received an error from fetching */
-function ErrorComponent({ err }: any) {
-  return <div>{err}</div>;
-}
-
-export default Search;
+export default SearchPage;

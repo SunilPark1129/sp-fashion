@@ -2,28 +2,20 @@ import "./purchase.css";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useEffect, useState } from "react";
-import { FilteredProp } from "../../model/stateProps";
+import {
+  FilteredProp,
+  ItemObjectProperty,
+  checkArrayProp,
+} from "../../model/stateProps";
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { IMAGE_KEY } from "../../data/key";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteBasket } from "../../redux/features/basketSlice";
 import NoWishListFound from "../../components/nowishlist/NoWishList";
+import StatementComponent from "./StatementComponent";
+import UserInfoComponent from "./UserInfoComponent";
 
-type ItemProperty = {
-  qty: number | string;
-  hasChecked: boolean;
-  price: number;
-  name: string;
-  id: string;
-};
-
-type ItemObjectProperty = {
-  [key: string]: ItemProperty;
-};
-
-type checkArrayProp = ItemProperty[];
-
-function Purchase() {
+function PurchasePage() {
   const navigate = useNavigate();
   const basketState = useSelector((store: RootState) => store.basket.results);
   const dispatch = useDispatch<AppDispatch>();
@@ -294,65 +286,4 @@ function Purchase() {
   );
 }
 
-function StatementComponent({
-  displayItems,
-  total,
-}: {
-  displayItems: checkArrayProp;
-  total: string;
-}) {
-  return (
-    <section className="purchase__form__step__page purchase__form__text">
-      <div>
-        <h2>Statement</h2>
-      </div>
-      <div className="purchase__form__invoice">
-        <p>Invoice:</p>
-        <div className="purchase__form__invoice__box">
-          {displayItems.length === 0 ? (
-            <div
-              className="purchase__form__invoice__item"
-              style={{ pointerEvents: "none", userSelect: "none" }}
-            >
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-            </div>
-          ) : (
-            displayItems.map(({ id, name, qty, price }) => (
-              <div className="purchase__form__invoice__item" key={id}>
-                <p>{name}</p>
-                <p>{qty}</p>
-                <p>${(price * Number(qty)).toFixed(2)}</p>
-              </div>
-            ))
-          )}
-        </div>
-      </div>
-      <div className="purchase__form__total">
-        <p>
-          <span>Total Items</span>: {displayItems.length}
-        </p>
-        <p>
-          <span>Total Price</span>: ${total}
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function UserInfoComponent() {
-  return (
-    <section className="purchase__form__step__page purchase__form__user">
-      <div>
-        <h2>User Info</h2>
-      </div>
-      <div className="purchase__form__user__content">
-        <p>For a safer and faster delivery, customers need to log in.</p>
-        <Link to={"/login"}>SIGN IN</Link>
-      </div>
-    </section>
-  );
-}
-
-export default Purchase;
+export default PurchasePage;

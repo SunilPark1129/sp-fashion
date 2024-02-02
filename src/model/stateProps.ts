@@ -27,3 +27,17 @@ export type CategoryValidProp =
   | "purchase"
   | "search"
   | null;
+
+export type ItemProperty = {
+  qty: number | string;
+  hasChecked: boolean;
+  price: number;
+  name: string;
+  id: string;
+};
+
+export type ItemObjectProperty = {
+  [key: string]: ItemProperty;
+};
+
+export type checkArrayProp = ItemProperty[];

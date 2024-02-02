@@ -3,11 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import ShopAside from "../../components/aside/ShopAside";
 import { FilteredProp } from "../../model/stateProps";
-import Items from "../../components/item/Items";
+import Items from "../../components/card/Card";
 import Advertisement from "../../components/advertisement/Advertisement";
 import NoWishListFound from "../../components/nowishlist/NoWishList";
 
-function Favorite() {
+function FavoritePage() {
   const likeState = useSelector((store: RootState) => store.likeState.results);
   const [filteredData, setFilteredData] = useState<FilteredProp[]>([]);
 
@@ -38,4 +38,4 @@ function Favorite() {
   );
 }
 
-export default Favorite;
+export default FavoritePage;

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import photo from "../home/assets/banner_recycle.jpg";
 import { Link } from "react-router-dom";
 import "./login.css";
-type Props = {};
 
-function Login({}: Props) {
+function LoginPage() {
   const [hasValidated, setHasValidated] = useState<boolean | null>(null);
 
   function submitHandler(e: React.FormEvent) {
@@ -57,4 +56,4 @@ function Login({}: Props) {
   );
 }
 
-export default Login;
+export default LoginPage;

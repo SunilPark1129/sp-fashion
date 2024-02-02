@@ -21,6 +21,27 @@ import { useState } from "react";
 import Advertisement from "../../components/advertisement/Advertisement";
 import Cookies from "js-cookie";
 
+function HomePage() {
+  return (
+    <main className="home">
+      <Banner />
+
+      <BrandNew />
+
+      <BestSeller />
+
+      <SeasonSales />
+
+      <RemoveCookie />
+
+      <div className="wrapper">
+        <Advertisement />
+      </div>
+    </main>
+  );
+}
+
+/* ------------------------ BestSeller Component ------------------------*/
 function BestSeller() {
   const bestSellerArray = [
     {
@@ -100,6 +121,7 @@ function BestSeller() {
   );
 }
 
+/* ------------------------ SeasonSales Component ------------------------*/
 function SeasonSales() {
   const bestSellerArray = [
     {
@@ -179,6 +201,7 @@ function SeasonSales() {
   );
 }
 
+/* ------------------------ BrandNew Component ------------------------*/
 function BrandNew() {
   const navigate = useNavigate();
   function itemClickHandler(category: string, unit: string) {
@@ -208,8 +231,8 @@ function BrandNew() {
   );
 }
 
-/* ------------- remove localstorage ------------- */
-function RemoveLocalStorage() {
+/* ------------------------ Remove Cookie Component ------------------------*/
+function RemoveCookie() {
   const [hasData, setHasData] = useState<string | undefined>(
     Cookies.get("project-sp1129-like-wishlist") ||
       Cookies.get("project-sp1129-basket-wishlist")
@@ -230,10 +253,10 @@ function RemoveLocalStorage() {
     );
   }
   return (
-    <section className="remove-localstorage">
+    <section className="remove-cookie">
       <div className="wrapper">
         <div className="container">
-          <div className="remove-localstorage__text">
+          <div className="remove-cookie__text">
             <h3>Remove All Caches</h3>
             <div>
               <p>
@@ -248,7 +271,7 @@ function RemoveLocalStorage() {
               </p>
             </div>
           </div>
-          <div className="remove-localstorage__text__btn-box">
+          <div className="remove-cookie__text__btn-box">
             <button onClick={deleteCacheHandler}>DELETE</button>
             <p>
               Currently data is in cookie:{" "}
@@ -261,24 +284,4 @@ function RemoveLocalStorage() {
   );
 }
 
-function Home() {
-  return (
-    <main className="home">
-      <Banner />
-
-      <BrandNew />
-
-      <BestSeller />
-
-      <SeasonSales />
-
-      <RemoveLocalStorage />
-
-      <div className="wrapper">
-        <Advertisement />
-      </div>
-    </main>
-  );
-}
-
-export default Home;
+export default HomePage;

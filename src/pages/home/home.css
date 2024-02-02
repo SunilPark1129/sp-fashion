@@ -135,10 +135,10 @@
   color: black;
 }
 
-.remove-localstorage {
+.remove-cookie {
   padding: 0.5em;
 }
-.remove-localstorage .container {
+.remove-cookie .container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -147,33 +147,33 @@
   min-height: 30em;
   padding: 2em;
 }
-.remove-localstorage__text {
+.remove-cookie__text {
   display: flex;
   flex-direction: column;
   gap: 2em;
   max-width: 60rem;
 }
-.remove-localstorage__text h3 {
+.remove-cookie__text h3 {
   font-weight: bold;
   margin: 0 auto;
 }
-.remove-localstorage__text__btn-box {
+.remove-cookie__text__btn-box {
   display: flex;
   flex-direction: column;
   gap: 1em;
 }
-.remove-localstorage button {
+.remove-cookie button {
   padding: 0.5em 1em;
   background-color: rgb(194, 39, 39);
   color: #fff;
   font-size: 0.9em;
   margin: 0 auto;
 }
-.remove-localstorage button:hover {
+.remove-cookie button:hover {
   background-color: rgb(185, 85, 85);
 }
-.remove-localstorage h3,
-.remove-localstorage p,
-.remove-localstorage button {
+.remove-cookie h3,
+.remove-cookie p,
+.remove-cookie button {
   font-family: "Roboto", sans-serif;
 }/*# sourceMappingURL=home.css.map */
