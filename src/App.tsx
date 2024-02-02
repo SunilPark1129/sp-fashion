@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
 import { updateLikeState } from "./redux/features/LikeSlice";
 import { updateBasketState } from "./redux/features/basketSlice";
+import ScrollToTop from "./utilities/ScrollToTop";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -56,6 +57,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<ErrorPage />} />
         </Routes>
+        <ScrollToTop />
         <Footer />
       </Router>
     </div>
