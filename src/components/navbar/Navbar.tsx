@@ -71,6 +71,9 @@ function Navbar() {
           </div>
           <div className="nav__flex">
             <ul className="nav__content">
+              <Link className="nav__logo" to={"/"}>
+                <img src={logo} alt="SIP logo" />
+              </Link>
               <li>
                 <div>
                   <NavLink to={"/"}>HOME</NavLink>
@@ -89,17 +92,8 @@ function Navbar() {
                   </button>
                 </div>
               </li>
-              <li>
-                <div>
-                  <NavLink to={"/career"}>CAREER</NavLink>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <NavLink to={"/contact"}>CONTACT</NavLink>
-                </div>
-              </li>
             </ul>
+            <SearchBar />
             <ul className="nav__content">
               <li className="nav__count">
                 <Link

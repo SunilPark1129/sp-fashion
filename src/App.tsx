@@ -5,15 +5,12 @@ import Cookies from "js-cookie";
 import Home from "./pages/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import Shop from "./pages/shop/Shop";
-import Contact from "./pages/contact/Contact";
-
 import Purchase from "./pages/purchase/Purchase";
 import Login from "./pages/login/Login";
 import Footer from "./components/footer/Footer";
 import Favorite from "./pages/favorite/Favorite";
 import ErrorPage from "./pages/error/ErrorPage";
 import Detail from "./pages/detail/Detail";
-import Career from "./pages/career/Career";
 import Search from "./pages/search/Search";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
@@ -53,8 +50,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/detail" element={<Detail />} />
-          <Route path="/career" element={<Career />} />
-          <Route path="/contact" element={<Contact />} />
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/search" element={<Search />} />
