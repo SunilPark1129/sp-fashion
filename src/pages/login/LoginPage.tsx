@@ -31,7 +31,7 @@ function LoginPage() {
                 <label htmlFor="password">
                   PASSWORD:
                   <input
-                    type="text"
+                    type="password"
                     id="password"
                     autoComplete="off"
                     required
