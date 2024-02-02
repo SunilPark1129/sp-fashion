@@ -337,8 +337,6 @@ function ZoomInImageComponent({ item }: { item: string }) {
     const halfLeft = layerX - halfWidth;
     const halfTop = layerY - halfHeight;
 
-    console.log(halfLeft, halfTop);
-
     setTPos({ x: halfLeft, y: halfTop });
     setIsMoving(true);
   }
@@ -366,6 +364,8 @@ function ZoomInImageComponent({ item }: { item: string }) {
       className="detail__imgs__front__item__user-select-prevention"
       onPointerMove={zoomInHandler}
       onPointerLeave={zoomInLeaveHandler}
+      onPointerUp={() => {}}
+      onPointerDown={() => {}}
     >
       <img
         src={item}

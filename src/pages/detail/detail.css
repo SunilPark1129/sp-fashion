@@ -54,6 +54,7 @@
 .detail__imgs__front__item__user-select-prevention {
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 .detail__imgs__front__item img {
   width: 100%;

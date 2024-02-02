@@ -53,6 +53,7 @@
         &__user-select-prevention {
           width: 100%;
           height: 100%;
+          touch-action: none;
         }
 
         img {
