@@ -273,8 +273,9 @@
     }
 
     &__item {
-      display: flex;
       border: 1px solid var(--clr-line);
+      display: grid;
+      grid-template-columns: repeat(1, 1fr 2em 6em);
 
       &:not(:nth-of-type(1)) {
         border-top: none;
@@ -287,17 +288,15 @@
         align-items: center;
 
         &:nth-of-type(1) {
-          flex: 1 1 75%;
+          flex: 0 70%;
         }
         &:nth-of-type(2) {
-          justify-content: center;
           border-left: 1px solid var(--clr-line);
-          flex: 1 1 8%;
+          justify-content: center;
         }
         &:nth-of-type(3) {
-          justify-content: right;
           border-left: 1px solid var(--clr-line);
-          flex: 1 1 17%;
+          justify-content: right;
         }
       }
     }
