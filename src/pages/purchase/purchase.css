@@ -227,7 +227,7 @@
 .purchase__form__step__page {
   flex-shrink: 0;
   width: 100%;
-  gap: 2em;
+  gap: 1em;
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -235,6 +235,7 @@
 .purchase__form__step__page h2 {
   font-weight: bold;
   font-size: 1.2em;
+  text-align: center;
 }
 .purchase__form__invoice {
   display: flex;
@@ -244,7 +245,7 @@
 .purchase__form__invoice__box {
   display: flex;
   flex-direction: column;
-  height: 10rem;
+  height: 8rem;
   overflow-y: auto;
 }
 .purchase__form__invoice__item {
@@ -279,21 +280,21 @@
 }
 .purchase__form__next {
   display: flex;
-  gap: 2em;
-  justify-content: center;
+  gap: 0.5em;
+  justify-content: space-between;
 }
 .purchase__form__next button {
   padding: 0.5em 2em;
-  background-color: var(--clr-dark);
+  background-color: rgb(144, 183, 235);
   border-radius: 4px;
-  color: #fff;
+  color: black;
   font-size: 0.9em;
 }
 .purchase__form__next button:hover {
-  background-color: #3b3b3b;
+  filter: opacity(0.6);
 }
 .purchase__form__next button:disabled {
-  background-color: #686868;
+  filter: opacity(0.6);
   cursor: not-allowed;
 }
 .purchase__form__user__content {
@@ -303,6 +304,9 @@
   align-items: center;
   margin: auto 0;
   gap: 1em;
+  max-width: 16rem;
+  margin: auto;
+  text-align: center;
 }
 .purchase__form__user__content a {
   padding: 0.5em 1em;

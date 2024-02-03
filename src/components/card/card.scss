@@ -8,17 +8,10 @@
     gap: 0.5em;
     justify-items: center;
     @media (max-width: 1350px) {
-      grid-template-columns: repeat(3, minmax(260px, 1fr));
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
     }
-    @media (max-width: 860px) {
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-    }
-    @media (max-width: 740px) {
-      grid-template-columns: repeat(2, minmax(180px, 1fr));
-      gap: 0.25em;
-    }
-    @media (max-width: 380px) {
-      grid-template-columns: repeat(1, minmax(180px, 1fr));
+    @media (max-width: 500px) {
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
       gap: 0.25em;
     }
     &__item {
@@ -61,10 +54,16 @@
       }
       &__btn {
         display: flex;
-        gap: 1em;
         position: absolute;
+        gap: 1em;
         right: 1em;
         top: 1em;
+
+        @media (max-width: 740px) {
+          gap: 0.5em;
+          right: 0.5em;
+          top: 0.5em;
+        }
 
         svg path {
           fill: rgb(218, 218, 218);

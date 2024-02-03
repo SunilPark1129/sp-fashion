@@ -4,7 +4,6 @@
   position: relative;
   padding: 0.5em;
   padding-bottom: 0;
-  // margin: 4em 0;
 
   &__img {
     cursor: pointer;
@@ -29,5 +28,9 @@
     p {
       text-shadow: 1px 1px 1px black;
     }
+  }
+
+  @media (max-width: 500px) {
+    height: 12em;
   }
 }

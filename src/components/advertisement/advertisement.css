@@ -30,4 +30,9 @@
 .advertisement__text h4,
 .advertisement__text p {
   text-shadow: 1px 1px 1px black;
+}
+@media (max-width: 500px) {
+  .advertisement {
+    height: 12em;
+  }
 }/*# sourceMappingURL=advertisement.css.map */
