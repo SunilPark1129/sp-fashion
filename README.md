@@ -7,7 +7,7 @@ sip_fashion-v1 02/02/24
 ## Project Description
 
 - It's a clothing web-store project that display various clothes.
-- This website does not have implemented features such as login, purchase, or about contact etc pages.
+- This project does not have included features such as login, purchase, or about contact etc pages.
 
 ## Features
 > Features that I would like to introduce.
