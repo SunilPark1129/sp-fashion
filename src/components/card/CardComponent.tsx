@@ -17,23 +17,20 @@ export default function CardComponent({
 }) {
   const [isImgReady, setIsImgReady] = useState<boolean>(false);
   const imgRef = useRef<HTMLImageElement>(null);
-  const hasMounted = useRef<boolean | null>(null);
   const navigate = useNavigate();
   const [params] = useSearchParams();
 
+  useEffect(() => {
+    console.log(isImgReady);
+  }, [isImgReady]);
+
   // when image is onloaded, display image on the screen
   useEffect(() => {
-    if (!imgRef.current || hasMounted.current) return;
-    hasMounted.current = true;
+    if (!imgRef.current || isImgReady) return;
     let image = document.createElement("img");
     image.src = imgRef.current.src;
     image.onload = function () {
       setIsImgReady(true);
-    };
-
-    return () => {
-      hasMounted.current = true;
-      setIsImgReady(false);
     };
   }, [imgRef]);
 
@@ -73,13 +70,13 @@ export default function CardComponent({
       key={item.id + item.category}
     >
       <div className="card__content__item__img">
+        <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
         <img
           src={IMAGE_KEY + item.image[0]}
           alt={item.name}
           loading="lazy"
           ref={imgRef}
         />
-        <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
         <div className="card__content__item__btn">
           <button
             className={`btn-svg btn-svg--like ${

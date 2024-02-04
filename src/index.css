@@ -129,9 +129,11 @@ body {
   left: 0;
   top: 0;
   background-color: rgba(71, 71, 71, 0.466);
-  filter: blur(2px);
+  /* filter: blur(2px); */
   opacity: 1;
-  transition: 0.3s opacity;
+  transition: 0.3s opacity, 0.3s backdrop-filter;
+  backdrop-filter: blur(4px);
+  z-index: 9;
 }
 
 .img-ready--active {

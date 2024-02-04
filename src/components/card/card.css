@@ -66,6 +66,7 @@
   gap: 1em;
   right: 1em;
   top: 1em;
+  z-index: 10;
 }
 @media (max-width: 740px) {
   .card__content__item__btn {
