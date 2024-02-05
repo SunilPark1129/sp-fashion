@@ -44,6 +44,7 @@ npm start
 
 ## Self-improvement
 
+- In this project, I put a lot of effort into optimizing images.
 - In this project, I made efforts to implement a folder structure and file names that are easy to read and understand.
 - For faster web performance, I made an effort to minimize re-rendering on each page.
 
