@@ -11,11 +11,11 @@ function DetailLoading() {
         </div>
         <div className="detail-loading__container">
           <div className="detail-loading__imgs">
-            <div className="detail-loading__imgs__lg"></div>
             <div className="detail-loading__imgs__box">
               <div className="detail-loading__imgs__box__sm"></div>
               <div className="detail-loading__imgs__box__sm"></div>
             </div>
+            <div className="detail-loading__imgs__lg"></div>
           </div>
           <div className="detail-loading__texts">
             <div className="detail-loading__texts__box">

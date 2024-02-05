@@ -1,15 +1,11 @@
 import "./detail.css";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { BASE_URL, IMAGE_KEY } from "../../data/key";
+import { useSearchParams } from "react-router-dom";
+import { BASE_URL } from "../../data/key";
 import { FilteredProp } from "../../model/stateProps";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { getFilter } from "../../utilities/getFilter";
-import { useDispatch } from "react-redux";
-import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
-import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
-import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import DetailLoading from "./DetailLoading";
 import FetchError from "../../components/fetcherror/FetchError";
 import DisplayComponent from "./DisplayComponent";

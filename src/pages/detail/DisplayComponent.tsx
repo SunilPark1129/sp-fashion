@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FilteredProp } from "../../model/stateProps";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -325,11 +325,20 @@ export default function DisplayComponent({
   );
 }
 
-let timer: ReturnType<typeof setTimeout>;
-
 function ZoomInImageComponent({ item }: { item: string }) {
   const [isMoving, setIsMoving] = useState<boolean>(false);
   const [tPos, setTPos] = useState<TPosProp>(initTPos);
+  const [isImgReady, setIsImgReady] = useState<boolean>(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (!imgRef.current || isImgReady) return;
+    let image = document.createElement("img");
+    image.src = imgRef.current.src;
+    image.onload = function () {
+      setIsImgReady(true);
+    };
+  }, [imgRef]);
 
   function zoomInHandler(e: any) {
     const { layerX, layerY } = e.nativeEvent;
@@ -355,7 +364,11 @@ function ZoomInImageComponent({ item }: { item: string }) {
       onPointerMove={zoomInHandler}
       onPointerLeave={zoomInLeaveHandler}
     >
+      <div className={`img-ready ${isImgReady && "img-ready--active"}`}>
+        <img src={`${item}?tr=bl-10`} alt={"img"} />
+      </div>
       <img
+        ref={imgRef}
         src={item}
         alt={"img"}
         style={{

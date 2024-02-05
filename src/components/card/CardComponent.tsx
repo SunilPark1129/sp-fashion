@@ -20,10 +20,6 @@ export default function CardComponent({
   const navigate = useNavigate();
   const [params] = useSearchParams();
 
-  useEffect(() => {
-    console.log(isImgReady);
-  }, [isImgReady]);
-
   // when image is onloaded, display image on the screen
   useEffect(() => {
     if (!imgRef.current || isImgReady) return;
@@ -62,7 +58,7 @@ export default function CardComponent({
       `/detail?category=${category}&unit=${unit}&path=${selectedCategory}${str}`
     );
   }
-
+  // ?tr=bl-10
   return (
     <section
       className="card__content__item"
@@ -70,9 +66,16 @@ export default function CardComponent({
       key={item.id + item.category}
     >
       <div className="card__content__item__img">
-        <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
+        <div className={`img-ready ${isImgReady && "img-ready--active"}`}>
+          <img
+            src={`${IMAGE_KEY}${item.image[0]}?tr=w-400&tr=bl-10`}
+            srcSet={`${IMAGE_KEY}${item.image[0]}?tr=w-250&tr=bl-10 250w, ${IMAGE_KEY}${item.image[0]}?tr=w-400&tr=bl-10 400w`}
+            sizes="(max-width: 500px) 250px, 400px"
+            alt={item.name}
+          />
+        </div>
         <img
-          src={`${IMAGE_KEY}/tr:w-400"${item.image[0]}`}
+          src={`${IMAGE_KEY}/tr:w-400${item.image[0]}`}
           srcSet={`${IMAGE_KEY}/tr:w-250${item.image[0]} 250w, ${IMAGE_KEY}/tr:w-400${item.image[0]} 400w`}
           sizes="(max-width: 500px) 250px, 400px"
           alt={item.name}
