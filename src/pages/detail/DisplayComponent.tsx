@@ -118,18 +118,6 @@ export default function DisplayComponent({
         <div className="container">
           {/* image */}
           <div className="detail__imgs">
-            <div className="detail__imgs__front">
-              {image.map((item, idx) => (
-                <div
-                  key={id + "/" + idx}
-                  className={`detail__imgs__front__item ${
-                    currentImg === idx && "detail__imgs__front__item--active"
-                  }`}
-                >
-                  <ZoomInImageComponent item={IMAGE_KEY + item} />
-                </div>
-              ))}
-            </div>
             <div className="detail__imgs__select">
               {image.map((item, idx) => (
                 <div
@@ -139,7 +127,24 @@ export default function DisplayComponent({
                   }`}
                   onClick={() => setCurrentImg(idx)}
                 >
-                  <img src={IMAGE_KEY + item} alt={name} />
+                  <img
+                    src={`${IMAGE_KEY}/tr:w-200${item}`}
+                    srcSet={`${IMAGE_KEY}/tr:w-100${item} 100w, ${IMAGE_KEY}/tr:w-200${item} 200w`}
+                    sizes="(max-width: 500px) 100px, 200px"
+                    alt={name}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="detail__imgs__front">
+              {image.map((item, idx) => (
+                <div
+                  key={id + "/" + idx}
+                  className={`detail__imgs__front__item ${
+                    currentImg === idx && "detail__imgs__front__item--active"
+                  }`}
+                >
+                  <ZoomInImageComponent item={IMAGE_KEY + item} />
                 </div>
               ))}
             </div>
@@ -325,8 +330,6 @@ let timer: ReturnType<typeof setTimeout>;
 function ZoomInImageComponent({ item }: { item: string }) {
   const [isMoving, setIsMoving] = useState<boolean>(false);
   const [tPos, setTPos] = useState<TPosProp>(initTPos);
-  const [isMoveAble, setIsMoveAble] = useState<boolean>(false);
-  const [firstPos, setFirstPos] = useState<TPosProp>(initTPos);
 
   function zoomInHandler(e: any) {
     const { layerX, layerY } = e.nativeEvent;
@@ -346,38 +349,18 @@ function ZoomInImageComponent({ item }: { item: string }) {
     setIsMoving(false);
   }
 
-  useEffect(() => {
-    if (isMoving) {
-      setFirstPos(tPos);
-      timer = setTimeout(() => {
-        setIsMoveAble(true);
-      }, 300);
-    } else {
-      setIsMoveAble(false);
-      clearTimeout(timer);
-      setFirstPos(initTPos);
-    }
-  }, [isMoving]);
-
   return (
     <div
       className="detail__imgs__front__item__user-select-prevention"
       onPointerMove={zoomInHandler}
       onPointerLeave={zoomInLeaveHandler}
-      onPointerUp={() => {}}
-      onPointerDown={() => {}}
     >
       <img
         src={item}
         alt={"img"}
         style={{
-          transition: `${
-            isMoveAble
-              ? "transform 0.3s"
-              : "transform 0.3s, left 0.2s, top 0.2s"
-          }`,
-          left: `${isMoveAble ? -tPos.x / 2 : -firstPos.x / 2}px`,
-          top: `${isMoveAble ? -tPos.y / 2 : -firstPos.y / 2}px`,
+          left: `${-tPos.x}px`,
+          top: `${-tPos.y}px`,
           transform: `scale(${isMoving ? 2 : 1})`,
         }}
       />

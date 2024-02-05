@@ -1,15 +1,17 @@
 import "./home.css";
 
 import Banner from "./Banner";
-import bestSeller1 from "./assets/home_bestseller_1.jpg";
-import bestSeller2 from "./assets/home_bestseller_7.jpg";
-import bestSeller3 from "./assets/home_bestseller_12.jpg";
-import bestSeller4 from "./assets/home_bestseller_15.jpg";
-import brandNewLarge from "./assets/home_brandnew_large.jpg";
-import sale1 from "./assets/home_sale_1.jpg";
-import sale2 from "./assets/home_sale_2.jpg";
-import sale3 from "./assets/home_sale_3.jpg";
-import sale4 from "./assets/home_sale_4.jpg";
+
+import {
+  bestSellerPic1,
+  bestSellerPic2,
+  bestSellerPic3,
+  bestSellerPic4,
+  bestSalePic1,
+  bestSalePic2,
+  bestSalePic3,
+  bestSalePic4,
+} from "../../assets/imgURL";
 
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +22,8 @@ import { updateBasketState } from "../../redux/features/basketSlice";
 import { useState } from "react";
 import Advertisement from "../../components/advertisement/Advertisement";
 import Cookies from "js-cookie";
+import { brandNewPic } from "../../assets/imgURL";
+import { IMAGE_KEY } from "../../data/key";
 
 function HomePage() {
   return (
@@ -45,7 +49,7 @@ function HomePage() {
 function BestSeller() {
   const bestSellerArray = [
     {
-      img: bestSeller1,
+      img: bestSellerPic1,
       category: "coat",
       name: "Short Simple Designed Woman Coat",
       price: "360",
@@ -53,7 +57,7 @@ function BestSeller() {
       id: "38",
     },
     {
-      img: bestSeller2,
+      img: bestSellerPic2,
       category: "hoodie",
       name: "Fancy Clean Designed Woman Hoodie",
       price: "220",
@@ -61,7 +65,7 @@ function BestSeller() {
       id: "24",
     },
     {
-      img: bestSeller3,
+      img: bestSellerPic3,
       category: "shirt",
       name: "Overfit Simple Designed Man Shirt",
       price: "42",
@@ -69,7 +73,7 @@ function BestSeller() {
       id: "9",
     },
     {
-      img: bestSeller4,
+      img: bestSellerPic4,
       category: "sweater",
       name: "Cowl Neck Fancy Woman Sweater",
       price: "148",
@@ -97,7 +101,12 @@ function BestSeller() {
                 onClick={() => itemClickHandler(category, id)}
               >
                 <div className="home__section__img">
-                  <img src={img} alt={name} />
+                  <img
+                    src={`${IMAGE_KEY}/tr:w-500${img}`}
+                    srcSet={`${IMAGE_KEY}/tr:w-300${img} 300w, ${IMAGE_KEY}/tr:w-500${img} 500w`}
+                    sizes="(max-width: 740px) 300px, 500px"
+                    alt={name}
+                  />
                 </div>
                 <div className="home__section__text">
                   <p>{category}</p>
@@ -125,7 +134,7 @@ function BestSeller() {
 function SeasonSales() {
   const bestSellerArray = [
     {
-      img: sale1,
+      img: bestSalePic1,
       category: "coat",
       name: "Fancy Simple Man Coat",
       price: "320",
@@ -133,7 +142,7 @@ function SeasonSales() {
       id: "8",
     },
     {
-      img: sale2,
+      img: bestSalePic2,
       category: "hoodie",
       name: "Fancy Smooth Woman Hoodie",
       price: "180",
@@ -141,7 +150,7 @@ function SeasonSales() {
       id: "20",
     },
     {
-      img: sale3,
+      img: bestSalePic3,
       category: "shirt",
       name: "Open Neck Designed Woman Shirt",
       price: "52",
@@ -149,7 +158,7 @@ function SeasonSales() {
       id: "3",
     },
     {
-      img: sale4,
+      img: bestSalePic4,
       category: "sweater",
       name: "Thin Cable Knit Woman Sweater",
       price: "78",
@@ -177,7 +186,12 @@ function SeasonSales() {
                 onClick={() => itemClickHandler(category, id)}
               >
                 <div className="home__section__img">
-                  <img src={img} alt={name} />
+                  <img
+                    src={`${IMAGE_KEY}/tr:w-500${img}`}
+                    srcSet={`${IMAGE_KEY}/tr:w-300${img} 300w, ${IMAGE_KEY}/tr:w-500${img} 500w`}
+                    sizes="(max-width: 740px) 300px, 500px"
+                    alt={name}
+                  />
                 </div>
                 <div className="home__section__text">
                   <p>{category}</p>
@@ -213,7 +227,12 @@ function BrandNew() {
       <div className="wrapper">
         <div className="container">
           <div className="home__brand-new__img">
-            <img src={brandNewLarge} alt="" />
+            <img
+              src={`${IMAGE_KEY}/tr:w-1300${brandNewPic}`}
+              srcSet={`${IMAGE_KEY}/tr:w-500${brandNewPic} 500w, ${IMAGE_KEY}/tr:w-900${brandNewPic} 900w, ${IMAGE_KEY}/tr:w-1300${brandNewPic} 1300w`}
+              sizes="(max-width: 500px) 500px, (max-width: 1200px) 900px, 1300px"
+              alt="woman with a coat smiling"
+            />
           </div>
           <div className="home__brand-new__text">
             <div>

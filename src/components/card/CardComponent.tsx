@@ -72,7 +72,9 @@ export default function CardComponent({
       <div className="card__content__item__img">
         <div className={`img-ready ${isImgReady && "img-ready--active"}`}></div>
         <img
-          src={IMAGE_KEY + item.image[0]}
+          src={`${IMAGE_KEY}/tr:w-400"${item.image[0]}`}
+          srcSet={`${IMAGE_KEY}/tr:w-250${item.image[0]} 250w, ${IMAGE_KEY}/tr:w-400${item.image[0]} 400w`}
+          sizes="(max-width: 500px) 250px, 400px"
           alt={item.name}
           loading="lazy"
           ref={imgRef}

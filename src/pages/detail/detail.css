@@ -62,7 +62,6 @@
   -o-object-fit: cover;
      object-fit: cover;
   position: absolute;
-  transition: transform 0.2s;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import photo from "../home/assets/banner_recycle.jpg";
 import { Link } from "react-router-dom";
 import "./login.css";
+import { bannerData } from "../home/data";
 
 function LoginPage() {
   const [hasValidated, setHasValidated] = useState<boolean | null>(null);
@@ -16,7 +16,12 @@ function LoginPage() {
       <div className="wrapper">
         <div className="container">
           <div className="login__img">
-            <img src={photo} alt="hoodie and pants" />
+            <img
+              src={bannerData[2].image.src}
+              srcSet={bannerData[2].image.srcSet}
+              sizes={bannerData[2].image.sizes}
+              alt="hoodie and pants"
+            />
           </div>
           <div className="login__text">
             <div className="login__header">

@@ -159,7 +159,10 @@ function PurchasePage() {
                     }`}
                   >
                     <div className="purchase__card__img">
-                      <img src={IMAGE_KEY + item.image[0]} alt={item.name} />
+                      <img
+                        src={`${IMAGE_KEY}/tr:w-100${item.image[0]}`}
+                        alt={item.name}
+                      />
                     </div>
                     <div className={`purchase__card__text`}>
                       <p>{item.name}</p>

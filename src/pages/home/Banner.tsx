@@ -14,13 +14,18 @@ function SlideImageComponent({ currentIdx }: { currentIdx: number }) {
       {bannerData.map(({ image }, idx) => (
         <div
           key={idx}
-          className={`banner__image banner__image--${image.size} ${
+          className={`banner__image banner__image--${image.objectFit} ${
             currentIdx === idx && "banner__image--active"
           }`}
         >
           <div className="wrapper">
             <div className="banner__image__box">
-              <img src={image.url} alt={image.alt} />
+              <img
+                src={image.src}
+                alt={image.alt}
+                srcSet={image.srcSet}
+                sizes={image.sizes}
+              />
             </div>
           </div>
         </div>
