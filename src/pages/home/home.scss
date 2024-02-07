@@ -40,6 +40,7 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
+
       &:hover {
         outline: 1px solid rgb(161, 161, 161);
       }
@@ -60,6 +61,11 @@
         color: rgb(184, 16, 16);
         text-transform: uppercase;
       }
+
+      p {
+        color: var(--clr-dark);
+      }
+
       &__sale {
         display: flex;
         align-items: center;
@@ -108,7 +114,7 @@
       p:nth-of-type(1) {
         font-size: 1.2em;
       }
-      button {
+      a {
         width: max-content;
         border: 1px solid var(--clr-line);
         padding: 0.5em 1.5em;

@@ -10,6 +10,8 @@ export const bannerJacketPic = "/other/fa2.jpg";
 
 export const brandNewPic = "/other/best_seller.jpg";
 
+export const recommendedPic = "/other/recommended.jpg";
+
 export const bestSellerPic1 = "/other/best_seller_coat.jpg";
 export const bestSellerPic2 = "/other/best_seller_hoodie.jpg";
 export const bestSellerPic3 = "/other/best_seller_shirt.jpg";

@@ -11,10 +11,11 @@ import {
   bestSalePic2,
   bestSalePic3,
   bestSalePic4,
+  recommendedPic,
 } from "../../assets/imgURL";
 
 import { getSaleCalculator } from "../../utilities/getSaleCalculator";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updateLikeState } from "../../redux/features/LikeSlice";
@@ -33,6 +34,8 @@ function HomePage() {
       <BrandNew />
 
       <BestSeller />
+
+      <Recommended />
 
       <SeasonSales />
 
@@ -81,10 +84,6 @@ function BestSeller() {
       id: "19",
     },
   ];
-  const navigate = useNavigate();
-  function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}&path=${category}`);
-  }
 
   return (
     <section className="home__main-section home__section">
@@ -95,10 +94,10 @@ function BestSeller() {
           </div>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
-              <div
-                key={id + name}
+              <Link
+                key={id + category}
+                to={`/detail?category=${category}&unit=${id}&path=${category}`}
                 className="home__section__item"
-                onClick={() => itemClickHandler(category, id)}
               >
                 <div className="home__section__img">
                   <img
@@ -121,7 +120,7 @@ function BestSeller() {
                     </p>
                   )}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -166,10 +165,6 @@ function SeasonSales() {
       id: "20",
     },
   ];
-  const navigate = useNavigate();
-  function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}&path=${category}`);
-  }
 
   return (
     <section className="home__main-section home__section">
@@ -180,10 +175,10 @@ function SeasonSales() {
           </div>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
-              <div
-                key={id + name}
+              <Link
+                key={id + category}
+                to={`/detail?category=${category}&unit=${id}&path=${category}`}
                 className="home__section__item"
-                onClick={() => itemClickHandler(category, id)}
               >
                 <div className="home__section__img">
                   <img
@@ -206,7 +201,7 @@ function SeasonSales() {
                     </p>
                   )}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -217,11 +212,6 @@ function SeasonSales() {
 
 /* ------------------------ BrandNew Component ------------------------*/
 function BrandNew() {
-  const navigate = useNavigate();
-  function itemClickHandler(category: string, unit: string) {
-    navigate(`/detail?category=${category}&unit=${unit}&path=${category}`);
-  }
-
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
@@ -240,9 +230,39 @@ function BrandNew() {
             </div>
             <p>Short Fashioned Woman Coat</p>
             <p>$364</p>
-            <button onClick={() => itemClickHandler("coat", "41")}>
+            <Link to={`/detail?category=coat&unit=41&path=coat`}>
               See detail
-            </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------ Recommended Component ------------------------*/
+function Recommended() {
+  return (
+    <section className="home__main-section home__brand-new">
+      <div className="wrapper">
+        <div className="container">
+          <div className="home__brand-new__img">
+            <img
+              src={`${IMAGE_KEY}/tr:w-1300${recommendedPic}`}
+              srcSet={`${IMAGE_KEY}/tr:w-500${recommendedPic} 500w, ${IMAGE_KEY}/tr:w-900${recommendedPic} 900w, ${IMAGE_KEY}/tr:w-1300${recommendedPic} 1300w`}
+              sizes="(max-width: 500px) 500px, (max-width: 1200px) 900px, 1300px"
+              alt="woman with a coat smiling"
+            />
+          </div>
+          <div className="home__brand-new__text">
+            <div>
+              <h2>Recommended Cloth</h2>
+            </div>
+            <p>Designed Crop Top Woman Shirt</p>
+            <p>$49.50</p>
+            <Link to={`/detail?category=shirt&unit=18&path=shirt`}>
+              See detail
+            </Link>
           </div>
         </div>
       </div>

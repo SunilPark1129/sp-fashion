@@ -58,6 +58,9 @@
   color: rgb(184, 16, 16);
   text-transform: uppercase;
 }
+.home__section__text p {
+  color: var(--clr-dark);
+}
 .home__section__text__sale {
   display: flex;
   align-items: center;
@@ -107,13 +110,13 @@
 .home__brand-new__text p:nth-of-type(1) {
   font-size: 1.2em;
 }
-.home__brand-new__text button {
+.home__brand-new__text a {
   width: -moz-max-content;
   width: max-content;
   border: 1px solid var(--clr-line);
   padding: 0.5em 1.5em;
 }
-.home__brand-new__text button:hover {
+.home__brand-new__text a:hover {
   border: 1px solid black;
   color: black;
 }
