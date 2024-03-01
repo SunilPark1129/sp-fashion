@@ -7,8 +7,8 @@ sip_fashion-v1 02/02/24
 ## Project Description
 
 - The SIP Clothing website provides users with a familiar UI to enhance the online shopping experience. Users can easily find clothes by using filters or adding them to the cart.
-- It's a clothing web-store project that display various clothes.
-- This project does not have included features such as login, purchase, or about contact etc pages.
+- It's a clothing web-store project that displays various clothes.
+- This project does not have included features such as login, purchase, and contact page.
 
 ## Features
 > Features that I would like to introduce.
@@ -45,8 +45,8 @@ npm start
 
 ## Self-improvement
 
-- In this project, I put a lot of effort into optimizing images.
-- In this project, I made efforts to implement a folder structure and file names that are easy to read and understand.
+- I put a lot of effort into optimizing images.
+- I made efforts to implement a folder structure and file names that are easy to read and understand.
 - For faster web performance, I made an effort to minimize re-rendering on each page.
 
 ## Project Status
