@@ -7,10 +7,18 @@ import {
   bestSellerPic2,
   bestSellerPic3,
   bestSellerPic4,
+  bestSellerPic5,
+  bestSellerPic6,
+  bestSellerPic7,
+  bestSellerPic8,
   bestSalePic1,
   bestSalePic2,
   bestSalePic3,
   bestSalePic4,
+  bestSalePic5,
+  bestSalePic6,
+  bestSalePic7,
+  bestSalePic8,
   recommendedPic,
 } from "../../assets/imgURL";
 
@@ -31,19 +39,19 @@ function HomePage() {
     <main className="home">
       <Banner />
 
-      <BrandNew />
+      <Recommended />
 
       <BestSeller />
 
-      <Recommended />
+      <BrandNew />
 
       <SeasonSales />
-
-      <RemoveCookie />
 
       <div className="wrapper">
         <Advertisement />
       </div>
+
+      <RemoveCookie />
     </main>
   );
 }
@@ -60,10 +68,34 @@ function BestSeller() {
       id: "38",
     },
     {
+      img: bestSellerPic5,
+      category: "coat",
+      name: "Short Fancy Man Coat",
+      price: "360",
+      sale: "0",
+      id: "37",
+    },
+    {
       img: bestSellerPic2,
       category: "hoodie",
       name: "Fancy Clean Designed Woman Hoodie",
       price: "220",
+      sale: "0",
+      id: "24",
+    },
+    {
+      img: bestSellerPic6,
+      category: "hoodie",
+      name: "Fancy Designed Man Hoodie",
+      price: "144",
+      sale: "5",
+      id: "17",
+    },
+    {
+      img: bestSellerPic7,
+      category: "shirt",
+      name: "Fancy Cleaned Simple Designed Woman Shirt",
+      price: "60",
       sale: "0",
       id: "24",
     },
@@ -83,12 +115,20 @@ function BestSeller() {
       sale: "10",
       id: "19",
     },
+    {
+      img: bestSellerPic8,
+      category: "sweater",
+      name: "Clean Designed Man to Man Sweater",
+      price: "56",
+      sale: "0",
+      id: "17",
+    },
   ];
 
   return (
     <section className="home__main-section home__section">
       <div className="wrapper">
-        <div className="container">
+        <div className="container container--parent">
           <div>
             <h2>BEST SELLTER of the year</h2>
           </div>
@@ -133,6 +173,14 @@ function BestSeller() {
 function SeasonSales() {
   const bestSellerArray = [
     {
+      img: bestSalePic5,
+      category: "coat",
+      name: "Fur Woman Coat",
+      price: "192",
+      sale: "20",
+      id: "1",
+    },
+    {
       img: bestSalePic1,
       category: "coat",
       name: "Fancy Simple Man Coat",
@@ -149,6 +197,14 @@ function SeasonSales() {
       id: "20",
     },
     {
+      img: bestSalePic6,
+      category: "hoodie",
+      name: "Thick Designed Man Hoodie",
+      price: "104",
+      sale: "10",
+      id: "9",
+    },
+    {
       img: bestSalePic3,
       category: "shirt",
       name: "Open Neck Designed Woman Shirt",
@@ -157,12 +213,28 @@ function SeasonSales() {
       id: "3",
     },
     {
+      img: bestSalePic7,
+      category: "shirt",
+      name: "Fancy Simple Designed Man Shirt",
+      price: "66",
+      sale: "10",
+      id: "17",
+    },
+    {
       img: bestSalePic4,
       category: "sweater",
       name: "Thin Cable Knit Woman Sweater",
       price: "78",
       sale: "30",
       id: "20",
+    },
+    {
+      img: bestSalePic8,
+      category: "sweater",
+      name: "Thick Aran Man Sweater",
+      price: "114",
+      sale: "10",
+      id: "5",
     },
   ];
 
@@ -215,7 +287,10 @@ function BrandNew() {
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
-        <div className="container">
+        <Link
+          className="container"
+          to={`/detail?category=coat&unit=41&path=coat`}
+        >
           <div className="home__brand-new__img">
             <img
               src={`${IMAGE_KEY}/tr:w-1300${brandNewPic}`}
@@ -230,11 +305,9 @@ function BrandNew() {
             </div>
             <p>Short Fashioned Woman Coat</p>
             <p>$364</p>
-            <Link to={`/detail?category=coat&unit=41&path=coat`}>
-              See detail
-            </Link>
+            <div className="role-link">See detail</div>
           </div>
-        </div>
+        </Link>
       </div>
     </section>
   );
@@ -245,7 +318,10 @@ function Recommended() {
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
-        <div className="container">
+        <Link
+          className="container"
+          to={`/detail?category=shirt&unit=18&path=shirt`}
+        >
           <div className="home__brand-new__img">
             <img
               src={`${IMAGE_KEY}/tr:w-1300${recommendedPic}`}
@@ -260,11 +336,9 @@ function Recommended() {
             </div>
             <p>Designed Crop Top Woman Shirt</p>
             <p>$49.50</p>
-            <Link to={`/detail?category=shirt&unit=18&path=shirt`}>
-              See detail
-            </Link>
+            <div className="role-link">See detail</div>
           </div>
-        </div>
+        </Link>
       </div>
     </section>
   );
