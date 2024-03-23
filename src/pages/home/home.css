@@ -10,15 +10,18 @@
   gap: 0.5em;
 }
 .home__main-section h2 {
-  font-size: 1.4em;
+  font-size: 1.5em;
   font-weight: bold;
+  font-family: sans-serif;
 }
 .home__section .container {
   display: flex;
   flex-direction: column;
   max-width: 80rem;
-  align-items: center;
   margin: 0 auto;
+}
+.home__section .container h2 span {
+  color: rgb(216, 39, 113);
 }
 .home__section__box {
   margin: 0 auto;
@@ -59,6 +62,7 @@
 }
 .home__section__text p {
   color: var(--clr-dark);
+  font-size: 0.9em;
 }
 .home__section__text__sale {
   display: flex;

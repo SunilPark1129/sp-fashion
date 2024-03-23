@@ -128,9 +128,11 @@ function BestSeller() {
   return (
     <section className="home__main-section home__section">
       <div className="wrapper">
-        <div className="container container--parent">
+        <div className="container">
           <div>
-            <h2>BEST SELLTER of the year</h2>
+            <h2>
+              BEST <span>SELLTER</span>
+            </h2>
           </div>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
@@ -243,7 +245,9 @@ function SeasonSales() {
       <div className="wrapper">
         <div className="container">
           <div>
-            <h2>BIG SALES</h2>
+            <h2>
+              BIG <span>SALES</span>
+            </h2>
           </div>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
