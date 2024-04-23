@@ -1,14 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
-import { addBasket, deleteBasket } from "../../redux/features/basketSlice";
-import { addLikeState, deleteLikeState } from "../../redux/features/LikeSlice";
 import { CategoryValidProp, FilteredProp } from "../../model/stateProps";
-import { IMAGE_KEY } from "../../data/key";
 import "./card.css";
-import { getSaleCalculator } from "../../utilities/getSaleCalculator";
 import { getFilter } from "../../utilities/getFilter";
-import { useNavigate, useSearchParams } from "react-router-dom";
 import { cleanupSort } from "../../redux/features/sortSlice";
 import CardComponent from "./CardComponent";
 import EmptyItemComponent from "../emptyItem/EmptyItemComponent";
