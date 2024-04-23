@@ -26,7 +26,7 @@ const initTPos: TPosProp = {
 
 const shopLists = ["coat", "shirt", "hoodie", "sweater"];
 
-export default function DisplayComponent({
+export default function ProductDetail({
   data,
   pathParam,
   termParam,

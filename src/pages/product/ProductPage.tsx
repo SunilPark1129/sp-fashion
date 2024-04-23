@@ -8,7 +8,7 @@ import { RootState } from "../../redux/store";
 import { getFilter } from "../../utilities/getFilter";
 import ProductSkeletonLoading from "./ProductSkeletonLoading";
 import FetchError from "../../components/fetcherror/FetchError";
-import DisplayComponent from "./ProductDetail";
+import ProductDetail from "./ProductDetail";
 
 function ProductPage() {
   const [params] = useSearchParams();
@@ -62,7 +62,7 @@ function ProductPage() {
   if (isLoading) return <ProductSkeletonLoading />;
   if (!data || error) return <FetchError error={error} />;
   return (
-    <DisplayComponent data={data} pathParam={pathParam} termParam={termParam} />
+    <ProductDetail data={data} pathParam={pathParam} termParam={termParam} />
   );
 }
 
