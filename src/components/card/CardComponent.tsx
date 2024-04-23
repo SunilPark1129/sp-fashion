@@ -55,7 +55,7 @@ export default function CardComponent({
       str = `&term=${searchTerm}`;
     }
     navigate(
-      `/detail?category=${category}&unit=${unit}&path=${selectedCategory}${str}`
+      `/product?category=${category}&unit=${unit}&path=${selectedCategory}${str}`
     );
   }
   // ?tr=bl-10

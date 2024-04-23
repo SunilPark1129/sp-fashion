@@ -47,7 +47,7 @@ export default function DisplayComponent({
   /* ------------- size handlers ------------ */
   function hasClickedSize(e: any) {
     // if size content is not clicked then focus-out
-    if (!e?.target?.className.includes("detail__text__size__cover")) {
+    if (!e?.target?.className.includes("product__text__size__cover")) {
       setHasSizeModalOpened(false);
     }
   }
@@ -106,24 +106,24 @@ export default function DisplayComponent({
     label = "purchase";
   }
   return (
-    <main className="detail">
+    <main className="product">
       <div className="wrapper">
-        <div className="detail__path">
+        <div className="product__path">
           <Link to={"/"}>home</Link>
           <span>&#62;</span>
           <Link to={`${path}`}>{label}</Link>
           <span>&#62;</span>
-          <p>detail</p>
+          <p>product</p>
         </div>
         <div className="container">
           {/* image */}
-          <div className="detail__imgs">
-            <div className="detail__imgs__select">
+          <div className="product__imgs">
+            <div className="product__imgs__select">
               {image.map((item, idx) => (
                 <div
                   key={idx}
-                  className={`detail__imgs__select__item ${
-                    currentImg === idx && "detail__imgs__select__item--active"
+                  className={`product__imgs__select__item ${
+                    currentImg === idx && "product__imgs__select__item--active"
                   }`}
                   onClick={() => setCurrentImg(idx)}
                 >
@@ -136,12 +136,12 @@ export default function DisplayComponent({
                 </div>
               ))}
             </div>
-            <div className="detail__imgs__front">
+            <div className="product__imgs__front">
               {image.map((item, idx) => (
                 <div
                   key={id + "/" + idx}
-                  className={`detail__imgs__front__item ${
-                    currentImg === idx && "detail__imgs__front__item--active"
+                  className={`product__imgs__front__item ${
+                    currentImg === idx && "product__imgs__front__item--active"
                   }`}
                 >
                   <ZoomInImageComponent item={IMAGE_KEY + item} />
@@ -151,9 +151,9 @@ export default function DisplayComponent({
           </div>
 
           {/* text */}
-          <div className="detail__text">
+          <div className="product__text">
             {/* info */}
-            <div className="detail__text__info">
+            <div className="product__text__info">
               <h1>{name}</h1>
               <p>
                 Model: {id}
@@ -164,7 +164,7 @@ export default function DisplayComponent({
             </div>
 
             {/* trait */}
-            <div className="detail__text__trait">
+            <div className="product__text__trait">
               <p>
                 Color: <span>{color}</span>
               </p>
@@ -175,7 +175,7 @@ export default function DisplayComponent({
                 Category: <span>{category}</span>
               </p>
             </div>
-            <div className="detail__text__sale">
+            <div className="product__text__sale">
               {sale === 0 ? (
                 <p>Price: ${price.toFixed(2)}</p>
               ) : (
@@ -191,17 +191,17 @@ export default function DisplayComponent({
 
             {/* size */}
             <div
-              className="detail__text__size"
+              className="product__text__size"
               onClick={() => setHasSizeModalOpened((prev) => !prev)}
             >
-              <div className="detail__text__size__cover">
+              <div className="product__text__size__cover">
                 {currentSize === 0
                   ? sizes[currentSize]
                   : `SIZE: ${sizes[currentSize]}`}
               </div>
               <div
-                className={`detail__text__size__item ${
-                  hasSizeModalOpened && "detail__text__size__item--active"
+                className={`product__text__size__item ${
+                  hasSizeModalOpened && "product__text__size__item--active"
                 }`}
               >
                 {sizes.slice(1).map((item, idx) => (
@@ -210,7 +210,7 @@ export default function DisplayComponent({
                     onClick={() => setCurrentSize(idx + 1)}
                     className={`${
                       currentSize === idx + 1 &&
-                      "detail__text__size__item__active"
+                      "product__text__size__item__active"
                     }`}
                   >
                     {item}
@@ -219,17 +219,17 @@ export default function DisplayComponent({
               </div>
             </div>
             <p
-              className={`detail__text__warning ${
+              className={`product__text__warning ${
                 hasSelectedSize &&
                 currentSize === 0 &&
-                "detail__text__warning--active"
+                "product__text__warning--active"
               }`}
             >
               *Please select a size.
             </p>
 
             {/* shipping */}
-            <div className="detail__text__shipping">
+            <div className="product__text__shipping">
               <label htmlFor="free-shipping">
                 <input
                   type="radio"
@@ -254,24 +254,24 @@ export default function DisplayComponent({
               </label>
             </div>
             <p
-              className={`detail__text__warning ${
+              className={`product__text__warning ${
                 shippingMethod === "fast-shipping" &&
-                "detail__text__warning--active"
+                "product__text__warning--active"
               }`}
             >
               *Business Day - Monday through Friday from 9 a.m. to 5 p.m.
             </p>
 
             {/* purchase */}
-            <div className="detail__text__purchase">
+            <div className="product__text__purchase">
               <button
-                className="detail__text__purchase__link"
+                className="product__text__purchase__link"
                 onClick={purchaseClickHandler}
               >
                 Buy Now
               </button>
               <div
-                className="detail__text__purchase__btn"
+                className="product__text__purchase__btn"
                 onClick={basketClickHandler}
               >
                 <button
@@ -297,7 +297,7 @@ export default function DisplayComponent({
                 Add to Bag
               </div>
               <div
-                className="detail__text__purchase__btn"
+                className="product__text__purchase__btn"
                 onClick={likeClickHandler}
               >
                 <button
@@ -360,7 +360,7 @@ function ZoomInImageComponent({ item }: { item: string }) {
 
   return (
     <div
-      className="detail__imgs__front__item__user-select-prevention"
+      className="product__imgs__front__item__user-select-prevention"
       onPointerMove={zoomInHandler}
       onPointerLeave={zoomInLeaveHandler}
     >

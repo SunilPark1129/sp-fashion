@@ -1,4 +1,4 @@
-.detail {
+.product {
   &__path {
     padding: 0 1em;
     padding-top: 1em;
@@ -13,10 +13,10 @@
     .container {
       flex-direction: column;
     }
-    .detail__text__shipping {
+    .product__text__shipping {
       max-width: 100%;
     }
-    .detail__text__purchase {
+    .product__text__purchase {
       max-width: 100%;
     }
   }
@@ -198,7 +198,7 @@
           z-index: 9;
 
           &:hover,
-          &.detail__text__size__item__active {
+          &.product__text__size__item__active {
             background-color: var(--clr-focus);
           }
         }

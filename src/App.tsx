@@ -10,7 +10,7 @@ import Login from "./pages/login/LoginPage";
 import Footer from "./components/footer/Footer";
 import Favorite from "./pages/favorite/FavoritePage";
 import ErrorPage from "./pages/error/ErrorPage";
-import Detail from "./pages/detail/DetailPage";
+import ProductPage from "./pages/product/ProductPage";
 import Search from "./pages/search/SearchPage";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./redux/store";
@@ -50,7 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/product" element={<ProductPage />} />
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/search" element={<Search />} />

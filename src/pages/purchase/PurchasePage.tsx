@@ -40,7 +40,9 @@ function PurchasePage() {
 
   function detailClickHandler(e: React.MouseEvent, item: FilteredProp) {
     e.stopPropagation();
-    navigate(`/detail?category=${item.category}&unit=${item.id}&path=purchase`);
+    navigate(
+      `/product?category=${item.category}&unit=${item.id}&path=purchase`
+    );
   }
 
   function selectClickHandler(checked: boolean, item: FilteredProp) {

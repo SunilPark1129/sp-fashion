@@ -1,4 +1,4 @@
-.detail-loading {
+.product-loading {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -12,7 +12,7 @@
   }
 }
 
-.detail-loading__route {
+.product-loading__route {
   padding: 1em;
   display: flex;
   gap: 0.5em;
@@ -34,7 +34,7 @@
   }
 }
 
-.detail-loading__imgs {
+.product-loading__imgs {
   display: flex;
   gap: 0.5em;
   max-width: 60rem;
@@ -89,7 +89,7 @@
   }
 }
 
-.detail-loading__texts {
+.product-loading__texts {
   width: 100%;
   display: flex;
   flex-direction: column;

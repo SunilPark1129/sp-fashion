@@ -1,4 +1,4 @@
-import "./detail.css";
+import "./product.css";
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { BASE_URL } from "../../data/key";
@@ -6,11 +6,11 @@ import { FilteredProp } from "../../model/stateProps";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { getFilter } from "../../utilities/getFilter";
-import DetailLoading from "./DetailLoading";
+import ProductSkeletonLoading from "./ProductSkeletonLoading";
 import FetchError from "../../components/fetcherror/FetchError";
-import DisplayComponent from "./DisplayComponent";
+import DisplayComponent from "./ProductDetail";
 
-function DetailPage() {
+function ProductPage() {
   const [params] = useSearchParams();
   const [data, setData] = useState<FilteredProp | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -59,11 +59,11 @@ function DetailPage() {
     };
   }, [params]);
 
-  if (isLoading) return <DetailLoading />;
+  if (isLoading) return <ProductSkeletonLoading />;
   if (!data || error) return <FetchError error={error} />;
   return (
     <DisplayComponent data={data} pathParam={pathParam} termParam={termParam} />
   );
 }
 
-export default DetailPage;
+export default ProductPage;

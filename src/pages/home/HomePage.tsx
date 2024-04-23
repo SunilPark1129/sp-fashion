@@ -138,7 +138,7 @@ function BestSeller() {
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <Link
                 key={id + category}
-                to={`/detail?category=${category}&unit=${id}&path=${category}`}
+                to={`/product?category=${category}&unit=${id}&path=${category}`}
                 className="home__section__item"
               >
                 <div className="home__section__img">
@@ -253,7 +253,7 @@ function SeasonSales() {
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <Link
                 key={id + category}
-                to={`/detail?category=${category}&unit=${id}&path=${category}`}
+                to={`/product?category=${category}&unit=${id}&path=${category}`}
                 className="home__section__item"
               >
                 <div className="home__section__img">
@@ -293,7 +293,7 @@ function BrandNew() {
       <div className="wrapper">
         <Link
           className="container"
-          to={`/detail?category=coat&unit=41&path=coat`}
+          to={`/product?category=coat&unit=41&path=coat`}
         >
           <div className="home__brand-new__img">
             <img
@@ -324,7 +324,7 @@ function Recommended() {
       <div className="wrapper">
         <Link
           className="container"
-          to={`/detail?category=shirt&unit=18&path=shirt`}
+          to={`/product?category=shirt&unit=18&path=shirt`}
         >
           <div className="home__brand-new__img">
             <img
