@@ -1,8 +1,8 @@
 .banner {
   display: flex;
   width: 100%;
-  background-color: #fff;
-  max-height: 60rem;
+  border-bottom: 1px solid #d3d3d3;
+  max-height: 40rem;
   min-height: 30rem;
   aspect-ratio: 5/2;
   position: relative;
@@ -36,7 +36,7 @@
      object-fit: cover;
 }
 .banner__image--cover .wrapper {
-  max-width: 3200px;
+  max-width: 2000px;
 }
 .banner__image--cover .banner__image__box {
   width: 100%;

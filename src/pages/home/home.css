@@ -17,7 +17,6 @@
 .home__section .container {
   display: flex;
   flex-direction: column;
-  max-width: 80rem;
   margin: 0 auto;
 }
 .home__section .container h2 span {
