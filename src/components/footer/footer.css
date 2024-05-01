@@ -6,9 +6,6 @@
 .footer div {
   font-family: "Roboto", sans-serif;
 }
-.footer .wrapper {
-  max-width: 1200px;
-}
 .footer .container {
   display: flex;
   flex-direction: column;
