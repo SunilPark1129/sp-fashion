@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { bannerData } from "./data";
 import "./banner.css";
 import { Link } from "react-router-dom";
@@ -115,23 +115,62 @@ function ArrowComponent({ nextSlide, currentIdx }: SlideIndexProp) {
 
 export default function Banner() {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [progress, setProgress] = useState("");
   function nextSlide(val: number): void {
     if (val === -1) val = bannerData.length - 1;
     else if (val === bannerData.length) val = 0;
     setCurrentIdx(val);
   }
 
+  useEffect(() => {
+    const progressTimer = setTimeout(() => {
+      setProgress("progressbar--active");
+    }, 50);
+
+    let prev = currentIdx;
+    if (prev > 2) {
+      prev = 0;
+    } else if (prev < 0) {
+      prev = 2;
+    } else {
+      prev++;
+    }
+
+    const timer = setInterval(() => {
+      setCurrentIdx(prev);
+    }, 5100);
+
+    return () => {
+      clearInterval(timer);
+      clearTimeout(progressTimer);
+      setProgress("");
+    };
+  }, [currentIdx]);
+
   return (
-    <div className="banner">
-      <SlideImageComponent currentIdx={currentIdx} />
-      <div className="wrapper">
-        <div className="banner__content">
-          <TextComponent currentIdx={currentIdx} />
-          <div className="banner__transport">
-            <DotsComponent nextSlide={nextSlide} currentIdx={currentIdx} />
-            <ArrowComponent nextSlide={nextSlide} currentIdx={currentIdx} />
+    <div>
+      <div className="banner">
+        <SlideImageComponent currentIdx={currentIdx} />
+        <div className="wrapper">
+          <div className="banner__content">
+            <TextComponent currentIdx={currentIdx} />
+            <div className="banner__transport">
+              <DotsComponent nextSlide={nextSlide} currentIdx={currentIdx} />
+              <ArrowComponent nextSlide={nextSlide} currentIdx={currentIdx} />
+            </div>
           </div>
         </div>
+      </div>
+      <Progressbar progress={progress} />
+    </div>
+  );
+}
+
+function Progressbar({ progress }: { progress: string }) {
+  return (
+    <div className="progressbar">
+      <div className="progressbar__cover">
+        <div className={`progressbar__cover__bar ${progress}`}></div>
       </div>
     </div>
   );
