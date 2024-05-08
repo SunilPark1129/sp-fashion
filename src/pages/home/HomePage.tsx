@@ -41,9 +41,15 @@ function HomePage() {
 
       <Recommended />
 
+      <div className="break"></div>
+
       <BestSeller />
 
+      <div className="break"></div>
+
       <BrandNew />
+
+      <div className="break"></div>
 
       <SeasonSales />
 

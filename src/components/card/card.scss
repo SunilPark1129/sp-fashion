@@ -12,7 +12,6 @@
     }
     @media (max-width: 500px) {
       grid-template-columns: repeat(2, minmax(120px, 1fr));
-      gap: 0.25em;
     }
     &__item {
       width: 100%;

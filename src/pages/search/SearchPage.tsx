@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import ShopAside from "../../components/aside/ShopAside";
-import { BasketProp, CategoryValidProp } from "../../model/stateProps";
+import { BasketProp } from "../../model/stateProps";
 import Items from "../../components/card/Card";
 import { requestHTTPAll } from "../../redux/features/getAllSlice";
 import { useSearchParams } from "react-router-dom";
@@ -11,7 +11,6 @@ import Advertisement from "../../components/advertisement/Advertisement";
 import FetchError from "../../components/fetcherror/FetchError";
 import EmptyItemComponent from "../../components/emptyItem/EmptyItemComponent";
 
-const b: CategoryValidProp = "coat";
 function SearchPage() {
   const dispatch = useDispatch<AppDispatch>();
   const { loading, data, error } = useSelector(

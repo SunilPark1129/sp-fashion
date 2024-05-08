@@ -17,7 +17,6 @@
 @media (max-width: 500px) {
   .card__content {
     grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 0.25em;
   }
 }
 .card__content__item {

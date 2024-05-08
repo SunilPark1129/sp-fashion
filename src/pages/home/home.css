@@ -31,7 +31,6 @@
 @media (max-width: 600px) {
   .home__section__box {
     grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 0.25em;
   }
 }
 .home__section__item {
