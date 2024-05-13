@@ -53,11 +53,17 @@ function HomePage() {
 
       <SeasonSales />
 
+      <div className="break"></div>
+
       <div className="wrapper">
         <Advertisement />
       </div>
 
+      <div className="break"></div>
+
       <RemoveCookie />
+
+      <div className="break"></div>
     </main>
   );
 }
@@ -135,11 +141,9 @@ function BestSeller() {
     <section className="home__main-section home__section">
       <div className="wrapper">
         <div className="container">
-          <div>
-            <h2>
-              BEST <span>SELLTER</span>
-            </h2>
-          </div>
+          <h2>
+            BEST <span>SELLTER</span>
+          </h2>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <Link
@@ -156,7 +160,6 @@ function BestSeller() {
                   />
                 </div>
                 <div className="home__section__text">
-                  <p>{category}</p>
                   <p>{name}</p>
                   {sale === "0" ? (
                     <p>${price}</p>
@@ -167,6 +170,7 @@ function BestSeller() {
                       {getSaleCalculator(price, sale)}
                     </p>
                   )}
+                  <p>{category}</p>
                 </div>
               </Link>
             ))}
@@ -250,11 +254,9 @@ function SeasonSales() {
     <section className="home__main-section home__section">
       <div className="wrapper">
         <div className="container">
-          <div>
-            <h2>
-              BIG <span>SALES</span>
-            </h2>
-          </div>
+          <h2>
+            BIG <span>SALES</span>
+          </h2>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
               <Link
@@ -271,7 +273,6 @@ function SeasonSales() {
                   />
                 </div>
                 <div className="home__section__text">
-                  <p>{category}</p>
                   <p>{name}</p>
                   {sale === "0" ? (
                     <p>${price}</p>
@@ -282,6 +283,7 @@ function SeasonSales() {
                       {getSaleCalculator(price, sale)}
                     </p>
                   )}
+                  <p>{category}</p>
                 </div>
               </Link>
             ))}
@@ -297,6 +299,7 @@ function BrandNew() {
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
+        <h2>BRAND NEW</h2>
         <Link
           className="container"
           to={`/product?category=coat&unit=41&path=coat`}
@@ -310,12 +313,9 @@ function BrandNew() {
             />
           </div>
           <div className="home__brand-new__text">
-            <div>
-              <h2>Brand New</h2>
-            </div>
             <p>Short Fashioned Woman Coat</p>
             <p>$364</p>
-            <div className="role-link">See detail</div>
+            {/* <div className="role-link">See detail</div> */}
           </div>
         </Link>
       </div>
@@ -328,6 +328,7 @@ function Recommended() {
   return (
     <section className="home__main-section home__brand-new">
       <div className="wrapper">
+        <h2>TODAY's PICK</h2>
         <Link
           className="container"
           to={`/product?category=shirt&unit=18&path=shirt`}
@@ -341,12 +342,10 @@ function Recommended() {
             />
           </div>
           <div className="home__brand-new__text">
-            <div>
-              <h2>Recommended Cloth</h2>
-            </div>
+            <div></div>
             <p>Designed Crop Top Woman Shirt</p>
             <p>$49.50</p>
-            <div className="role-link">See detail</div>
+            {/* <div className="role-link">See detail</div> */}
           </div>
         </Link>
       </div>

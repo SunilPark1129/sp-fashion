@@ -4,9 +4,9 @@ export const bannerSalePic = "/other/l23.jpg";
 
 export const bannerNewPic = "/other/n2.jpg";
 
-export const bannerRecyclePic = "/other/n1.jpg";
+export const bannerRecyclePic = "/other/nlg5.jpg";
 
-export const bannerJacketPic = "/other/fa2.jpg";
+export const bannerJacketPic = "/other/nlg4.jpg";
 
 export const brandNewPic = "/other/best_seller.jpg";
 

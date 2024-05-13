@@ -145,7 +145,7 @@ body {
   height: 0.5rem;
   background-color: rgb(223, 223, 223);
 }
-@media (min-width: 600px) {
+@media (min-width: 740px) {
   .break {
     display: none;
   }

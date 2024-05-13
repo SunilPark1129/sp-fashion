@@ -8,6 +8,7 @@
   grid-template-columns: repeat(4, minmax(260px, 1fr));
   gap: 0.5em;
   justify-items: center;
+  row-gap: 2em;
 }
 @media (max-width: 1350px) {
   .card__content {
@@ -26,8 +27,8 @@
   flex-direction: column;
   cursor: pointer;
 }
-.card__content__item:hover {
-  outline: 1px solid rgb(168, 168, 168);
+.card__content__item:hover h3 {
+  text-decoration: underline;
 }
 .card__content__item__img {
   width: 100%;
@@ -52,7 +53,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  padding: 1em;
+  flex-grow: 1;
+}
+.card__content__item__info p {
+  margin-top: auto;
 }
 @media (max-width: 1050px) {
   .card__content__item__info {

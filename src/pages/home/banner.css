@@ -11,17 +11,21 @@
   max-width: 2000px;
   display: flex;
   justify-content: center;
+  background-color: rgb(161, 76, 76);
 }
 .banner__image {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 85%;
+  height: 85%;
   opacity: 0;
+  right: 0;
+  top: 0;
   pointer-events: none;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
   display: flex;
+  z-index: 1;
 }
 .banner__image--active {
   opacity: 1;
@@ -34,14 +38,16 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.banner__image--cover .wrapper {
-  max-width: 2000px;
-}
-.banner__image--cover .banner__image__box {
+.banner__image .banner__image__box {
   width: 100%;
 }
-.banner__image--cover .banner__image__box img {
+.banner__image .banner__image__box img {
   width: 100%;
+}
+@media (max-width: 1450px) {
+  .banner__image {
+    width: 100%;
+  }
 }
 .banner__content {
   position: absolute;
@@ -49,110 +55,140 @@
   justify-content: space-between;
   top: 50%;
   transform: translateY(-50%);
-  max-width: 60rem;
   width: 100%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
   gap: 4em;
   height: 100%;
-}
-.banner__content h2,
-.banner__content p {
-  font-family: "Lato", sans-serif;
-}
-.banner__content h2 {
-  font-size: 3em;
-  font-weight: bold;
-  padding-bottom: 2rem;
-}
-.banner__content p {
-  font-size: 1.2em;
+  z-index: 2;
 }
 .banner__text {
   margin: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.banner__text h2,
+.banner__text p {
+  font-family: "Lato", sans-serif;
+}
+.banner__text p {
+  font-size: 1.2em;
+  color: #dedede;
+}
+.banner__text h2 {
+  font-size: 3em;
+  font-weight: bold;
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 18rem;
+  text-shadow: 2px 2px 2px black;
+}
+.banner__text__desc {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  right: 8%;
+  gap: 1rem;
+  align-items: center;
+  left: 8%;
+  height: 15%;
+}
+@media (max-width: 1450px) {
+  .banner__text {
+    position: relative;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .banner__text h2,
+  .banner__text p {
+    text-align: center;
+    position: static;
+    width: 100%;
+  }
+  .banner__text p {
+    color: #fff;
+    text-shadow: 1px 1px 1px black;
+    max-width: 28rem;
+  }
+  .banner__text .banner__text__desc {
+    height: auto;
+    position: static;
+  }
 }
 .banner__text__color {
-  color: #202653;
-}
-.banner__text__color--light {
   color: #fff;
   text-shadow: 1px 1px 3px black;
-}
-.banner__text__color--dark {
-  text-shadow: 1px 1px 3px #fff;
 }
 .banner__text--short {
   max-width: 30rem;
 }
-.banner__text__link {
-  color: #202653;
-  position: relative;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 0.3em 0.5em;
-  border: 1px solid #202653;
-}
-.banner__text__link:hover {
-  color: #fff;
-  background-color: #202653;
-}
-.banner__text__link--light {
-  color: #fff;
-  border: 1px solid #fff;
-  text-shadow: 1px 1px 3px black;
-}
 .banner__transport {
   display: flex;
-  width: 100%;
-  height: 2rem;
+  height: 15%;
   align-items: center;
-  max-width: 20em;
   margin: 0 auto;
-  position: relative;
-  justify-content: center;
+  justify-content: end;
+  position: absolute;
+  right: 5%;
+  left: 5%;
+  bottom: 0%;
+  gap: 2em;
 }
 .banner__dots {
   display: flex;
-  gap: 0.5rem;
   position: relative;
   z-index: 2;
+  width: 20rem;
+  align-items: center;
+}
+.banner__dots__num {
+  color: #fff;
+  padding: 0 0.5rem;
+  font-size: 0.75rem;
+  font-family: sans-serif;
 }
 .banner__dots__item {
   cursor: pointer;
-  border-radius: 50%;
-  width: 1.1em;
-  height: 1.1em;
-  background-color: rgb(243, 243, 243);
-  border: 1px solid rgba(0, 0, 0, 0.26);
+  flex: 1;
+  height: 0.25rem;
+  background-color: rgba(39, 39, 39, 0.4549019608);
 }
 .banner__dots__item--active, .banner__dots__item:hover {
-  background-color: #2d3661;
+  background-color: rgb(243, 243, 243);
 }
 .banner__arrow {
-  position: absolute;
   display: flex;
-  width: 100%;
-  height: 100%;
+  gap: 2em;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
 .banner__arrow svg {
-  width: 1.3em;
-  height: 1.3em;
-  stroke: rgba(0, 0, 0, 0.26);
+  width: 1em;
+  height: 1em;
+  stroke: rgb(225, 225, 225);
 }
 .banner__arrow svg path {
-  fill: #fff;
+  stroke-width: 3;
 }
 .banner__arrow button {
   cursor: pointer;
 }
+.banner__arrow button:nth-of-type(2) {
+  transform: rotateY(180deg);
+}
 .banner__arrow button:hover svg path {
-  fill: #2d3661;
+  stroke: rgb(0, 0, 0);
 }
 
 .progressbar {
@@ -171,12 +207,12 @@
 .progressbar__cover__bar {
   width: 100%;
   height: 100%;
-  background-color: rgb(57, 56, 88);
+  background-color: rgb(18, 18, 18);
   position: absolute;
   left: -100%;
 }
 .progressbar--active {
-  animation: 5s leftbar linear;
+  animation: 8s leftbar linear;
 }
 
 @keyframes leftbar {

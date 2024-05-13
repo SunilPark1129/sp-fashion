@@ -58,7 +58,7 @@ export const bannerData: BannerDataProp[] = [
   {
     id: "2",
     heading: {
-      text: "NEW HOODIE",
+      text: "CHECK OUT NEW HOODIE",
       color: "light",
     },
     paragraph: {
@@ -84,10 +84,10 @@ export const bannerData: BannerDataProp[] = [
     id: "3",
     heading: { text: "RECYCLE DEAL", color: "dark" },
     paragraph: {
-      text: "We will give you a 10% discount coupon on the total purchase price",
+      text: "We will give you a 5% discount coupon on the total purchase price",
       color: "light",
     },
-    link: { has: true, label: "Read detail", href: "/", color: "light" },
+    link: { has: true, label: "Read detail", href: "/login", color: "light" },
     image: {
       src: `${IMAGE_KEY}/tr:w-1900${bannerRecyclePic}`,
       srcSet: `${IMAGE_KEY}/tr:w-800${bannerRecyclePic} 1200w, ${IMAGE_KEY}/tr:w-1201${bannerRecyclePic} 1201w`,
@@ -100,7 +100,10 @@ export const bannerData: BannerDataProp[] = [
   {
     id: "4",
     heading: { text: "Coming Soon: Jacket", color: "light" },
-    paragraph: { text: "2024 - New Category", color: "light" },
+    paragraph: {
+      text: "New clothing styles will be added in 2024. We'll ensure they come with great designs and quality",
+      color: "light",
+    },
     image: {
       src: `${IMAGE_KEY}/tr:w-1900${bannerJacketPic}`,
       srcSet: `${IMAGE_KEY}/tr:w-800${bannerJacketPic} 1200w, ${IMAGE_KEY}/tr:w-1201${bannerJacketPic} 1201w`,
