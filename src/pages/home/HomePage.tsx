@@ -142,7 +142,7 @@ function BestSeller() {
       <div className="wrapper">
         <div className="container">
           <h2>
-            BEST <span>SELLTER</span>
+            BEST <span>SELLER</span>
           </h2>
           <div className="home__section__box">
             {bestSellerArray.map(({ img, category, name, price, sale, id }) => (
